@@ -4,5 +4,5 @@ module book7 {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens sample;
+    opens sample.launcher;
 }
