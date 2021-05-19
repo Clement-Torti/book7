@@ -1,22 +1,22 @@
-package sample.launcher;
+package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.gui.controller.CahierController;
+
+import java.net.URL;
 
 public class Main extends Application {
+    public static final int WIN_WIDTH = 800;
+    public static final int WIN_HEIGHT = 600;
+    private static final String CAHIER_FXML = "gui/view/vueCahier.fxml";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-
-        /*
-        URL url = Main.class.getResource(CAHIER_FXML);
+        URL url = getClass().getResource(CAHIER_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);
         loader.setController(new CahierController());
@@ -28,8 +28,6 @@ public class Main extends Application {
         primaryStage.setMinHeight(WIN_HEIGHT);
 
         primaryStage.show();
-
-         */
     }
 
 

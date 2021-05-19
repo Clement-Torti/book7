@@ -5,4 +5,6 @@ module book7 {
     requires javafx.fxml;
 
     opens sample.launcher;
+    opens sample;
+
 }
