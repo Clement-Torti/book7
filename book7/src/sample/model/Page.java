@@ -14,6 +14,11 @@ public class Page {
     private boolean isPortrait;
     private List<Contenu> contenus;
 
+    // Getters
+    public List<Contenu> getContenus() {
+        return contenus;
+    }
+
     // Constructeurs
 
     // Methodes

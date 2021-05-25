@@ -1,14 +1,26 @@
 @import url(/colors.css);
 
-#mainScrollPane {
-    -fx-background-color: -blue-2;
+#mainVbox {
     -fx-fit-to-height: true;
     -fx-fit-to-width: true;
-}
-#mainVBox {
     -fx-background-color: -blue-1;
+}
+
+#contentScrollPane {
+    -fx-background-color: -blue-1;
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+    -fx-padding: 0;
+}
+
+#contentVbox{
     -fx-padding: 20 40 0 40;
     -fx-font-size: 1.5em;
+    -fx-background-color: -blue-1;
+    -fx-alignment: center;
+}
+
+#mainMenuBar{;
 }
 
 Image {

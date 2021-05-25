@@ -6,15 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-
-<ScrollPane stylesheets="/vueArborescence.css" id="mainScrollPane">
-      <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            id="mainVBox"
-            alignment="CENTER" fx:id="mainVbox"
-      >
-            <ImageView>
-                  <Image url="/logo_enseeiht.png" requestedWidth="450" preserveRatio="true" />
-            </ImageView>
-      </VBox>
-</ScrollPane>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="mainVbox"
+      stylesheets="/vueArborescence.css" id="mainVbox"
+>
+      <MenuBar id="mainMenuBar" fx:id="mainMenuBar">
+            <Menu id="menuFichier" fx:id="menuFichier" text="Fichier">
+                  <MenuItem id="menuFichierNouveau" fx:id="menuFichierNouveau" text="Nouveau module" />
+                  <MenuItem id="menuFichierImporter" fx:id="menuFichierImporter" text="Importer module" />
+                  <MenuItem id="menuFichierExporter" fx:id="menuFichierExporter" text="Exporter module" />
+                  <SeparatorMenuItem />
+                  <MenuItem id="menuFichierQuitter" fx:id="menuFichierQuitter" text="Quitter" />
+            </Menu>
+      </MenuBar>
+      <ScrollPane id="contentScrollPane">
+            <VBox id="contentVbox" fx:id="contentVbox">
+                  <ImageView>
+                        <Image url="/logo_enseeiht.png" requestedWidth="450" preserveRatio="true" />
+                  </ImageView>
+            </VBox>
+      </ScrollPane>
+</VBox>

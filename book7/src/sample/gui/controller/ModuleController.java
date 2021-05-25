@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import sample.gui.view.CahierView;
 import sample.gui.view.NavigationView;
 import sample.model.Enums.Section;
+import sample.model.Module;
 
 // ------------------------
 // Rôle: Classe controlant un module enseeiht, pour l'afficher et l'éditer
@@ -23,18 +24,21 @@ public class ModuleController extends BaseController {
 
     // Attributs
     private Section currentSection = Section.COURS;
+    private Module module;
 
     // Constructeurs
-    public ModuleController(Stage stage) {
+    public ModuleController(Stage stage, Module module) {
         super(stage);
-        System.out.println("Creation de cahier");
-
+        this.module = module;
     }
 
     // FXML Actions
     @FXML
     private void initialize() {
+        // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
+
+        currentCahier.setCahier(module.getCahiers().get(0));
     }
 
     // Methodes

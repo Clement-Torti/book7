@@ -3,6 +3,7 @@ package sample.gui.view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import sample.model.Contenu.Contenu;
 import sample.model.Page;
 
 // ------------------------
@@ -29,5 +30,12 @@ public class PageView extends VBox {
     // Methodes
     public void setPage(Page _page) {
         page = _page;
+        updateView();
+    }
+
+    private void updateView() {
+        for(Contenu c: page.getContenus()) {
+
+        }
     }
 }

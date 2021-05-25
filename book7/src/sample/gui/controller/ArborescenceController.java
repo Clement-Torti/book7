@@ -1,15 +1,12 @@
 package sample.gui.controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import sample.Main;
 import sample.model.Module;
 
 import java.io.File;
@@ -17,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,13 +23,14 @@ import java.util.regex.Pattern;
 //
 public class ArborescenceController extends BaseController {
     // Constantes
-    public static final Integer MODULE_WIDHT = 900;
-    public static final Integer MODULE_HEIGHT = 600;
+    public static final Integer MODULE_WIDTH = 600;
+    public static final Integer MODULE_HEIGHT = 400;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
 
     // FXML Outlets
-    @FXML
-    private VBox mainVbox;
+    @FXML private VBox mainVbox;
+    @FXML private VBox contentVbox;
+    @FXML private MenuItem menuFichierQuitter;
 
     // Attributs
     private HashMap<Integer, List<Module>> modules;
@@ -46,11 +43,17 @@ public class ArborescenceController extends BaseController {
     // Methodes
     @FXML
     void initialize() {
-        //
+        // Barre de menu
+        menuFichierQuitter.setAccelerator(KeyCombination.keyCombination("Ctrl+W"));
+        menuFichierQuitter.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
 
         // Lire les modules
         modules = lireModules();
-
 
         // Affichage dynamique des modules
         // Parcourir l'ensemble des dossiers "semestre"
@@ -73,9 +76,9 @@ public class ArborescenceController extends BaseController {
 
                 // Au clique, ouvrir la fenetre du cahier
                 moduleButton.setOnAction((event) -> {
-                    ModuleController moduleController = new ModuleController(getStage());
+                    ModuleController moduleController = new ModuleController(getStage(), m);
                     try {
-                        openStage(MODULE_FXML,  moduleController, MODULE_WIDHT, MODULE_HEIGHT, m.getNom());
+                        openStage(MODULE_FXML,  moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom());
                     } catch (IOException e) {
                         System.out.println(e);
                     }
@@ -87,7 +90,7 @@ public class ArborescenceController extends BaseController {
             semestreTitledPane.setContent(modulesVBox);
 
             // Ajouter les elements aux enfants
-            mainVbox.getChildren().add(semestreTitledPane);
+            contentVbox.getChildren().add(semestreTitledPane);
         }
 
     }

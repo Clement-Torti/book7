@@ -15,6 +15,10 @@ public class Module {
     private String chemin;
     private List<Cahier> cahiers;
 
+    // Getter
+    public List<Cahier> getCahiers() {
+        return cahiers;
+    }
 
     // Constructeurs
     public Module(String nom, String chemin) {
