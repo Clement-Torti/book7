@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            alignment="CENTER">
+
+    <TitledPane text="Semestre 5" />
+    <TitledPane text="Semestre 6" />
+    <TitledPane text="Semestre 7" />
+    <TitledPane text="Semestre 8" />
+    <TitledPane text="Semestre 9" />
+    <TitledPane text="Semestre 10" />
+
+</VBox>
