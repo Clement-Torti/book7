@@ -1,5 +1,6 @@
 package sample.gui.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -11,9 +12,6 @@ import javafx.scene.layout.VBox;
 public class PageView extends VBox {
     public PageView() {
         super();
-        this.setMaxWidth(Double.MAX_VALUE);
-        this.setMaxHeight(Double.MAX_VALUE);
-
         Label test = new Label();
         test.setText("Test ici");
 
