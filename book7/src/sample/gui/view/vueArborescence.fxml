@@ -5,16 +5,16 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      stylesheets="/vueArborescence.css" id="main"
-      alignment="CENTER" fx:id="mainVbox"
->
-
-      <ImageView>
-            <Image url="/logo_enseeiht.png" requestedWidth="500" preserveRatio="true" />
-      </ImageView>
-</VBox>
+<ScrollPane stylesheets="/vueArborescence.css" id="mainScrollPane">
+      <VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            id="mainVBox"
+            alignment="CENTER" fx:id="mainVbox"
+      >
+            <ImageView>
+                  <Image url="/logo_enseeiht.png" requestedWidth="450" preserveRatio="true" />
+            </ImageView>
+      </VBox>
+</ScrollPane>

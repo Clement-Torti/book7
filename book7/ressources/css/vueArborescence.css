@@ -1,8 +1,13 @@
 @import url(/colors.css);
 
-#main {
+#mainScrollPane {
+    -fx-background-color: -blue-2;
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+}
+#mainVBox {
     -fx-background-color: -blue-1;
-    -fx-padding: 0 40 0 40;
+    -fx-padding: 20 40 0 40;
     -fx-font-size: 1.5em;
 }
 
