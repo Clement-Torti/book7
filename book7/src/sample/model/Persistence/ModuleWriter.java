@@ -3,6 +3,7 @@ package sample.model.Persistence;
 import sample.model.Constantes;
 import sample.model.Module;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
@@ -28,6 +29,9 @@ public class ModuleWriter {
         try {
             String chemin = System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/"+module.getChemin();
             System.out.println(chemin);
+            File test_fichier = new File(chemin);
+            if(test_fichier.isFile())
+                test_fichier.delete();
             FileOutputStream fos = new FileOutputStream(chemin);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(module);

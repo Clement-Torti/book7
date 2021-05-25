@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.model.Constantes;
 import sample.model.Module;
+import sample.model.Persistence.ModuleReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -98,6 +99,7 @@ public class ArborescenceController extends BaseController {
 
     public static HashMap<Integer, List<Module>> lireModules() {
         HashMap<Integer, List<Module>> out = new HashMap<Integer, List<Module>>();
+        ModuleReader mr = new ModuleReader();
         try {
             //Initialisation des variables qui seront réutilisées
             File root, repertoire;
@@ -105,7 +107,7 @@ public class ArborescenceController extends BaseController {
             //Expression régulières
 
             Pattern p_semestre = Pattern.compile(Constantes.SEMESTRE_NAME+"([0-9]+)$");
-            Pattern p_fichier = Pattern.compile(".+\\."+ Constantes.EXTENSION);
+            Pattern p_fichier = Pattern.compile(".+\\."+Constantes.EXTENSION);
 
             Matcher m_semestre, m_fichier;
 
@@ -141,7 +143,7 @@ public class ArborescenceController extends BaseController {
                         //On vérifie que le programme ait la bonne extension déjà
                         m_fichier=p_fichier.matcher(liste_fichiers[j]);
                         if (m_fichier.matches())
-                            liste.add(extraireModule(path+"/"+liste_r[i]+"/"+liste_fichiers[j]));
+                            liste.add(extraireModule(mr,liste_r[i]+"/"+liste_fichiers[j]));
                     }
                     //Et bim on incrémente la map
                     out.put(numero, liste);
@@ -157,11 +159,8 @@ public class ArborescenceController extends BaseController {
         return out;
     }
 
-    public static Module extraireModule(String path){ //On va propager les exceptions vers getModuleMap ou consors
-        //C'est comme ça qu'on unserialize VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-        //File fichier = new File(path);
-        //ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier));
-        return new Module("arouf ou salam", path);
+    public static Module extraireModule(ModuleReader mr, String chemin){ //On va propager les exceptions vers getModuleMap ou consors
+        return mr.lire(chemin);
     }
 
 }

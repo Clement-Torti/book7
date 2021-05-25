@@ -19,6 +19,6 @@
     </center>
 
     <bottom>
-        <NavigationView fx:id="navigationView"/>
+        <NavigationView id="navigationView" fx:id="navigationView"/>
     </bottom>
 </BorderPane>

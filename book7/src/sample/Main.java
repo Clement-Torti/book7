@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.gui.controller.ArborescenceController;
 import sample.gui.controller.ModuleController;
+import sample.model.Persistence.ModuleWriter;
+import sample.model.Module;
 
 import java.net.URL;
 

@@ -3,6 +3,8 @@ package sample.gui.view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import sample.gui.controller.ModuleController;
@@ -20,12 +22,16 @@ public class NavigationView extends HBox {
         this.setSpacing(100);
 
         HBox Gauche = new HBox();
+        Gauche.setId("navigation_gauche");
         HBox Droite = new HBox();
-        Gauche.setSpacing(10);
-        Droite.setSpacing(10);
+        Droite.setId("navigation_droite");
+//        Gauche.setSpacing(10);
+//        Droite.setSpacing(10);
 
         Button boutonGauche = new Button();
+        boutonGauche.getStyleClass().add("bouton_navigation");
         Button boutonDroite = new Button();
+        boutonDroite.getStyleClass().add("bouton_navigation");
         Button boutonCours = new Button();
         boutonCours.setOnAction((event) -> {
             moduleController.changerSection(Section.COURS);
@@ -39,12 +45,33 @@ public class NavigationView extends HBox {
             moduleController.changerSection(Section.TP);
         });
 
-        boutonGauche.setText("bouton gauche");
-        boutonDroite.setText("bouton droit");
+        ColorAdjust couleurBlanche = new ColorAdjust();
+        couleurBlanche.setBrightness(1);
 
-        boutonCours.setText("cours");
+        // Bouton "Précedent"
+        ImageView iconBoutonGauche = new ImageView("/icon-arrow-left.png");
+        iconBoutonGauche.setPreserveRatio(true);
+        iconBoutonGauche.setFitWidth(20);
+        iconBoutonGauche.setSmooth(false);
+        iconBoutonGauche.setEffect(couleurBlanche);
+        boutonGauche.setGraphic(iconBoutonGauche);
+        //        boutonGauche.setText("bouton gauche");
+
+        // Bouton "Suivant"
+        ImageView iconBoutonDroite = new ImageView("/icon-arrow-right.png");
+        iconBoutonDroite.setPreserveRatio(true);
+        iconBoutonDroite.setFitWidth(20);
+        iconBoutonDroite.setSmooth(false);
+        iconBoutonDroite.setEffect(couleurBlanche);
+        boutonDroite.setGraphic(iconBoutonDroite);
+//        boutonDroite.setText("bouton droit");
+
+        boutonCours.setText("Cours");
+        boutonCours.getStyleClass().add("bouton_cahier");
         boutonTD.setText("TD");
+        boutonTD.getStyleClass().add("bouton_cahier");
         boutonTP.setText("TP");
+        boutonTP.getStyleClass().add("bouton_cahier");
 
 
         Droite.setHgrow(boutonCours, Priority.ALWAYS);

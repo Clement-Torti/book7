@@ -13,6 +13,12 @@ public class TextArea extends Contenu {
     private String texte;
     private List<Balise> balises;
 
+
+    // Getters
+    public String getTexte() {
+        return texte;
+    }
+
     // -----
     // rôle: Ajout d'une balise de style dans le texte
     // param:

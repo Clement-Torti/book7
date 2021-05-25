@@ -1,3 +1,5 @@
+@import "colors.css";
+
 #main {
 }
 
@@ -9,4 +11,45 @@
     -fx-background-color: rgba(0, 250, 250, 1);
 }
 
+#navigationView{
+    -fx-background-color: -grey-1;
+    -fx-alignment: center;
+}
 
+#navigation_gauche, #navigation_droite {
+    -fx-background-color: -grey-1;
+}
+
+#navigation_gauche{
+    -fx-spacing: 20;
+    -fx-padding: 10;
+}
+#navigation_droite{
+    -fx-spacing: 30;
+    -fx-padding: 15;
+}
+
+
+.bouton_navigation{
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: -blue-1;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.bouton_cahier{
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: -blue-1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.bouton_navigation:hover, .bouton_cahier:hover{
+    -fx-background-color: -blue-1-light;
+}
+
+.bouton_navigation:pressed, .bouton_cahier:pressed{
+    -fx-background-color: -blue-2;
+}
