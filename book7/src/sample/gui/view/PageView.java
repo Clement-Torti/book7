@@ -3,6 +3,7 @@ package sample.gui.view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import sample.gui.view.ContenuView.ContenuView;
 import sample.model.Contenu.Contenu;
 import sample.model.Page;
 
@@ -35,7 +36,8 @@ public class PageView extends VBox {
 
     private void updateView() {
         for(Contenu c: page.getContenus()) {
-
+            ContenuView cv = new ContenuView(c);
+            getChildren().add(cv.afficher());
         }
     }
 }

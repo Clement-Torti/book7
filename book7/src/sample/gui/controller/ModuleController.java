@@ -38,7 +38,7 @@ public class ModuleController extends BaseController {
         // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
 
-        currentCahier.setCahier(module.getCahiers().get(0));
+        //currentCahier.setCahier(module.getCahiers().get(0));
     }
 
     // Methodes

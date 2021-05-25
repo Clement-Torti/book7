@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.model.Constantes;
 import sample.model.Module;
 
 import java.io.File;
@@ -23,8 +24,8 @@ import java.util.regex.Pattern;
 //
 public class ArborescenceController extends BaseController {
     // Constantes
-    public static final Integer MODULE_WIDTH = 600;
-    public static final Integer MODULE_HEIGHT = 400;
+    public static final Integer MODULE_WIDTH = 900;
+    public static final Integer MODULE_HEIGHT = 600;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
 
     // FXML Outlets
@@ -103,17 +104,27 @@ public class ArborescenceController extends BaseController {
 
             //Expression régulières
 
-            Pattern p_semestre = Pattern.compile("semestre([0-9]+)$");
-            Pattern p_fichier = Pattern.compile(".+\\.book7");
+            Pattern p_semestre = Pattern.compile(Constantes.SEMESTRE_NAME+"([0-9]+)$");
+            Pattern p_fichier = Pattern.compile(".+\\."+ Constantes.EXTENSION);
 
             Matcher m_semestre, m_fichier;
 
             //Chemin absolu du dossier où sont les fichiers
-            String path=System.getProperty("user.dir")+"/ressources/sauvegarde_module";
+            String path=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME;
+
+            root = new File(path);
+            //On vérifie si le dossier existe, sinon on le crée
+            if(! root.isDirectory())
+                root.mkdirs();
 
             //On récupère la racine du dossier de sauvegarde pour récupérer tous les dossiers qu'il contient
-            root = new File(path);
             String liste_r[] = root.list();
+
+            if (liste_r.length==0){
+                for (int i = Constantes.SEMESTRE_PAR_DEFAUT_MIN ; i <= Constantes.SEMESTRE_PAR_DEFAUT_MAX ; i++)
+                    new File(path+"/"+Constantes.SEMESTRE_NAME+i).mkdirs();
+            }
+
             for (int i = 0; i < liste_r.length; i++) {
                 m_semestre = p_semestre.matcher(liste_r[i]);
                 //On vérifie que le dossier ai un nom valide pour le traiter
