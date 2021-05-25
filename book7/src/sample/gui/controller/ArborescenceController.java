@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.Set;
 
 // ------------------------
-// Rôle: Classe Controllant la vue de selection de module
+// Rôle: Classe controllant la vue de selection du module à éditer
 // Dernière Modification: Clément Torti
 //
 public class ArborescenceController extends BaseController {
     // Constantes
-    public static final Integer CAHIER_WIDHT = 600;
-    public static final Integer CAHIER_HEIGHT = 400;
+    public static final Integer MODULE_WIDHT = 600;
+    public static final Integer MODULE_HEIGHT = 400;
+    public static final String MODULE_FXML = "gui/view/vueModule.fxml";
 
     // FXML Outlets
     @FXML
@@ -53,6 +54,7 @@ public class ArborescenceController extends BaseController {
         for (String key: modules.keySet()) {
             // Creation de la TitledPane
             TitledPane semestreTitledPane = new TitledPane();
+            semestreTitledPane.getStyleClass().add("element_semestre");
             semestreTitledPane.setText(key);
             semestreTitledPane.setExpanded(false);
 
@@ -63,13 +65,14 @@ public class ArborescenceController extends BaseController {
             // Parcourir les modules d'un semestre
             for(Module m: modules.get(key)) {
                 Button moduleButton = new Button();
+                moduleButton.getStyleClass().add("element_module");
                 moduleButton.setText(m.getNom());
 
                 // Au clique, ouvrir la fenetre du cahier
                 moduleButton.setOnAction((event) -> {
-                    CahierController cahierController = new CahierController(getStage());
+                    ModuleController moduleController = new ModuleController(getStage());
                     try {
-                        openStage("gui/view/vueCahier.fxml",  cahierController, CAHIER_WIDHT, CAHIER_HEIGHT, m.getNom());
+                        openStage(MODULE_FXML,  moduleController, MODULE_WIDHT, MODULE_HEIGHT, m.getNom());
                     } catch (IOException e) {
                         System.out.println(e);
                     }

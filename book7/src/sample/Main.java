@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.gui.controller.ArborescenceController;
-import sample.gui.controller.CahierController;
+import sample.gui.controller.ModuleController;
 
 import java.net.URL;
 

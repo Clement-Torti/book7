@@ -1,2 +1,27 @@
+@import url(/colors.css);
+
 #main {
+    -fx-background-color: -blue-1;
+    -fx-padding: 0 40 0 40;
+    -fx-font-size: 1.5em;
+}
+
+Image {
+    -fx-max-width: 50%;
+    -fx-padding: 0 0 50 0;
+}
+
+.element_semestre{
+    -fx-padding: 20 0 20 0;
+}
+
+.element_module {
+    -fx-text-fill: black;
+    -fx-background-color: -grey-1;
+    -fx-font-size: 1.1em;
+    -fx-padding: 1.2em;
+}
+
+.element_module:hover{
+    -fx-background-color: -grey-2;
 }

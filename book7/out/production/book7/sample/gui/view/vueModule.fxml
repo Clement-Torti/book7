@@ -6,16 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import sample.gui.view.PageView?>
+<?import sample.gui.view.CahierView?>
 <BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
             prefHeight="400.0" prefWidth="600.0"
-            stylesheets="/vueCahier.css" id="main"
+            stylesheets="/vueModule.css" id="main"
             >
-    <center >
-        <Label text="center" id="testLabel"/>
+    <center>
+        <CahierView fx:id="currentCahier"/>
     </center>
 
     <bottom>
-
         <Label text="bottom" id="testLabel"/>
     </bottom>
 </BorderPane>
