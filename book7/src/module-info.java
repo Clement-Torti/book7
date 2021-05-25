@@ -6,5 +6,6 @@ module book7 {
 
     opens sample;
     opens sample.gui.controller;
+    opens sample.gui.view;
 
 }

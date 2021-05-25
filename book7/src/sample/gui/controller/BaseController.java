@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,15 +33,20 @@ public abstract class BaseController {
     // param:
     // - source: FXML de la nouvelle vue
     // - destController: Controlleur de la nouvelle vue
-    public void changeScene(String source, BaseController destController) throws IOException {
-        URL url = getClass().getResource(source);
+    // - width: Largeur de la vue
+    // - height: Hauteur de la vue
+    // - titre: Titre de la scene
+    public void changeScene(String source, BaseController destController, int width, int height, String titre) throws IOException {
+        URL url = Main.class.getResource(source);
         FXMLLoader loader = new FXMLLoader(url);
 
         loader.setController(destController);
 
         Parent root = loader.load();
 
-        getStage().setScene(new Scene(root, WIN_WIDTH, WIN_HEIGHT));
+        getStage().setScene(new Scene(root, width, height));
+
+        getStage().setTitle(titre);
     }
 
     // -----
@@ -50,8 +56,9 @@ public abstract class BaseController {
     // - destController: Controlleur de la nouvelle vue
     // - width: Largeur de la vue
     // - height: Hauteur de la vue
-    public void openStage(String source, BaseController destController, int width, int height) throws IOException {
-        URL url = getClass().getResource(source);
+    // - titre: Titre de la fenêtre
+    public void openStage(String source, BaseController destController, int width, int height, String titre) throws IOException {
+        URL url = Main.class.getResource(source);
 
         FXMLLoader loader = new FXMLLoader(url);
         loader.setController(destController);
@@ -59,7 +66,7 @@ public abstract class BaseController {
 
         Stage newStage = new Stage();
 
-        newStage.setTitle("Infos");
+        newStage.setTitle(titre);
         newStage.setScene(new Scene(root, width, height));
         newStage.setMinWidth(width+16);
         newStage.setMinHeight(height+39);

@@ -6,9 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import sample.Main;
 import sample.model.Module;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +23,10 @@ import java.util.Set;
 // Dernière Modification: Clément Torti
 //
 public class ArborescenceController extends BaseController {
+    // Constantes
+    public static final Integer CAHIER_WIDHT = 600;
+    public static final Integer CAHIER_HEIGHT = 400;
+
     // FXML Outlets
     @FXML
     private VBox mainVbox;
@@ -34,23 +42,25 @@ public class ArborescenceController extends BaseController {
     // Methodes
     @FXML
     void initialize() {
+        //
+
         // Lire les modules
         modules = lireModules();
 
-        System.out.println(modules);
 
-        // Affichage dynamique
-        // Acceder a ses enfants
+        // Affichage dynamique des modules
+        // Parcourir l'ensemble des dossiers "semestre"
         for (String key: modules.keySet()) {
             // Creation de la TitledPane
             TitledPane semestreTitledPane = new TitledPane();
             semestreTitledPane.setText(key);
             semestreTitledPane.setExpanded(false);
 
-            // Ajout d'une Vbox contenant les modules
+            // Les modules sont ajoutés dans une VBox
             VBox modulesVBox = new VBox();
             modulesVBox.setSpacing(10);
 
+            // Parcourir les modules d'un semestre
             for(Module m: modules.get(key)) {
                 Button moduleButton = new Button();
                 moduleButton.setText(m.getNom());
@@ -58,8 +68,11 @@ public class ArborescenceController extends BaseController {
                 // Au clique, ouvrir la fenetre du cahier
                 moduleButton.setOnAction((event) -> {
                     CahierController cahierController = new CahierController(getStage());
-
-                    //openStage("",  cahierController, 600, 400);
+                    try {
+                        openStage("gui/view/vueCahier.fxml",  cahierController, CAHIER_WIDHT, CAHIER_HEIGHT, m.getNom());
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
                 });
 
                 modulesVBox.getChildren().add(moduleButton);
@@ -72,6 +85,7 @@ public class ArborescenceController extends BaseController {
         }
 
     }
+
 
     private HashMap<String, List<Module>> lireModules() {
         HashMap<String, List<Module>> modules = new HashMap<String, List<Module>>();
