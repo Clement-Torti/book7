@@ -20,6 +20,11 @@ public class Cahier {
     private List<Page> pages;
     private List<Operation> operations;
 
+    // Getters
+    public List<Page> getPages() {
+        return pages;
+    }
+
     // Constructeurs
 
     // Méthodes

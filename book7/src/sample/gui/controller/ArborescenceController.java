@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
 //
 public class ArborescenceController extends BaseController {
     // Constantes
-    public static final Integer MODULE_WIDHT = 600;
-    public static final Integer MODULE_HEIGHT = 400;
+    public static final Integer MODULE_WIDHT = 900;
+    public static final Integer MODULE_HEIGHT = 600;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
 
     // FXML Outlets
