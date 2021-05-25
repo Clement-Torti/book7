@@ -15,10 +15,16 @@ public class Module {
     private String chemin;
     private List<Cahier> cahiers;
 
+
     // Constructeurs
     public Module(String nom, String chemin) {
         this.nom = nom;
         this.chemin = chemin;
+    }
+
+    // Getters
+    public String getNom() {
+        return nom;
     }
 
     // Méthodes

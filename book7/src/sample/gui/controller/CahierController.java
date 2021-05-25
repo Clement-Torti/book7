@@ -1,6 +1,8 @@
 package sample.gui.controller;
 
-public class CahierController {
+import javafx.stage.Stage;
+
+public class CahierController extends BaseController {
     // Constantes
 
     // FXML Outlets
@@ -8,7 +10,8 @@ public class CahierController {
     // Attributs
 
     // Constructeurs
-    public CahierController() {
+    public CahierController(Stage stage) {
+        super(stage);
         System.out.println("Creation de cahier");
     }
 

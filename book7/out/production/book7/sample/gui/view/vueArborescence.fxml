@@ -7,13 +7,9 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx"
-            alignment="CENTER">
-
-    <TitledPane text="Semestre 5" />
-    <TitledPane text="Semestre 6" />
-    <TitledPane text="Semestre 7" />
-    <TitledPane text="Semestre 8" />
-    <TitledPane text="Semestre 9" />
-    <TitledPane text="Semestre 10" />
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="/vueArborescence.css" id="main"
+      alignment="CENTER" fx:id="mainVbox"
+      >
 
 </VBox>
