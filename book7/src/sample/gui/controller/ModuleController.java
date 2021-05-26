@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import sample.gui.view.CahierView;
 import sample.gui.view.NavigationView;
+import sample.model.Contenu.TextArea;
 import sample.model.Enums.Section;
 import sample.model.Module;
 
@@ -38,7 +39,21 @@ public class ModuleController extends BaseController {
         // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
 
-        //currentCahier.setCahier(module.getCahiers().get(0));
+
+        switch (currentSection) {
+            case COURS:
+                currentCahier.setCahier(module.getCours());
+                break;
+            case TD:
+                currentCahier.setCahier(module.getTD());
+                break;
+            case TP:
+                currentCahier.setCahier(module.getTP());
+                break;
+        }
+
+
+
     }
 
     // Methodes

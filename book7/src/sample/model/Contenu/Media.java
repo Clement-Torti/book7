@@ -1,5 +1,6 @@
 package sample.model.Contenu;
 
+import java.io.Serializable;
 import java.net.URL;
 
 // ------------------------
@@ -7,7 +8,9 @@ import java.net.URL;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public abstract class Media extends Contenu {
+public abstract class Media extends Contenu implements Serializable {
+    private static final long serialVersionUID = -6573313072129458148L;
+
     // Attributs
     private URL url;
 

@@ -25,15 +25,14 @@ public class CahierView extends HBox {
 
         // Ajout des 2 pages
         leftPage = new PageView();
-        leftPage.setId("page1");
         rightPage = new PageView();
-        rightPage.setId("page2");
 
         HBox.setHgrow(leftPage, Priority.ALWAYS);
         HBox.setHgrow(rightPage, Priority.ALWAYS);
 
         getChildren().add(leftPage);
         getChildren().add(rightPage);
+
     }
 
     // Methodes

@@ -1,5 +1,6 @@
 package sample.model.Contenu;
 
+import java.io.Serializable;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import java.util.List;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class TextArea extends Contenu {
+public class TextArea extends Contenu implements Serializable {
+    private static final long serialVersionUID = 1043738449910295226L;
+
     // Attributs
     private String texte;
     private List<Balise> balises;
@@ -17,6 +20,11 @@ public class TextArea extends Contenu {
     // Getters
     public String getTexte() {
         return texte;
+    }
+
+    // Setters
+    public void setTexte(String texte) {
+        this.texte = texte;
     }
 
     // -----

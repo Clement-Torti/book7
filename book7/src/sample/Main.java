@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.gui.controller.ArborescenceController;
 import sample.gui.controller.ModuleController;
+import sample.model.Cahier;
+import sample.model.Contenu.TextArea;
+import sample.model.Page;
 import sample.model.Persistence.ModuleWriter;
 import sample.model.Module;
 

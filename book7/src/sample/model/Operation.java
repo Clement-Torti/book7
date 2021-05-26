@@ -2,6 +2,7 @@ package sample.model;
 
 import sample.model.Contenu.Contenu;
 
+import java.io.Serializable;
 import java.util.Date;
 
 // ------------------------
@@ -9,7 +10,9 @@ import java.util.Date;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class Operation {
+public class Operation implements Serializable {
+    private static final long serialVersionUID = -5511058818152724582L;
+
     // Attributs
     private Date date;
     private Contenu contenu; // sauvegarde du contenu avant modification
