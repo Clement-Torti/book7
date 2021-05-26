@@ -32,6 +32,7 @@ public class ArborescenceController extends BaseController {
     // FXML Outlets
     @FXML private VBox mainVbox;
     @FXML private VBox contentVbox;
+    @FXML private Menu menuFichier;
     @FXML private MenuItem menuFichierQuitter;
 
     // Attributs
@@ -46,6 +47,8 @@ public class ArborescenceController extends BaseController {
     @FXML
     void initialize() {
         // Barre de menu
+        menuFichier.getStyleClass().add("menu");
+        menuFichierQuitter.getStyleClass().add("item-menu");
         menuFichierQuitter.setAccelerator(KeyCombination.keyCombination("Ctrl+W"));
         menuFichierQuitter.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -62,18 +65,19 @@ public class ArborescenceController extends BaseController {
         for (Integer key: modules.keySet()) {
             // Creation de la TitledPane
             TitledPane semestreTitledPane = new TitledPane();
-            semestreTitledPane.getStyleClass().add("element_semestre");
-            semestreTitledPane.setText("semestre " + key);
+            semestreTitledPane.getStyleClass().add("titled-pane");
+            semestreTitledPane.setText("Semestre " + key);
             semestreTitledPane.setExpanded(false);
 
             // Les modules sont ajoutés dans une VBox
             VBox modulesVBox = new VBox();
             modulesVBox.setSpacing(10);
+            modulesVBox.getStyleClass().add("vbox");
 
             // Parcourir les modules d'un semestre
             for(Module m: modules.get(key)) {
                 Button moduleButton = new Button();
-                moduleButton.getStyleClass().add("element_module");
+                moduleButton.getStyleClass().add("bouton");
                 moduleButton.setText(m.getNom());
 
                 // Au clique, ouvrir la fenetre du cahier

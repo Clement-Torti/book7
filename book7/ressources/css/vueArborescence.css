@@ -1,5 +1,6 @@
 @import url(/colors.css);
 
+/* Affichage général */
 #mainVbox {
     -fx-fit-to-height: true;
     -fx-fit-to-width: true;
@@ -20,25 +21,38 @@
     -fx-alignment: center;
 }
 
-#mainMenuBar{;
-}
-
-Image {
-    -fx-max-width: 50%;
-    -fx-padding: 0 0 50 0;
-}
-
-.element_semestre{
+/* Affichage des éléments semetres/modules */
+.titled-pane{
     -fx-padding: 20 0 20 0;
 }
 
-.element_module {
-    -fx-text-fill: black;
-    -fx-background-color: -grey-1;
-    -fx-font-size: 1.1em;
-    -fx-padding: 1.2em;
+.titled-pane .vbox .bouton {
+    -fx-padding: 10 20 10 20;
+    -fx-border-style: none;
+    -fx-background-color: -blue-2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, -blue-1, 10, 0.0, 0, 1);
 }
 
-.element_module:hover{
+.titled-pane .vbox .bouton:hover{
     -fx-background-color: -grey-2;
+}
+
+.titled-pane .vbox .bouton:pressed{
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+/* Barre de menu */
+
+#mainMenuBar{
+    -fx-padding: 5 20 5 20;
+}
+
+.menu {
+    -fx-background-radius: 20px;
+    -fx-padding: 3 6 3 6;
+}
+.menu:hover{
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 15, 0.0, 0, 1);
 }
