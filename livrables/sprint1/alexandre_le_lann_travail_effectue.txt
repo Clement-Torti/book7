@@ -1,1 +1,0 @@
-Avec Nassim en pair programming, nous avons développé les fonctions du contrôleur permettant de créer l'arborescence des modules en contrôlant ceux déjà créés. Nous avons également mis en place la persistence des modules en ayant implémenté la sérialisation et la désérialisation des modules.
