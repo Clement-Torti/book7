@@ -4,12 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
+import sample.model.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,9 +80,28 @@ public class ArborescenceController extends BaseController {
 
             // Parcourir les modules d'un semestre
             for(Module m: modules.get(key)) {
+                HBox moduleHBox = new HBox();
+                moduleHBox.setSpacing(30);
+                moduleHBox.getStyleClass().add("hbox");
+
+                // Bouton pour ouvrir le module
                 Button moduleButton = new Button();
                 moduleButton.getStyleClass().add("bouton");
                 moduleButton.setText(m.getNom());
+
+                // Bouton pour supprimer le module
+                Button supprimerButton = new Button();
+                supprimerButton.getStyleClass().add("boutonSupprimer");
+
+                // Image poubelle pour bouton supprimer
+                ColorAdjust couleurBlanche = new ColorAdjust();
+                couleurBlanche.setBrightness(1);
+
+                ImageView iconSupprimer = new ImageView("/icon-trash-2.png");
+                iconSupprimer.setPreserveRatio(true);
+                iconSupprimer.setFitWidth(20);
+                iconSupprimer.setEffect(couleurBlanche);
+                supprimerButton.setGraphic(iconSupprimer);
 
                 // Au clique, ouvrir la fenetre du cahier
                 moduleButton.setOnAction((event) -> {
@@ -90,7 +113,16 @@ public class ArborescenceController extends BaseController {
                     }
                 });
 
-                modulesVBox.getChildren().add(moduleButton);
+                // Au clique, supprimer le fichier du module
+                supprimerButton.setOnAction((event) -> {
+                    Utils.supprimerModule(m);
+                });
+
+                // Ajout des boutons dans la HBox
+                moduleHBox.getChildren().add(moduleButton);
+                moduleHBox.getChildren().add(supprimerButton);
+                // Ajout de la HBox dans la VBox du semestre
+                modulesVBox.getChildren().add(moduleHBox);
             }
 
             semestreTitledPane.setContent(modulesVBox);
