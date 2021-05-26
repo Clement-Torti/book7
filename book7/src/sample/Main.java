@@ -18,7 +18,7 @@ public class Main extends Application {
     private static final String ARBORESCENCE_FXML = "gui/view/vueArborescence.fxml";
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);
