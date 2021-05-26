@@ -2,6 +2,8 @@ package sample.model;
 
 import sample.model.Contenu.Contenu;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 // ------------------------
@@ -9,18 +11,24 @@ import java.util.List;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class Page {
+public class Page implements Serializable {
+    private static final long serialVersionUID = 9165005631809492024L;
+
     // Attributs
     private boolean isPortrait;
-    private List<Contenu> contenus;
+    private List<Contenu> contenus = new ArrayList<>();
 
     // Getters
     public List<Contenu> getContenus() {
         return contenus;
     }
 
+
     // Constructeurs
 
     // Methodes
+    public void appendContenu(Contenu contenu) {
+        contenus.add(contenu);
+    }
 
 }

@@ -24,7 +24,6 @@ public class PageView extends VBox {
         super();
         setId("page");
         Label test = new Label();
-        test.setText("Test ici");
 
         getChildren().add(test);
     }

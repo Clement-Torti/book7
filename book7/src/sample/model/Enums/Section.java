@@ -1,5 +1,6 @@
 package sample.model.Enums;
 
+
 // ------------------------
 // Rôle: Enumération indiquant le type de contenu d'un cahier
 // Création: Clément Torti

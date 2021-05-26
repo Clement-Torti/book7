@@ -3,22 +3,22 @@ package sample.model;
 import sample.model.Enums.Motif;
 import sample.model.Enums.Section;
 
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 // ------------------------
 // Rôle: Classe représentant un cahier enseeiht
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class Cahier {
+public class Cahier implements Serializable {
+    private static final long serialVersionUID = 3445207238004973501L;
+
     // Attributs
     private Section section;
-    private Motif motif;
-    private List<Page> pages;
-    private List<Operation> operations;
+    private Motif motif = Motif.GRANDS_CARREAUX;
+    private List<Page> pages = new ArrayList<>();
+    private List<Operation> operations = new ArrayList<>();
 
     // Getters
     public List<Page> getPages() {
@@ -26,8 +26,18 @@ public class Cahier {
     }
 
     // Constructeurs
+    public Cahier(Section section) {
+        this.section = section;
+
+        // Un cahier a 2 page à sa création
+        pages.add(new Page());
+        pages.add(new Page());
+    }
 
     // Méthodes
+    public void addPage(Page page) {
+        pages.add(page);
+    }
 
     // -----
     // rôle: Rechercher dans le cahier du texte (Ctrl F)

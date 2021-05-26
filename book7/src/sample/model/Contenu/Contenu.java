@@ -3,6 +3,7 @@ package sample.model.Contenu;
 import sample.model.Enums.Alignement;
 import sample.model.Enums.Disposition;
 
+import java.io.Serializable;
 import java.util.Dictionary;
 
 // ------------------------
@@ -10,7 +11,9 @@ import java.util.Dictionary;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public abstract class Contenu {
+public abstract class Contenu implements Serializable {
+    private static final long serialVersionUID = 6149141948119544784L;
+    
     // Attributs
     private String id;
     private Dictionary<String, String> metadonnees;
