@@ -53,6 +53,7 @@ public class ArborescenceController extends BaseController {
     void initialize() {
         // Barre de menu
         menuFichier.getStyleClass().add("menu");
+        // ItemMenu pour quitter le programme -> class CSS + action
         menuFichierQuitter.getStyleClass().add("item-menu");
         menuFichierQuitter.setAccelerator(KeyCombination.keyCombination("Ctrl+W"));
         menuFichierQuitter.setOnAction(new EventHandler<ActionEvent>() {
@@ -94,35 +95,40 @@ public class ArborescenceController extends BaseController {
                 Button supprimerButton = new Button();
                 supprimerButton.getStyleClass().add("boutonSupprimer");
 
-                // Image poubelle pour bouton supprimer
+                // Filtre Blanc pour icône
                 ColorAdjust couleurBlanche = new ColorAdjust();
                 couleurBlanche.setBrightness(1);
 
+                // Ajout icône pour bouton supprimer
                 ImageView iconSupprimer = new ImageView("/icon-trash-2.png");
                 iconSupprimer.setPreserveRatio(true);
                 iconSupprimer.setFitWidth(20);
                 iconSupprimer.setEffect(couleurBlanche);
                 supprimerButton.setGraphic(iconSupprimer);
 
-                // Au clique, ouvrir la fenetre du cahier
+                // Au clique, ouvrir la fenêtre du cahier
                 moduleButton.setOnAction((event) -> {
                     ModuleController moduleController = new ModuleController(getStage(), m);
                     try {
-                        openStage(MODULE_FXML,  moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom());
+                        openStage(MODULE_FXML, moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom());
                     } catch (IOException e) {
                         System.out.println(e);
                     }
                 });
 
-                // Au clique, supprimer le fichier du module
+                // Au clique, ouvrir une fenêtre de confirmation
                 supprimerButton.setOnAction((event) -> {
+                    // Creer une pop-up Alert
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Supprimer module");
                     alert.setHeaderText("Voulez-vous supprimer le module : " + m.getNom() + " ?");
                     alert.setContentText("T'es sûr frérot ?");
 
+                    // Bouton pour supprimer le module
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
+
+                    // Actions des boutons
+                    if (result.get() == ButtonType.OK) {
                         Utils.supprimerModule(m);
                         modulesVBox.getChildren().remove(moduleHBox);
                     } else {
@@ -137,12 +143,12 @@ public class ArborescenceController extends BaseController {
                 modulesVBox.getChildren().add(moduleHBox);
             }
 
+            // Ajout de la VBox dans le TitledPane
             semestreTitledPane.setContent(modulesVBox);
 
             // Ajouter les elements aux enfants
             contentVbox.getChildren().add(semestreTitledPane);
         }
-
     }
 
     public static HashMap<Integer, List<Module>> lireModules() {
@@ -153,7 +159,6 @@ public class ArborescenceController extends BaseController {
             File root, repertoire;
 
             //Expression régulières
-
             Pattern p_semestre = Pattern.compile(Constantes.SEMESTRE_NAME+"([0-9]+)$");
             Pattern p_fichier = Pattern.compile(".+\\."+Constantes.EXTENSION);
 

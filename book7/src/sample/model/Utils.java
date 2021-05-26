@@ -4,11 +4,11 @@ import java.io.File;
 
 public class Utils {
     public static void supprimerModule(Module module) {
-        //Chemin absolu du dossier où sont les fichiers
+        // Chemin absolu du dossier où se trouve le module
         String path=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/";
-        //Supprimer fichier
+        // Sélectionner le fichier
         File file = new File(path + module.getChemin());
-        System.out.println(file.toString());
+        // Supprimer le fichier
         if (file.delete()){
             System.out.println("Module " + module.getNom() + " supprimé.");
         } else{
