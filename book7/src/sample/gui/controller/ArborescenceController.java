@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,7 +116,18 @@ public class ArborescenceController extends BaseController {
 
                 // Au clique, supprimer le fichier du module
                 supprimerButton.setOnAction((event) -> {
-                    Utils.supprimerModule(m);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Supprimer module");
+                    alert.setHeaderText("Voulez-vous supprimer le module : " + m.getNom() + " ?");
+                    alert.setContentText("T'es sûr frérot ?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        Utils.supprimerModule(m);
+                        // ... user chose OK
+                    } else {
+                        // ... user chose CANCEL or closed the dialog
+                    }
                 });
 
                 // Ajout des boutons dans la HBox
