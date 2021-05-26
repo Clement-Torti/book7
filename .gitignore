@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 book7/out/*
+book7/.idea/*
 
 # Log file
 *.log
