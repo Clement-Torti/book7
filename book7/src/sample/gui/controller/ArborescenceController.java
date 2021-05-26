@@ -124,9 +124,9 @@ public class ArborescenceController extends BaseController {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         Utils.supprimerModule(m);
-                        // ... user chose OK
+                        modulesVBox.getChildren().remove(moduleHBox);
                     } else {
-                        // ... user chose CANCEL or closed the dialog
+                        System.out.println("Suppression annulée.");
                     }
                 });
 
