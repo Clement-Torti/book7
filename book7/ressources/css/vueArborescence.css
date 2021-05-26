@@ -42,9 +42,26 @@
 .titled-pane .vbox .bouton:pressed{
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
+/* Bouton supprimer */
+.hbox {
+    -fx-alignment: center;
+}
+
+.boutonSupprimer {
+    -fx-padding: 5;
+    -fx-border-style: none;
+    -fx-background-color: #c30000;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.boutonSupprimer:hover {
+    -fx-background-color: #e50000;
+}
+.boutonSupprimer:pressed {
+    -fx-effect: dropshadow(three-pass-box, -grey-1, 10, 0.0, 0, 1);
+}
 
 /* Barre de menu */
-
 #mainMenuBar{
     -fx-padding: 5 20 5 20;
 }
