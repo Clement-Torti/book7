@@ -1,0 +1,7 @@
+@import "colors.css";
+
+#mainVue {
+    -fx-background-color: white;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}

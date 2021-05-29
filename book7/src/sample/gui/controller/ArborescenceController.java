@@ -1,5 +1,6 @@
 package sample.gui.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.model.Constantes;
 import sample.model.Module;
@@ -30,8 +32,8 @@ import java.util.regex.Pattern;
 //
 public class ArborescenceController extends BaseController {
     // Constantes
-    public static final Integer MODULE_WIDTH = 900;
-    public static final Integer MODULE_HEIGHT = 600;
+    public static Double MODULE_WIDTH = 900.0;
+    public static Double MODULE_HEIGHT = 600.0;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
 
     // FXML Outlets
@@ -46,6 +48,12 @@ public class ArborescenceController extends BaseController {
     // Constructeurs
     public ArborescenceController(Stage stage) {
         super(stage);
+        // Definir la taille de la fenetre d'un module comme la hauteur maximal de l'ecran
+        ObservableList<Screen> screenSizes = Screen.getScreens();
+        screenSizes.forEach(screen -> {
+            MODULE_HEIGHT = screen.getBounds().getHeight();
+            MODULE_WIDTH = MODULE_HEIGHT * 1.3;
+        });
     }
 
     // Methodes

@@ -7,7 +7,24 @@ package sample.model.Enums;
 // Dernière Modification: Clément Torti
 //
 public enum Section {
-    COURS,
-    TD,
-    TP
-}
+    COURS {
+        public String toString() {
+            return "COURS";
+        }
+    },
+
+    TD{
+        public String toString() {
+            return "TD";
+        }
+    },
+
+    TP {
+        public String toString() {
+            return "TP";
+        }
+    }
+
+
+
+    }

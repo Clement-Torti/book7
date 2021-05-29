@@ -3,17 +3,11 @@
 #main {
 }
 
-#page1 {
-    -fx-background-color: rgba(0, 250, 250, 1);
-}
-
-#page2 {
-    -fx-background-color: rgba(0, 250, 250, 1);
-}
-
-#navigationView{
-    -fx-background-color: -grey-1;
+#navigationView, #toolBox {
+    -fx-background-color: white;
     -fx-alignment: center;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
 
 #navigation_gauche, #navigation_droite {

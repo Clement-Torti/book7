@@ -1,5 +1,6 @@
 package sample.gui.view;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -13,6 +14,7 @@ import sample.model.Cahier;
 public class CahierView extends HBox {
     // Attributs
     private Cahier cahier;
+    private String nomModule;
 
     // Outlets
     private PageView leftPage;
@@ -21,11 +23,12 @@ public class CahierView extends HBox {
 
     // Constructeur
     public CahierView() {
-        setSpacing(20);
-
         // Ajout des 2 pages
         leftPage = new PageView();
         rightPage = new PageView();
+
+        setMargin(leftPage, new Insets(10));
+        setMargin(rightPage, new Insets(10));
 
         HBox.setHgrow(leftPage, Priority.ALWAYS);
         HBox.setHgrow(rightPage, Priority.ALWAYS);
@@ -36,8 +39,9 @@ public class CahierView extends HBox {
     }
 
     // Methodes
-    public void setCahier(Cahier _cahier) {
+    public void setCahier(Cahier _cahier, String _nomModule) {
         cahier = _cahier;
+        nomModule = _nomModule;
         setPage(0); // Afficher la 1ere page par défaut
     }
 
@@ -48,15 +52,15 @@ public class CahierView extends HBox {
 
         // La page a afficher est paire
         if (pageIndex % 2 == 0) {
-            leftPage.setPage(cahier.getPages().get(pageIndex));
+            leftPage.setPage(cahier.getPages().get(pageIndex), pageIndex, nomModule, cahier.getSection());
 
             if(cahier.getPages().size() > pageIndex) {
-                rightPage.setPage(cahier.getPages().get(pageIndex + 1));
+                rightPage.setPage(cahier.getPages().get(pageIndex + 1), pageIndex + 1, nomModule, cahier.getSection());
             }
         } else {
             // La page à afficher est impaire
-            leftPage.setPage(cahier.getPages().get(pageIndex-1));
-            rightPage.setPage(cahier.getPages().get(pageIndex));
+            leftPage.setPage(cahier.getPages().get(pageIndex-1), pageIndex - 1, nomModule, cahier.getSection());
+            rightPage.setPage(cahier.getPages().get(pageIndex), pageIndex, nomModule, cahier.getSection());
         }
     }
 }

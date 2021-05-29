@@ -36,7 +36,7 @@ public abstract class BaseController {
     // - width: Largeur de la vue
     // - height: Hauteur de la vue
     // - titre: Titre de la scene
-    public void changeScene(String source, BaseController destController, int width, int height, String titre) throws IOException {
+    public void changeScene(String source, BaseController destController, Double width, Double height, String titre) throws IOException {
         URL url = Main.class.getResource(source);
         FXMLLoader loader = new FXMLLoader(url);
 
@@ -57,7 +57,7 @@ public abstract class BaseController {
     // - width: Largeur de la vue
     // - height: Hauteur de la vue
     // - titre: Titre de la fenêtre
-    public void openStage(String source, BaseController destController, int width, int height, String titre) throws IOException {
+    public void openStage(String source, BaseController destController, Double width, Double height, String titre) throws IOException {
         URL url = Main.class.getResource(source);
 
         FXMLLoader loader = new FXMLLoader(url);
@@ -66,10 +66,9 @@ public abstract class BaseController {
 
         Stage newStage = new Stage();
 
+        newStage.setResizable(false);
         newStage.setTitle(titre);
         newStage.setScene(new Scene(root, width, height));
-        newStage.setMinWidth(width+16);
-        newStage.setMinHeight(height+39);
         newStage.initOwner(getStage());
         newStage.showAndWait();
     }

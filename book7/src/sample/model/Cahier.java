@@ -24,6 +24,7 @@ public class Cahier implements Serializable {
     public List<Page> getPages() {
         return pages;
     }
+    public Section getSection() { return section; }
 
     // Constructeurs
     public Cahier(Section section) {
