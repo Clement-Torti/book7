@@ -2,9 +2,11 @@ package sample.gui.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import sample.gui.view.CahierView;
 import sample.gui.view.NavigationView;
+import sample.gui.view.ToolBoxView;
 import sample.model.Contenu.TextArea;
 import sample.model.Enums.Section;
 import sample.model.Module;
@@ -22,6 +24,8 @@ public class ModuleController extends BaseController {
     private CahierView currentCahier;
     @FXML
     private NavigationView navigationView;
+    @FXML
+    private ToolBoxView toolBoxView;
 
     // Attributs
     private Section currentSection = Section.COURS;
@@ -39,21 +43,7 @@ public class ModuleController extends BaseController {
         // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
 
-
-        switch (currentSection) {
-            case COURS:
-                currentCahier.setCahier(module.getCours());
-                break;
-            case TD:
-                currentCahier.setCahier(module.getTD());
-                break;
-            case TP:
-                currentCahier.setCahier(module.getTP());
-                break;
-        }
-
-
-
+        updateView();
     }
 
     // Methodes
@@ -65,5 +55,21 @@ public class ModuleController extends BaseController {
             return;
         }
         currentSection = nouvelleSection;
+        updateView();
+    }
+
+    private void updateView() {
+        switch (currentSection) {
+            case COURS:
+                currentCahier.setCahier(module.getCours(), module.getNom());
+                break;
+            case TD:
+                currentCahier.setCahier(module.getTD(), module.getNom());
+                break;
+            case TP:
+                currentCahier.setCahier(module.getTP(), module.getNom());
+                break;
+        }
+
     }
 }
