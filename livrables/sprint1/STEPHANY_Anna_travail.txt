@@ -1,0 +1,1 @@
+J'ai travaillé ensemble avec Clément torti et Phillipe lopes sur l'arborescence (Contrôleur et vue )  et la vue  du  module. Avec Clément j'ai également travaillé sur l'affichage des différents contenus sur une page. 

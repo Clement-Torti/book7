@@ -1,0 +1,8 @@
+Philippe Lopes
+26/05/21
+
+Travail effectué :
+- Developpement en partie de la vue Arborescence et Module (fxml, css et controller) 
+	- Barre de Menu
+	- Affichage des semestres et des modules à partir de l'arborescence de fichiers
+	- Affichage des boutons de navigations à l'intérieur d'un Module

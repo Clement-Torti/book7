@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+book7/out/*
 
 # Log file
 *.log

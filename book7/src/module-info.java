@@ -5,4 +5,7 @@ module book7 {
     requires javafx.fxml;
 
     opens sample;
+    opens sample.gui.controller;
+    opens sample.gui.view;
+
 }
