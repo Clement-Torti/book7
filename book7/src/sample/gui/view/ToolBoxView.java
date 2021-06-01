@@ -66,7 +66,6 @@ public class ToolBoxView extends VBox {
         getChildren().add(policeButton);
 
         // taillePolice (Liste déroulante)
-
         ComboBox<Integer> taillePolice = new ComboBox<>();
         for (int i = 4; i <= 25; i++) {
             taillePolice.getItems().add(i);
@@ -83,7 +82,7 @@ public class ToolBoxView extends VBox {
         Button grasButton = new Button();
         ImageView iconGras = new ImageView("/icon-bold.png");
         iconGras.setPreserveRatio(true);
-        iconGras.setFitWidth(15);
+        iconGras.setFitHeight(20);
         grasButton.setGraphic(iconGras);
         grasButton.getStyleClass().add("bouton_style");
         grasButton.setOnAction((event) ->{
@@ -95,7 +94,7 @@ public class ToolBoxView extends VBox {
         Button italiqueButton = new Button();
         ImageView iconItalique = new ImageView("/icon-talic.png");
         iconItalique.setPreserveRatio(true);
-        iconItalique.setFitWidth(15);
+        iconItalique.setFitHeight(20);
         italiqueButton.setGraphic(iconItalique);
         italiqueButton.getStyleClass().add("bouton_style");
         italiqueButton.setOnAction((event) ->{
@@ -107,7 +106,7 @@ public class ToolBoxView extends VBox {
         Button soulignementButton = new Button();
         ImageView iconSoulignement = new ImageView("/icon-underline.png");
         iconSoulignement.setPreserveRatio(true);
-        iconSoulignement.setFitWidth(15);
+        iconSoulignement.setFitHeight(20);
         soulignementButton.setGraphic(iconSoulignement);
         soulignementButton.getStyleClass().add("bouton_style");
         soulignementButton.setOnAction((event) ->{
@@ -119,7 +118,7 @@ public class ToolBoxView extends VBox {
         Button surlignementButton = new Button();
         ImageView iconSurlignement = new ImageView("/icon-highlighter.png");
         iconSurlignement.setPreserveRatio(true);
-        iconSurlignement.setFitWidth(15);
+        iconSurlignement.setFitHeight(20);
         surlignementButton.setGraphic(iconSurlignement);
         surlignementButton.getStyleClass().add("bouton_style");
         surlignementButton.setOnAction((event) ->{
