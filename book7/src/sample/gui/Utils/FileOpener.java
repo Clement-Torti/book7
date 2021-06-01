@@ -26,6 +26,9 @@ public class FileOpener {
     // Methodes
     public File getFile() {
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter
+                = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
         fileChooser.setTitle("Open Resource File");
         File f = fileChooser.showOpenDialog(stage);
 

@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -16,7 +18,7 @@ import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
 import sample.model.Contenu.Contenu;
 
-import sample.model.Contenu.Image;
+import sample.model.Contenu.ImageBook7;
 import sample.model.Contenu.TextZone;
 import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
@@ -65,6 +67,7 @@ public class PageView extends BorderPane {
         setCenter(scrollPane);
         scrollPane.setContent(contenuBox);
         contenuBox.setId("contenuBox");
+        contenuBox.setAlignment(Pos.CENTER);
         setMargin(scrollPane, new Insets(0, 20, 0, 20));
 
         setBottom(footerBox);
@@ -126,6 +129,14 @@ public class PageView extends BorderPane {
         addImage.setOnAction((event) -> {
             File f = fileOpener.getFile();
             System.out.println(f);
+
+            if (f != null) {
+                ImageBook7 imageBook7 = new ImageBook7(f.toURI());
+                page.appendContenu(imageBook7);
+                updateView();
+            }
+
+
         });
         footerBox.getChildren().add(addImage);
 

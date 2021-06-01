@@ -1,6 +1,8 @@
 package sample.model.Contenu;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URL;
 
 // ------------------------
 // Rôle: Un media représentant une PDF
@@ -13,6 +15,9 @@ public class PDF extends Media implements Serializable {
     // Attributs
 
     // Constructeurs
+    public PDF(URI uri) {
+        super(uri);
+    }
 
     // Methodes
 }

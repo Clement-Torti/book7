@@ -1,6 +1,7 @@
 package sample.model.Contenu;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.net.URL;
 
 // ------------------------
@@ -12,9 +13,17 @@ public abstract class Media extends Contenu implements Serializable {
     private static final long serialVersionUID = -6573313072129458148L;
 
     // Attributs
-    private URL url;
+    private URI uri;
+
+    // Getter
+    public URI getUri() {
+        return uri;
+    }
 
     // Constructeurs
+    public Media(URI uri) {
+        this.uri = uri;
+    }
 
     // Methodes
 }
