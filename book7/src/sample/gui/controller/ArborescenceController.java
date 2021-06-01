@@ -52,7 +52,7 @@ public class ArborescenceController extends BaseController {
         ObservableList<Screen> screenSizes = Screen.getScreens();
         screenSizes.forEach(screen -> {
             MODULE_HEIGHT = screen.getBounds().getHeight();
-            MODULE_WIDTH = MODULE_HEIGHT * 1.3;
+            MODULE_WIDTH = MODULE_HEIGHT * 1.4;
         });
     }
 

@@ -1,14 +1,14 @@
 package sample.gui.view;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import sample.model.Toolbox;
 import sample.model.Enums.FontStyle;
 
@@ -29,99 +29,106 @@ public class ToolBoxView extends VBox {
     // Methodes
     private void updateView() {
         // Palette de couleur
-        Button colorButton = new Button();
-        colorButton.setText("Get Color");
-        colorButton.setOnAction((event) -> {
-            System.out.println(toolbox);
-            System.out.println(toolbox.getColor());
-        });
-        getChildren().add(colorButton);
+        Text couleurTexte = new Text();
+        couleurTexte.setFont(new Font(16));
+        couleurTexte.setText("Couleurs");
+        getChildren().add(couleurTexte);
 
-        Button colorRedButton = new Button();
-        colorRedButton.setText("Set red Color");
-        colorRedButton.setOnAction((event) ->{
-            toolbox.setColor(Color.RED);
-        });
-        getChildren().add(colorRedButton);
+        FlowPane paletteCouleur = new FlowPane();
+        paletteCouleur.setId("palette_couleur");
+        // Couleurs
+        Color[] listeCouleurs = {
+                Color.RED, Color.BLUE, Color.GREEN,
+                Color.BLACK, Color.CADETBLUE, Color.TOMATO,
+                Color.GHOSTWHITE, Color.VIOLET, Color.TURQUOISE,
+                Color.PINK, Color.ORANGE, Color.LEMONCHIFFON
+        };
+        for (Color couleur : listeCouleurs){
+            Button couleurBouton = new Button();
+//            couleurBouton.setText();
+            couleurBouton.getStyleClass().add("bouton_couleur");
+            couleurBouton.setStyle("-fx-background-color: #" + couleur.toString().substring(2, 8) + ";");
+            couleurBouton.setOnAction((event) -> {
+                toolbox.setColor(couleur);
+                System.out.println(toolbox.getColor());
+            });
+            paletteCouleur.getChildren().add(couleurBouton);
+        }
+        getChildren().add(paletteCouleur);
 
         // policeTexte (Liste déroulante)
-        ComboBox policeButton = new ComboBox();
+        ComboBox<FontStyle> policeButton = new ComboBox<>();
         for (int i = 0; i < FontStyle.values().length; i++) {
             policeButton.getItems().add(FontStyle.values()[i]);;
         }
         policeButton.getSelectionModel().select(0);
-        policeButton.getStyleClass().add("toolBoxButton");
+        policeButton.getStyleClass().add("liste_deroulante");
         getChildren().add(policeButton);
 
         // taillePolice (Liste déroulante)
-        ComboBox tailleButton = new ComboBox();
+
+        ComboBox<Integer> taillePolice = new ComboBox<>();
         for (int i = 4; i <= 25; i++) {
-            tailleButton.getItems().add(i);
+            taillePolice.getItems().add(i);
         }
-        tailleButton.getSelectionModel().select(8);
-        tailleButton.getStyleClass().add("toolBoxButton");
-        getChildren().add(tailleButton);
+        taillePolice.getSelectionModel().select(8);
+        taillePolice.getStyleClass().add("liste_deroulante");
+        getChildren().add(taillePolice);
+
+        // BOUTONS de style
+        FlowPane boutonPanel = new FlowPane();
+        boutonPanel.getStyleClass().add("liste_boutons_style");
 
         // gras (bouton)
         Button grasButton = new Button();
-        grasButton.getStyleClass().add("toolBoxButton");
+        ImageView iconGras = new ImageView("/icon-bold.png");
+        iconGras.setPreserveRatio(true);
+        iconGras.setFitWidth(15);
+        grasButton.setGraphic(iconGras);
+        grasButton.getStyleClass().add("bouton_style");
         grasButton.setOnAction((event) ->{
             toolbox.setGras(Boolean.TRUE);
         });
-        ImageView iconGras = new ImageView("/icon-bold.png");
-        iconGras.setPreserveRatio(true);
-        iconGras.setFitWidth(20);
-        grasButton.setGraphic(iconGras);
-
-        getChildren().add(grasButton);
+        boutonPanel.getChildren().add(grasButton);
 
         // italique (bouton)
         Button italiqueButton = new Button();
         ImageView iconItalique = new ImageView("/icon-talic.png");
         iconItalique.setPreserveRatio(true);
-        iconItalique.setFitWidth(20);
+        iconItalique.setFitWidth(15);
         italiqueButton.setGraphic(iconItalique);
-        italiqueButton.getStyleClass().add("toolBoxButton");
+        italiqueButton.getStyleClass().add("bouton_style");
         italiqueButton.setOnAction((event) ->{
             ////XXX////
         });
-        getChildren().add(italiqueButton);
-
-        HBox hbox1 = new HBox(grasButton, italiqueButton);
-        getChildren().add(hbox1);
+        boutonPanel.getChildren().add(italiqueButton);
 
         // soulignement (bouton)
         Button soulignementButton = new Button();
         ImageView iconSoulignement = new ImageView("/icon-underline.png");
         iconSoulignement.setPreserveRatio(true);
-        iconSoulignement.setFitWidth(20);
+        iconSoulignement.setFitWidth(15);
         soulignementButton.setGraphic(iconSoulignement);
-        soulignementButton.getStyleClass().add("toolBoxButton");
+        soulignementButton.getStyleClass().add("bouton_style");
         soulignementButton.setOnAction((event) ->{
 
         });
-        getChildren().add(soulignementButton);
+        boutonPanel.getChildren().add(soulignementButton);
 
         // surlignement (bouton)
         Button surlignementButton = new Button();
         ImageView iconSurlignement = new ImageView("/icon-highlighter.png");
         iconSurlignement.setPreserveRatio(true);
-        iconSurlignement.setFitWidth(20);
+        iconSurlignement.setFitWidth(15);
         surlignementButton.setGraphic(iconSurlignement);
-        surlignementButton.getStyleClass().add("toolBoxButton");
+        surlignementButton.getStyleClass().add("bouton_style");
         surlignementButton.setOnAction((event) ->{
             ////XXX////
         });
-        getChildren().add(surlignementButton);
+        boutonPanel.getChildren().add(surlignementButton);
 
-        HBox hbox2 = new HBox(soulignementButton, surlignementButton);
-        getChildren().add(hbox2);
-
-        // formes
-        Button shapeButton = new Button();
-        shapeButton.setText("Shape");
-
-        getChildren().add(shapeButton);
+        // Ajout de la liste à la ToolBoxView
+        getChildren().add(boutonPanel);
     }
 
     public Toolbox getToolbox() {

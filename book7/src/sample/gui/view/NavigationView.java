@@ -48,7 +48,6 @@ public class NavigationView extends HBox {
         ImageView iconBoutonGauche = new ImageView("/icon-arrow-left.png");
         iconBoutonGauche.setPreserveRatio(true);
         iconBoutonGauche.setFitWidth(20);
-        iconBoutonGauche.setSmooth(false);
         iconBoutonGauche.setEffect(couleurBlanche);
         boutonGauche.setGraphic(iconBoutonGauche);
         //        boutonGauche.setText("bouton gauche");
@@ -57,7 +56,6 @@ public class NavigationView extends HBox {
         ImageView iconBoutonDroite = new ImageView("/icon-arrow-right.png");
         iconBoutonDroite.setPreserveRatio(true);
         iconBoutonDroite.setFitWidth(20);
-        iconBoutonDroite.setSmooth(false);
         iconBoutonDroite.setEffect(couleurBlanche);
         boutonDroite.setGraphic(iconBoutonDroite);
 //        boutonDroite.setText("bouton droit");
