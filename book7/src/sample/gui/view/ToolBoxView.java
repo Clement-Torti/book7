@@ -22,6 +22,19 @@ public class ToolBoxView extends VBox {
 
     // Methodes
     private void updateView() {
+        // Palette de couleur
+
+        // policeTexte (Liste déroulante)
+
+        // taillePolice (Liste déroulante)
+
+        // gras (bouton)
+
+        // italique (bouton)
+
+        // soulignement (bouton)
+
+        // Exemples
         Button policeButton = new Button();
         policeButton.setText("Police");
 
