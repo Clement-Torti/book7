@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import sample.model.Toolbox;
@@ -48,6 +50,7 @@ public class ToolBoxView extends VBox {
             policeButton.getItems().add(FontStyle.values()[i]);;
         }
         policeButton.getSelectionModel().select(0);
+        policeButton.getStyleClass().add("toolBoxButton");
         getChildren().add(policeButton);
 
         // taillePolice (Liste déroulante)
@@ -56,28 +59,44 @@ public class ToolBoxView extends VBox {
             tailleButton.getItems().add(i);
         }
         tailleButton.getSelectionModel().select(8);
+        tailleButton.getStyleClass().add("toolBoxButton");
         getChildren().add(tailleButton);
 
         // gras (bouton)
         Button grasButton = new Button();
-        grasButton.setText("Set gras");
+        grasButton.getStyleClass().add("toolBoxButton");
         grasButton.setOnAction((event) ->{
             toolbox.setGras(Boolean.TRUE);
-            //text1.setStyle("-fx-font-weight: bold");
         });
+        ImageView iconGras = new ImageView("/icon-bold.png");
+        iconGras.setPreserveRatio(true);
+        iconGras.setFitWidth(20);
+        grasButton.setGraphic(iconGras);
+
         getChildren().add(grasButton);
 
         // italique (bouton)
         Button italiqueButton = new Button();
-        italiqueButton.setText("Set italique");
+        ImageView iconItalique = new ImageView("/icon-talic.png");
+        iconItalique.setPreserveRatio(true);
+        iconItalique.setFitWidth(20);
+        italiqueButton.setGraphic(iconItalique);
+        italiqueButton.getStyleClass().add("toolBoxButton");
         italiqueButton.setOnAction((event) ->{
-
+            ////XXX////
         });
         getChildren().add(italiqueButton);
 
+        HBox hbox1 = new HBox(grasButton, italiqueButton);
+        getChildren().add(hbox1);
+
         // soulignement (bouton)
         Button soulignementButton = new Button();
-        soulignementButton.setText("Set soulignement");
+        ImageView iconSoulignement = new ImageView("/icon-underline.png");
+        iconSoulignement.setPreserveRatio(true);
+        iconSoulignement.setFitWidth(20);
+        soulignementButton.setGraphic(iconSoulignement);
+        soulignementButton.getStyleClass().add("toolBoxButton");
         soulignementButton.setOnAction((event) ->{
 
         });
@@ -85,11 +104,18 @@ public class ToolBoxView extends VBox {
 
         // surlignement (bouton)
         Button surlignementButton = new Button();
-        surlignementButton.setText("Set surlignement");
+        ImageView iconSurlignement = new ImageView("/icon-highlighter.png");
+        iconSurlignement.setPreserveRatio(true);
+        iconSurlignement.setFitWidth(20);
+        surlignementButton.setGraphic(iconSurlignement);
+        surlignementButton.getStyleClass().add("toolBoxButton");
         surlignementButton.setOnAction((event) ->{
-
+            ////XXX////
         });
         getChildren().add(surlignementButton);
+
+        HBox hbox2 = new HBox(soulignementButton, surlignementButton);
+        getChildren().add(hbox2);
 
         // formes
         Button shapeButton = new Button();

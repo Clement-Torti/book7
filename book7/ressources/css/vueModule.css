@@ -46,3 +46,8 @@
 .bouton_navigation:pressed, .bouton_cahier:pressed{
     -fx-background-color: -blue-2;
 }
+
+.toolBoxButton {
+    -fx-spacing: 20;
+    -fx-padding: 10;
+}
