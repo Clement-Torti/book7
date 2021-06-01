@@ -26,7 +26,7 @@ import java.util.Locale;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class PageView extends BorderPane implements IObservateur {
+public class PageView extends BorderPane {
     // Outlets
     private ScrollPane scrollPane;
     private HBox headerBox = new HBox();
@@ -51,11 +51,13 @@ public class PageView extends BorderPane implements IObservateur {
         setMargin(headerBox, new Insets(10));
 
         scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
         scrollPane.setId("scrollPane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         setCenter(scrollPane);
         scrollPane.setContent(contenuBox);
+        contenuBox.setId("contenuBox");
         setMargin(scrollPane, new Insets(0, 20, 0, 20));
 
         setBottom(footerBox);
@@ -87,9 +89,8 @@ public class PageView extends BorderPane implements IObservateur {
 
         // Contenu
         for(Contenu c: page.getContenus()) {
-            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c, this);
+            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
             contenuBox.getChildren().add(cv.afficher());
-
         }
 
         try {
@@ -98,11 +99,8 @@ public class PageView extends BorderPane implements IObservateur {
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
-                ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz, this);
+                ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
                 contenuBox.getChildren().add(cv.afficher());
-
-                // textHolder.textProperty().bind(textArea.textProperty());
-
 
                 page.appendContenu(tz);
             }
@@ -126,15 +124,6 @@ public class PageView extends BorderPane implements IObservateur {
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
-    }
-
-
-    @Override
-    public void update(Observable obs) {
-        System.out.println("Appelez");
-        System.out.println(obs);
-
-
     }
 }
 

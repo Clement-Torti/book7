@@ -10,8 +10,8 @@ import sample.model.Observateur.IObservateur;
 //
 public class PDFView extends ContenuView {
 
-    public PDFView(Contenu contenu, IObservateur obs) {
-        super(contenu, obs);
+    public PDFView(Contenu contenu) {
+        super(contenu);
     }
 
     @Override

@@ -14,7 +14,7 @@
 .text-area {
     -fx-background-color: rgba(0, 0, 0, 0);
     -fx-background-insets: 0;
-    -fx-background-color: transparent;
+    -fx-background-color: blue;
 
 }
 
@@ -23,7 +23,7 @@
 }
 
 .text-area:focused .content {
-    -fx-background-color: transparent, white, transparent, white;
+    -fx-background-color: transparent;
 }
 
 .text-area:focused {
@@ -45,5 +45,10 @@
 }
 
 #scrollPane {
-   -fx-background-color: transparent;
+   -fx-background-color: yellow;
+}
+
+#contenuBox {
+    -fx-background-color: green;
+    -fx-border-style: solid;
 }

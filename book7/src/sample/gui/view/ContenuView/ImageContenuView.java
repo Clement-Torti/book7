@@ -10,8 +10,8 @@ import sample.model.Observateur.IObservateur;
 //
 public class ImageContenuView extends ContenuView {
 
-    public ImageContenuView(Contenu contenu, IObservateur obs) {
-        super(contenu, obs);
+    public ImageContenuView(Contenu contenu) {
+        super(contenu);
     }
 
     @Override

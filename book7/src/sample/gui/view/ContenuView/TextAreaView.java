@@ -24,29 +24,29 @@ public class TextAreaView extends ContenuView {
     private Text textHolder = new Text();
     private double oldHeight = 0;
 
-    public TextAreaView(Contenu contenu, IObservateur obs) {
-        super(contenu, obs);
+    public TextAreaView(Contenu contenu) {
+        super(contenu);
     }
 
     @Override
     public Node afficher() {
         textArea.setText(((TextZone) contenu).getTexte());
-        return yourSP();
+        textHolder.setText(textArea.getText());
+        return resizableTextArea();
     }
 
-    private TextArea yourSP(){
+    private TextArea resizableTextArea(){
         // Taille du textAreapar defaut
         textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
         textArea.setPadding(new Insets(0));
-
 
         textArea.setWrapText(true);
         textHolder.textProperty().bind(textArea.textProperty());
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-                notifier();
                 ((TextZone)contenu).setTexte(textArea.getText());
+                System.out.println(oldValue.getHeight());
                 if (oldHeight != newValue.getHeight()) {
                     oldHeight = newValue.getHeight();
                     textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);

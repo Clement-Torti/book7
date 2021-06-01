@@ -10,8 +10,8 @@ import sample.model.Observateur.IObservateur;
 //
 public class FormuleView extends ContenuView {
 
-    public FormuleView(Contenu contenu, IObservateur obs) {
-        super(contenu, obs);
+    public FormuleView(Contenu contenu) {
+        super(contenu);
     }
 
     @Override
