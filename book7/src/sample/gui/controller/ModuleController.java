@@ -1,13 +1,10 @@
 package sample.gui.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import sample.gui.view.CahierView;
 import sample.gui.view.NavigationView;
 import sample.gui.view.ToolBoxView;
-import sample.model.Contenu.TextArea;
 import sample.model.Enums.Section;
 import sample.model.Module;
 
@@ -26,6 +23,7 @@ public class ModuleController extends BaseController {
     private NavigationView navigationView;
     @FXML
     private ToolBoxView toolBoxView;
+
 
     // Attributs
     private Section currentSection = Section.COURS;
@@ -55,6 +53,16 @@ public class ModuleController extends BaseController {
             return;
         }
         currentSection = nouvelleSection;
+        updateView();
+    }
+
+    public void nextPage() {
+        currentCahier.nextPage();
+        updateView();
+    }
+
+    public void previousPage() {
+        currentCahier.previousPage();
         updateView();
     }
 

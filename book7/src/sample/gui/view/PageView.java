@@ -2,15 +2,21 @@ package sample.gui.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
-import sample.Main;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
+import sample.gui.view.ContenuView.ImageContenuView;
 import sample.model.Contenu.Contenu;
+
+import sample.model.Contenu.Image;
+import sample.model.Contenu.TextZone;
 import sample.model.Enums.Section;
+import sample.model.Observateur.IObservateur;
+import sample.model.Observateur.Observable;
 import sample.model.Page;
 
 import java.util.Locale;
@@ -20,8 +26,9 @@ import java.util.Locale;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class PageView extends BorderPane {
+public class PageView extends BorderPane implements IObservateur {
     // Outlets
+    private ScrollPane scrollPane;
     private HBox headerBox = new HBox();
     private VBox contenuBox = new VBox();
     private HBox footerBox = new HBox();
@@ -42,8 +49,15 @@ public class PageView extends BorderPane {
         // Elements
         setTop(headerBox);
         setMargin(headerBox, new Insets(10));
-        setCenter(contenuBox);
-        setMargin(contenuBox, new Insets(0, 20, 0, 20));
+
+        scrollPane = new ScrollPane();
+        scrollPane.setId("scrollPane");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        setCenter(scrollPane);
+        scrollPane.setContent(contenuBox);
+        setMargin(scrollPane, new Insets(0, 20, 0, 20));
+
         setBottom(footerBox);
         setMargin(footerBox, new Insets(5, 20, 10, 20));
 
@@ -73,14 +87,39 @@ public class PageView extends BorderPane {
 
         // Contenu
         for(Contenu c: page.getContenus()) {
-            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
+            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c, this);
             contenuBox.getChildren().add(cv.afficher());
+
         }
 
-        // Le dernier element est un contenu dynamique
-        TextField textField = new TextField();
-        contenuBox.getChildren().add(textField);
+        try {
+            Integer contentSize = page.getContenus().size();
 
+            if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
+                // Le dernier element est un contenu dynamique
+                TextZone tz = new TextZone();
+                ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz, this);
+                contenuBox.getChildren().add(cv.afficher());
+
+                // textHolder.textProperty().bind(textArea.textProperty());
+
+
+                page.appendContenu(tz);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        Button addImage = new Button();
+        addImage.setText("Ajout image");
+        addImage.setOnAction((event) -> {
+            Contenu c = new Image();
+            page.appendContenu(c);
+            updateView();
+        });
+
+       headerBox.getChildren().add(addImage);
         // Footer
         footerBox.setAlignment(Pos.CENTER_RIGHT);
 
@@ -88,4 +127,20 @@ public class PageView extends BorderPane {
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
     }
+
+
+    @Override
+    public void update(Observable obs) {
+        System.out.println("Appelez");
+        System.out.println(obs);
+
+
+    }
 }
+
+
+
+
+    // PageView doit savoir quelle TextAreaView a ete modifié
+
+    // Mettre à jour le modele

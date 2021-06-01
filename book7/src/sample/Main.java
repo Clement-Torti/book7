@@ -6,12 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.gui.controller.ArborescenceController;
-import sample.gui.controller.ModuleController;
-import sample.model.Cahier;
-import sample.model.Contenu.TextArea;
-import sample.model.Page;
-import sample.model.Persistence.ModuleWriter;
+import sample.model.Contenu.TextZone;
 import sample.model.Module;
+import sample.model.Persistence.ModuleWriter;
 
 import java.net.URL;
 
@@ -22,6 +19,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*
+        Module m = new Module("gestion", 1);
+
+        TextZone tz = new TextZone();
+        tz.setTexte("ceci est la textezone");
+
+        m.getCours().getPages().get(0).appendContenu(tz);
+
+        ModuleWriter mw = new ModuleWriter();
+        mw.ecrire(m);
+        */
+
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);
