@@ -4,7 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.Main;
 
 import java.io.IOException;
@@ -65,11 +67,13 @@ public abstract class BaseController {
         Parent root = loader.load();
 
         Stage newStage = new Stage();
+        newStage.initStyle(StageStyle.TRANSPARENT);
+        Scene scene = new Scene(root, width, height);
+        scene.setFill(Color.TRANSPARENT);
 
         newStage.setResizable(false);
         newStage.setTitle(titre);
-        newStage.setScene(new Scene(root, width, height));
-        newStage.initOwner(getStage());
+        newStage.setScene(scene);
         newStage.showAndWait();
     }
 }

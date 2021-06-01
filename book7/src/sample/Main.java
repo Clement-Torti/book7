@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.gui.controller.ArborescenceController;
 import sample.model.Contenu.TextZone;
 import sample.model.Module;
@@ -38,7 +40,9 @@ public class Main extends Application {
         Parent root = loader.load();
 
         primaryStage.setTitle("Book 7");
-        primaryStage.setScene(new Scene(root, WIN_WIDTH, WIN_HEIGHT));
+        Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT);
+
+        primaryStage.setScene(scene);
         primaryStage.setMinWidth(WIN_WIDTH);
         primaryStage.setMinHeight(WIN_HEIGHT);
 

@@ -15,7 +15,7 @@ import sample.model.Page;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class CahierView extends HBox implements IObservateur {
+public class CahierView extends HBox {
     // Attributs
     private Cahier cahier;
     private String nomModule;
@@ -80,11 +80,5 @@ public class CahierView extends HBox implements IObservateur {
             leftPage.setPage(cahier.getPages().get(pageIndex-1), pageIndex - 1, nomModule, cahier.getSection());
             rightPage.setPage(cahier.getPages().get(pageIndex), pageIndex, nomModule, cahier.getSection());
         }
-    }
-
-    @Override
-    public void update(Observable obs) {
-        // Lancer la sauvegarde auto
-        System.out.println("sauvegarde auto");
     }
 }
