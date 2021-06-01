@@ -22,6 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);
@@ -38,6 +39,15 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+//        Module m = new Module("gestion", 1);
+//
+//        TextArea tz = new TextArea();
+//        tz.setTexte("ceci est la textezone");
+//
+//        m.getCours().getPages().get(0).appendContenu(tz);
+//
+//        ModuleWriter mw = new ModuleWriter();
+//        mw.ecrire(m);
         launch(args);
     }
 }

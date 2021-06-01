@@ -10,6 +10,7 @@ import sample.gui.view.ToolBoxView;
 import sample.model.Contenu.TextArea;
 import sample.model.Enums.Section;
 import sample.model.Module;
+import sample.model.Toolbox;
 
 // ------------------------
 // Rôle: Classe controlant un module enseeiht, pour l'afficher et l'éditer
@@ -30,6 +31,7 @@ public class ModuleController extends BaseController {
     // Attributs
     private Section currentSection = Section.COURS;
     private Module module;
+    private Toolbox toolbox;
 
     // Constructeurs
     public ModuleController(Stage stage, Module module) {
@@ -43,7 +45,9 @@ public class ModuleController extends BaseController {
         // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
 
+        toolbox = toolBoxView.getToolbox();
         updateView();
+        System.out.println("ModuleController" + toolbox);
     }
 
     // Methodes
@@ -61,13 +65,13 @@ public class ModuleController extends BaseController {
     private void updateView() {
         switch (currentSection) {
             case COURS:
-                currentCahier.setCahier(module.getCours(), module.getNom());
+                currentCahier.setCahier(module.getCours(), module.getNom(), toolbox);
                 break;
             case TD:
-                currentCahier.setCahier(module.getTD(), module.getNom());
+                currentCahier.setCahier(module.getTD(), module.getNom(), toolbox);
                 break;
             case TP:
-                currentCahier.setCahier(module.getTP(), module.getNom());
+                currentCahier.setCahier(module.getTP(), module.getNom(), toolbox);
                 break;
         }
 

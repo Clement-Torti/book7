@@ -19,7 +19,6 @@ public class NavigationView extends HBox {
     public NavigationView() {
         super();
         this.setSpacing(100);
-
         HBox Gauche = new HBox();
         Gauche.setId("navigation_gauche");
         HBox Droite = new HBox();

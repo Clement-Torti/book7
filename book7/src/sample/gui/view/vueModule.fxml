@@ -18,7 +18,7 @@
             >
 
     <left>
-        <ToolBoxView id="toolBox" fx:id="toolBox">
+        <ToolBoxView id="toolBoxView" fx:id="toolBoxView">
             <BorderPane.margin>
                 <Insets left="10" bottom="10" top="10"/>
             </BorderPane.margin>

@@ -3,7 +3,7 @@
 #main {
 }
 
-#navigationView, #toolBox {
+#navigationView, #toolBoxView {
     -fx-background-color: white;
     -fx-alignment: center;
     -fx-border-radius: 10;

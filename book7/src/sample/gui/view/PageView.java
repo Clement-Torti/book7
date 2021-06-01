@@ -12,6 +12,7 @@ import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.model.Contenu.Contenu;
 import sample.model.Enums.Section;
 import sample.model.Page;
+import sample.model.Toolbox;
 
 import java.util.Locale;
 
@@ -31,6 +32,7 @@ public class PageView extends BorderPane {
     private Integer index;
     private String nomModule;
     private Section section;
+    private Toolbox toolbox;
 
     // Constructeur
     public PageView() {
@@ -50,11 +52,13 @@ public class PageView extends BorderPane {
     }
 
     // Methodes
-    public void setPage(Page _page, Integer _index, String _nomModule, Section _section) {
+    public void setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
         page = _page;
         index = _index;
         nomModule = _nomModule;
         section = _section;
+        toolbox = _toolbox;
+        System.out.println("PageView " + toolbox);
         updateView();
     }
 
