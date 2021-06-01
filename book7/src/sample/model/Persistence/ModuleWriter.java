@@ -28,7 +28,6 @@ public class ModuleWriter {
     public boolean ecrire(Module module) {
         try {
             String chemin = System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/"+module.getChemin();
-            System.out.println(chemin);
             File test_fichier = new File(chemin);
             if(test_fichier.isFile())
                 test_fichier.delete();

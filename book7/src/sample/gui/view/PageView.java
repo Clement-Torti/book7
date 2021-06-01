@@ -1,5 +1,6 @@
 package sample.gui.view;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -7,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import sample.gui.Utils.FileOpener;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
@@ -19,6 +23,7 @@ import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 import sample.model.Page;
 
+import java.io.File;
 import java.util.Locale;
 
 // ------------------------
@@ -32,6 +37,7 @@ public class PageView extends BorderPane {
     private HBox headerBox = new HBox();
     private VBox contenuBox = new VBox();
     private HBox footerBox = new HBox();
+    private FileOpener fileOpener;
 
     // Attributs
     private Page page;
@@ -40,8 +46,9 @@ public class PageView extends BorderPane {
     private Section section;
 
     // Constructeur
-    public PageView() {
+    public PageView(FileOpener fileOpener) {
         super();
+        this.fileOpener = fileOpener;
         // CSS
         getStylesheets().add("vuePage.css");
         setId("mainVue");
@@ -101,7 +108,6 @@ public class PageView extends BorderPane {
                 TextZone tz = new TextZone();
                 ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
                 contenuBox.getChildren().add(cv.afficher());
-
                 page.appendContenu(tz);
             }
 
@@ -109,27 +115,22 @@ public class PageView extends BorderPane {
 
         }
 
+
+        // Footer
+        footerBox.setAlignment(Pos.CENTER_RIGHT);
+        footerBox.setSpacing(10);
+
+        // Ajout d'une image
         Button addImage = new Button();
         addImage.setText("Ajout image");
         addImage.setOnAction((event) -> {
-            Contenu c = new Image();
-            page.appendContenu(c);
-            updateView();
+            File f = fileOpener.getFile();
+            System.out.println(f);
         });
-
-       headerBox.getChildren().add(addImage);
-        // Footer
-        footerBox.setAlignment(Pos.CENTER_RIGHT);
+        footerBox.getChildren().add(addImage);
 
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
     }
 }
-
-
-
-
-    // PageView doit savoir quelle TextAreaView a ete modifié
-
-    // Mettre à jour le modele

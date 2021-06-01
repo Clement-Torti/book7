@@ -11,9 +11,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import sample.gui.controller.ModuleController;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.TextZone;
 import sample.model.Observateur.IObservateur;
+
+import java.time.LocalDateTime;
 
 // rôle: ContenuView indiquant à la vue comment afficher un TextArea
 // Dernière modification: Clément Torti
@@ -32,21 +35,26 @@ public class TextAreaView extends ContenuView {
     public Node afficher() {
         textArea.setText(((TextZone) contenu).getTexte());
         textHolder.setText(textArea.getText());
+
         return resizableTextArea();
     }
 
     private TextArea resizableTextArea(){
         // Taille du textAreapar defaut
         textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
-        textArea.setPadding(new Insets(0));
-
         textArea.setWrapText(true);
         textHolder.textProperty().bind(textArea.textProperty());
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+                // Ajouter une operation
+
+                // ajoutOperation(contenu, LocalDateTime.now());
+
+                // MAJ du modele
                 ((TextZone)contenu).setTexte(textArea.getText());
-                System.out.println(oldValue.getHeight());
+                sauvegarder();
+
                 if (oldHeight != newValue.getHeight()) {
                     oldHeight = newValue.getHeight();
                     textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);

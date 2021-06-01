@@ -4,7 +4,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import sample.gui.Utils.FileOpener;
 import sample.model.Cahier;
+import sample.model.Observateur.IObservateur;
+import sample.model.Observateur.Observable;
 import sample.model.Page;
 
 // ------------------------
@@ -12,7 +15,7 @@ import sample.model.Page;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class CahierView extends HBox {
+public class CahierView extends HBox implements IObservateur {
     // Attributs
     private Cahier cahier;
     private String nomModule;
@@ -24,10 +27,10 @@ public class CahierView extends HBox {
 
 
     // Constructeur
-    public CahierView() {
+    public CahierView(FileOpener fileOpener) {
         // Ajout des 2 pages
-        leftPage = new PageView();
-        rightPage = new PageView();
+        leftPage = new PageView(fileOpener);
+        rightPage = new PageView(fileOpener);
 
         setMargin(leftPage, new Insets(10));
         setMargin(rightPage, new Insets(10));
@@ -77,5 +80,11 @@ public class CahierView extends HBox {
             leftPage.setPage(cahier.getPages().get(pageIndex-1), pageIndex - 1, nomModule, cahier.getSection());
             rightPage.setPage(cahier.getPages().get(pageIndex), pageIndex, nomModule, cahier.getSection());
         }
+    }
+
+    @Override
+    public void update(Observable obs) {
+        // Lancer la sauvegarde auto
+        System.out.println("sauvegarde auto");
     }
 }
