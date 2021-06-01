@@ -12,6 +12,8 @@ import javafx.scene.text.Text;
 import sample.model.Toolbox;
 import sample.model.Enums.FontStyle;
 
+import java.util.List;
+
 public class ToolBoxView extends VBox {
     // Attributs
     private Toolbox toolbox;
@@ -57,9 +59,11 @@ public class ToolBoxView extends VBox {
         getChildren().add(paletteCouleur);
 
         // policeTexte (Liste déroulante)
-        ComboBox<FontStyle> policeButton = new ComboBox<>();
-        for (int i = 0; i < FontStyle.values().length; i++) {
-            policeButton.getItems().add(FontStyle.values()[i]);;
+        List<String> fontFamilies = Font.getFamilies();
+
+        ComboBox<String> policeButton = new ComboBox<>();
+        for(String font : fontFamilies) {
+            policeButton.getItems().add(font);
         }
         policeButton.getSelectionModel().select(0);
         policeButton.getStyleClass().add("liste_deroulante");
