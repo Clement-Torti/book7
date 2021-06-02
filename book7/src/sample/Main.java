@@ -21,7 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*
+
         Module m = new Module("gestion", 1);
 
         TextZone tz = new TextZone();
@@ -31,7 +31,7 @@ public class Main extends Application {
 
         ModuleWriter mw = new ModuleWriter();
         mw.ecrire(m);
-        */
+
 
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 

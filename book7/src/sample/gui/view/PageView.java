@@ -24,8 +24,11 @@ import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 import sample.model.Page;
+import sample.model.Utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.util.Locale;
 
 // ------------------------
@@ -128,10 +131,9 @@ public class PageView extends BorderPane {
         addImage.setText("Ajout image");
         addImage.setOnAction((event) -> {
             File f = fileOpener.getFile();
-            System.out.println(f);
 
-            if (f != null) {
-                ImageBook7 imageBook7 = new ImageBook7(f.toURI());
+            if(f != null) {
+                ImageBook7 imageBook7 = new ImageBook7(f.getAbsoluteFile().toURI());
                 page.appendContenu(imageBook7);
                 updateView();
             }
