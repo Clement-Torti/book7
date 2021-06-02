@@ -2,15 +2,16 @@ package sample.gui.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.gui.Utils.FileOpener;
 import sample.gui.view.CahierView;
 import sample.gui.view.NavigationView;
 import sample.gui.view.ToolBoxView;
-import sample.model.Contenu.TextArea;
 import sample.model.Enums.Section;
 import sample.model.Module;
 import sample.model.Toolbox;
+import sample.model.Persistence.ModuleWriter;
 
 // ------------------------
 // Rôle: Classe controlant un module enseeiht, pour l'afficher et l'éditer
@@ -22,6 +23,7 @@ public class ModuleController extends BaseController {
 
     // FXML Outlets
     @FXML
+    private BorderPane root;
     private CahierView currentCahier;
     @FXML
     private NavigationView navigationView;
@@ -30,7 +32,8 @@ public class ModuleController extends BaseController {
 
     // Attributs
     private Section currentSection = Section.COURS;
-    private Module module;
+    private static Module module;
+    private FileOpener fileOpener;
     private Toolbox toolbox;
 
     // Constructeurs
@@ -44,8 +47,13 @@ public class ModuleController extends BaseController {
     private void initialize() {
         // Permet à la navigation view de communiquer les changements de section ...
         navigationView.setModuleController(this);
-
+        // Toolbox
         toolbox = toolBoxView.getToolbox();
+        // Cahier View
+        fileOpener = new FileOpener(getStage());
+        currentCahier = new CahierView(fileOpener);
+        root.setCenter(currentCahier);
+
         updateView();
     }
 
@@ -58,6 +66,16 @@ public class ModuleController extends BaseController {
             return;
         }
         currentSection = nouvelleSection;
+        updateView();
+    }
+
+    public void nextPage() {
+        currentCahier.nextPage();
+        updateView();
+    }
+
+    public void previousPage() {
+        currentCahier.previousPage();
         updateView();
     }
 
@@ -74,5 +92,10 @@ public class ModuleController extends BaseController {
                 break;
         }
 
+    }
+
+    public static void sauvegarderModule() {
+        ModuleWriter mw = new ModuleWriter();
+        mw.ecrire(module);
     }
 }

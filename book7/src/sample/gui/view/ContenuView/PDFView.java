@@ -3,7 +3,7 @@ package sample.gui.view.ContenuView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import sample.model.Contenu.Contenu;
-import sample.model.Contenu.TextArea;
+import sample.model.Observateur.IObservateur;
 
 // rôle: ContenuView indiquant à la vue comment afficher un PDF
 // Dernière modification: Clément Torti

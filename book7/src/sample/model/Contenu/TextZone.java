@@ -9,7 +9,7 @@ import java.util.List;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class TextArea extends Contenu implements Serializable {
+public class TextZone extends Contenu implements Serializable {
     private static final long serialVersionUID = 1043738449910295226L;
 
     // Attributs

@@ -1,6 +1,7 @@
 package sample.model.Contenu;
 
 import java.io.Serializable;
+import java.net.URI;
 
 // ------------------------
 // Rôle: Un media représentant une formule mathematique
@@ -14,6 +15,9 @@ public class Formule extends Media implements Serializable {
     private String texte;
 
     // Constructeurs
+    public Formule(URI uri) {
+        super(uri);
+    }
 
     // Méthodes
 }

@@ -19,10 +19,10 @@ public class NavigationView extends HBox {
     public NavigationView() {
         super();
         this.setSpacing(100);
-        HBox Gauche = new HBox();
-        Gauche.setId("navigation_gauche");
-        HBox Droite = new HBox();
-        Droite.setId("navigation_droite");
+        HBox hboxGauche = new HBox();
+        hboxGauche.setId("navigation_gauche");
+        HBox hboxDroite = new HBox();
+        hboxDroite.setId("navigation_droite");
 
         Button boutonGauche = new Button();
         boutonGauche.getStyleClass().add("bouton_navigation");
@@ -50,6 +50,9 @@ public class NavigationView extends HBox {
         iconBoutonGauche.setFitWidth(20);
         iconBoutonGauche.setEffect(couleurBlanche);
         boutonGauche.setGraphic(iconBoutonGauche);
+        boutonGauche.setOnAction((event) -> {
+            moduleController.previousPage();
+        });
         //        boutonGauche.setText("bouton gauche");
 
         // Bouton "Suivant"
@@ -58,7 +61,9 @@ public class NavigationView extends HBox {
         iconBoutonDroite.setFitWidth(20);
         iconBoutonDroite.setEffect(couleurBlanche);
         boutonDroite.setGraphic(iconBoutonDroite);
-//        boutonDroite.setText("bouton droit");
+        boutonDroite.setOnAction((event) -> {
+            moduleController.nextPage();
+        });
 
         boutonCours.setText("Cours");
         boutonCours.getStyleClass().add("bouton_cahier");
@@ -68,21 +73,21 @@ public class NavigationView extends HBox {
         boutonTP.getStyleClass().add("bouton_cahier");
 
 
-        Droite.setHgrow(boutonCours, Priority.ALWAYS);
-        Droite.setHgrow(boutonTD, Priority.ALWAYS);
-        Droite.setHgrow(boutonTP, Priority.ALWAYS);
-        Gauche.setHgrow(boutonDroite, Priority.ALWAYS);
-        Gauche.setHgrow(boutonGauche, Priority.ALWAYS);
+        hboxDroite.setHgrow(boutonCours, Priority.ALWAYS);
+        hboxDroite.setHgrow(boutonTD, Priority.ALWAYS);
+        hboxDroite.setHgrow(boutonTP, Priority.ALWAYS);
+        hboxGauche.setHgrow(boutonDroite, Priority.ALWAYS);
+        hboxGauche.setHgrow(boutonGauche, Priority.ALWAYS);
 
 
-        Gauche.getChildren().add(boutonGauche);
-        Gauche.getChildren().add(boutonDroite);
-        Droite.getChildren().add(boutonCours);
-        Droite.getChildren().add(boutonTD);
-        Droite.getChildren().add(boutonTP);
+        hboxGauche.getChildren().add(boutonGauche);
+        hboxGauche.getChildren().add(boutonDroite);
+        hboxDroite.getChildren().add(boutonCours);
+        hboxDroite.getChildren().add(boutonTD);
+        hboxDroite.getChildren().add(boutonTP);
 
-        getChildren().add(Gauche);
-        getChildren().add(Droite);
+        getChildren().add(hboxGauche);
+        getChildren().add(hboxDroite);
 
     }
 

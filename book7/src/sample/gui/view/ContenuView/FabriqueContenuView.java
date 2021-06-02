@@ -1,7 +1,5 @@
 package sample.gui.view.ContenuView;
 
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import sample.model.Contenu.*;
 
 // rôle: Fabrique fournissant la bonne sous classe de contenuView en fonction du contenu fourni
@@ -9,13 +7,13 @@ import sample.model.Contenu.*;
 //
 public class FabriqueContenuView {
     public static ContenuView fabriquerContenuView(Contenu contenu) {
-        if (contenu instanceof TextArea) {
+        if (contenu instanceof TextZone) {
             return new TextAreaView(contenu);
         } else if(contenu instanceof Forme) {
             return new FormeView(contenu);
         } else if(contenu instanceof Formule) {
             return new FormuleView(contenu);
-        } else if(contenu instanceof Image) {
+        } else if(contenu instanceof ImageBook7) {
             return new ImageContenuView(contenu);
         } else if(contenu instanceof  PDF) {
             return new PDFView(contenu);

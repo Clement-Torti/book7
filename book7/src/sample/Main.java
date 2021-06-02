@@ -4,14 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.gui.controller.ArborescenceController;
-import sample.gui.controller.ModuleController;
-import sample.model.Cahier;
-import sample.model.Contenu.TextArea;
-import sample.model.Page;
-import sample.model.Persistence.ModuleWriter;
+import sample.model.Contenu.TextZone;
 import sample.model.Module;
+import sample.model.Persistence.ModuleWriter;
 
 import java.net.URL;
 
@@ -22,7 +21,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);

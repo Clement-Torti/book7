@@ -15,7 +15,7 @@
             xmlns:fx="http://javafx.com/fxml"
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="/vueModule.css" id="main"
-            >
+            fx:id="root">
 
     <left>
         <ToolBoxView id="toolBoxView" fx:id="toolBoxView">
@@ -26,7 +26,6 @@
     </left>
 
     <center>
-        <CahierView fx:id="currentCahier"/>
     </center>
 
     <bottom>
