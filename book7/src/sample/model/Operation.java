@@ -18,6 +18,10 @@ public class Operation implements Serializable {
     private Contenu contenu; // sauvegarde du contenu avant modification
 
     // Constructeurs
+    public Operation(Contenu contenu, Date date) {
+        this.contenu = contenu;
+        this.date = date;
+    }
 
     // Methodes
 }

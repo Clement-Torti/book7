@@ -52,6 +52,9 @@ public class NavigationView extends HBox {
         iconBoutonGauche.setSmooth(false);
         iconBoutonGauche.setEffect(couleurBlanche);
         boutonGauche.setGraphic(iconBoutonGauche);
+        boutonGauche.setOnAction((event) -> {
+            moduleController.previousPage();
+        });
         //        boutonGauche.setText("bouton gauche");
 
         // Bouton "Suivant"
@@ -61,7 +64,9 @@ public class NavigationView extends HBox {
         iconBoutonDroite.setSmooth(false);
         iconBoutonDroite.setEffect(couleurBlanche);
         boutonDroite.setGraphic(iconBoutonDroite);
-//        boutonDroite.setText("bouton droit");
+        boutonDroite.setOnAction((event) -> {
+            moduleController.nextPage();
+        });
 
         boutonCours.setText("Cours");
         boutonCours.getStyleClass().add("bouton_cahier");
