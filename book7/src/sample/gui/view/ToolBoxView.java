@@ -24,7 +24,6 @@ public class ToolBoxView extends VBox {
     public ToolBoxView() {
         super();
         toolbox = new Toolbox();
-        System.out.println("ToolboxView" + toolbox);
         updateView();
     }
 

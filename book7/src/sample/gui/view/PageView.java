@@ -58,7 +58,6 @@ public class PageView extends BorderPane {
         nomModule = _nomModule;
         section = _section;
         toolbox = _toolbox;
-        System.out.println("PageView " + toolbox);
         updateView();
     }
 

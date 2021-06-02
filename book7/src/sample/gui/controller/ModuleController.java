@@ -47,7 +47,6 @@ public class ModuleController extends BaseController {
 
         toolbox = toolBoxView.getToolbox();
         updateView();
-        System.out.println("ModuleController" + toolbox);
     }
 
     // Methodes

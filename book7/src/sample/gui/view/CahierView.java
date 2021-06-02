@@ -46,7 +46,6 @@ public class CahierView extends HBox {
         cahier = _cahier;
         nomModule = _nomModule;
         toolbox = _toolbox;
-        System.out.println("CahierView " + _toolbox);
         setPage(0); // Afficher la 1ere page par défaut
     }
 
