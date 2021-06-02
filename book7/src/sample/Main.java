@@ -21,18 +21,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Module m = new Module("gestion", 1);
-
-        TextZone tz = new TextZone();
-        tz.setTexte("ceci est la textezone");
-
-        m.getCours().getPages().get(0).appendContenu(tz);
-
-        ModuleWriter mw = new ModuleWriter();
-        mw.ecrire(m);
-
-
         URL url = getClass().getResource(ARBORESCENCE_FXML);
 
         FXMLLoader loader = new FXMLLoader(url);
@@ -40,9 +28,7 @@ public class Main extends Application {
         Parent root = loader.load();
 
         primaryStage.setTitle("Book 7");
-        Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT);
-
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root, WIN_WIDTH, WIN_HEIGHT));
         primaryStage.setMinWidth(WIN_WIDTH);
         primaryStage.setMinHeight(WIN_HEIGHT);
 
@@ -51,6 +37,15 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+//        Module m = new Module("gestion", 1);
+//
+//        TextArea tz = new TextArea();
+//        tz.setTexte("ceci est la textezone");
+//
+//        m.getCours().getPages().get(0).appendContenu(tz);
+//
+//        ModuleWriter mw = new ModuleWriter();
+//        mw.ecrire(m);
         launch(args);
     }
 }

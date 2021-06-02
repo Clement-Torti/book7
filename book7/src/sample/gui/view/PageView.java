@@ -24,8 +24,8 @@ import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 import sample.model.Page;
+import sample.model.Toolbox;
 import sample.model.Utils;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -49,6 +49,7 @@ public class PageView extends BorderPane {
     private Integer index;
     private String nomModule;
     private Section section;
+    private Toolbox toolbox;
 
     // Constructeur
     public PageView(FileOpener fileOpener) {
@@ -79,11 +80,12 @@ public class PageView extends BorderPane {
     }
 
     // Methodes
-    public void setPage(Page _page, Integer _index, String _nomModule, Section _section) {
+    public void setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
         page = _page;
         index = _index;
         nomModule = _nomModule;
         section = _section;
+        toolbox = _toolbox;
         updateView();
     }
 
@@ -107,8 +109,7 @@ public class PageView extends BorderPane {
         }
 
         try {
-            Integer contentSize = page.getContenus().size();
-
+            int contentSize = page.getContenus().size();
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
@@ -116,9 +117,8 @@ public class PageView extends BorderPane {
                 contenuBox.getChildren().add(cv.afficher());
                 page.appendContenu(tz);
             }
-
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
 
