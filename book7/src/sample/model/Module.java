@@ -37,11 +37,14 @@ public class Module implements Serializable {
     }
 
     private void calculerChemin(){
-        String nom_format = nom.replace(' ','_');
-        System.out.println(nom_format);
-        this.chemin = Constantes.SEMESTRE_NAME
-                + this.semestre
-                + "/" + nom_format + "." + Constantes.EXTENSION;
+        this.chemin=Module.calculerChemin(this.nom, this.semestre);
+    }
+
+    public static String calculerChemin(String nom, int semestre) {
+        String nom_format = nom.replace(' ', '_');
+        return (Constantes.SEMESTRE_NAME
+                + semestre
+                + "/" + nom_format + "." + Constantes.EXTENSION);
     }
 
     public String getChemin(){
@@ -61,6 +64,10 @@ public class Module implements Serializable {
     // Getters
     public String getNom() {
         return nom;
+    }
+
+    public int getSemestre() {
+        return this.semestre;
     }
 
     public Cahier getCours() {

@@ -27,8 +27,15 @@ public class ModuleWriter {
 
     public boolean ecrire(Module module) {
         try {
-            String chemin = System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/"+module.getChemin();
-            System.out.println(chemin);
+            String root= System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/";
+            String chemin_semestre = root + Constantes.SEMESTRE_NAME + Integer.toString(module.getSemestre());
+            String chemin = root+module.getChemin();
+
+            File dossier_semestre = new File(chemin_semestre);
+
+            if(!dossier_semestre.exists())
+                dossier_semestre.mkdirs();
+
             File test_fichier = new File(chemin);
             if(test_fichier.isFile())
                 test_fichier.delete();

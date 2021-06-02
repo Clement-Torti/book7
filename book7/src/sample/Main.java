@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.gui.controller.ArborescenceController;
+import sample.gui.controller.CreationModuleController;
 import sample.gui.controller.ModuleController;
 import sample.model.Cahier;
 import sample.model.Contenu.TextArea;
@@ -16,8 +17,8 @@ import sample.model.Module;
 import java.net.URL;
 
 public class Main extends Application {
-    public static final int WIN_WIDTH = 550;
-    public static final int WIN_HEIGHT = 400;
+    public static final int WIN_WIDTH = 400;
+    public static final int WIN_HEIGHT = 138;
     private static final String ARBORESCENCE_FXML = "gui/view/vueArborescence.fxml";
 
     @Override
