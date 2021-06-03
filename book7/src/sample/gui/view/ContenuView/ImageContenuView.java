@@ -21,6 +21,7 @@ public class ImageContenuView extends ContenuView {
     @Override
     public Node afficher() {
         ImageView iv = new ImageView(((ImageBook7)contenu).getUri().toString());
+        iv.getStyleClass().add("imageContenuView");
 
         iv.setPreserveRatio(true);
         iv.setFitWidth(300);
