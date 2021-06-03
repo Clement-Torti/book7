@@ -76,7 +76,7 @@ public class ArborescenceController extends BaseController {
             CreationModuleController contr = new CreationModuleController(getStage(), this);
 
             try {
-                openStage("gui/view/vueCreationModule.fxml", contr, 400.0, 140.0, "Creation module");
+                openStage("gui/view/vueCreationModule.fxml", contr, 400.0, 140.0, "Creation module", false);
             } catch (IOException e) {
                 System.out.println(e);
             }
@@ -202,7 +202,7 @@ public class ArborescenceController extends BaseController {
                 moduleButton.setOnAction((event) -> {
                     ModuleController moduleController = new ModuleController(getStage(), m);
                     try {
-                        openStage(MODULE_FXML, moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom());
+                        openStage(MODULE_FXML, moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom(), true);
                     } catch (IOException e) {
                         System.out.println(e);
                     }

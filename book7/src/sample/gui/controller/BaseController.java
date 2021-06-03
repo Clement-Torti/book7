@@ -59,7 +59,7 @@ public abstract class BaseController {
     // - width: Largeur de la vue
     // - height: Hauteur de la vue
     // - titre: Titre de la fenêtre
-    public void openStage(String source, BaseController destController, Double width, Double height, String titre) throws IOException {
+    public void openStage(String source, BaseController destController, Double width, Double height, String titre, boolean transparent) throws IOException {
         URL url = Main.class.getResource(source);
 
         FXMLLoader loader = new FXMLLoader(url);
@@ -67,9 +67,12 @@ public abstract class BaseController {
         Parent root = loader.load();
 
         Stage newStage = new Stage();
-        newStage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root, width, height);
-        scene.setFill(Color.TRANSPARENT);
+
+        if (transparent) {
+            newStage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
+        }
 
         destController.stage = newStage;
 
