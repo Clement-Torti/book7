@@ -14,10 +14,13 @@
     -fx-padding: 0;
 }
 
+#rootVBox {
+    -fx-background-color: -blue-1;
+}
+
 #contentVbox{
     -fx-padding: 20 40 0 40;
     -fx-font-size: 1.5em;
-    -fx-background-color: -blue-1;
     -fx-alignment: center;
 }
 
@@ -27,6 +30,7 @@
 }
 
 .titled-pane .vbox .bouton {
+    height:100%;
     -fx-padding: 10 20 10 20;
     -fx-border-style: none;
     -fx-background-color: -blue-2;
