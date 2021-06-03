@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.gui.controller.ArborescenceController;
+import sample.model.Contenu.TextZone;
 import sample.gui.controller.CreationModuleController;
 import sample.gui.controller.ModuleController;
 import sample.model.Cahier;
@@ -39,6 +42,15 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+//        Module m = new Module("gestion", 1);
+//
+//        TextArea tz = new TextArea();
+//        tz.setTexte("ceci est la textezone");
+//
+//        m.getCours().getPages().get(0).appendContenu(tz);
+//
+//        ModuleWriter mw = new ModuleWriter();
+//        mw.ecrire(m);
         launch(args);
     }
 }

@@ -2,6 +2,63 @@
 
 #mainVue {
     -fx-background-color: white;
-    -fx-border-radius: 10;
-    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+    -fx-background-radius: 20;
+    -fx-border-style: solid;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: rgb(200, 200, 200);
+
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
+
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 1;
+    -fx-opacity: 0;
+}
+
+.text-area {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-background-insets: 0;
+    /*-fx-background-color: blue;*/
+
+}
+
+.text-area .content {
+    -fx-background-color: white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .scroll-bar:horizontal {
+    -fx-pref-height: 1;
+    -fx-opacity: 0;
+}
+#scrollPane > .viewport {
+    -fx-background-color: white;
+}
+
+
+
+#scrollPane {
+   /*-fx-background-color: yellow;*/
+   -fx-background-color:transparent;
+}
+
+/*
+#contenuBox {
+    -fx-background-color: green;
+    -fx-border-style: solid;
+}
+*/
