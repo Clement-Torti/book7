@@ -3,6 +3,7 @@ package sample.gui.view;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -104,8 +105,7 @@ public class PageView extends BorderPane {
 
         // Contenu
         for(Contenu c: page.getContenus()) {
-            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
-            contenuBox.getChildren().add(cv.afficher());
+            contenuBox.getChildren().add(getDefaultContenuView(c));
         }
 
         try {
@@ -113,9 +113,9 @@ public class PageView extends BorderPane {
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
-                ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
-                contenuBox.getChildren().add(cv.afficher());
                 page.appendContenu(tz);
+
+                contenuBox.getChildren().add(getDefaultContenuView(tz));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -145,5 +145,23 @@ public class PageView extends BorderPane {
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
+    }
+
+    private Node getDefaultContenuView(Contenu c) {
+        HBox contenuHBox = new HBox();
+
+        ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
+        contenuHBox.getChildren().add(cv.afficher());
+
+        Button deleteBtn = new Button();
+        deleteBtn.setText("delete");
+        deleteBtn.setOnAction((event) -> {
+            page.getContenus().remove(c);
+            updateView();
+        });
+        contenuHBox.getChildren().add(deleteBtn);
+
+
+        return contenuHBox;
     }
 }
