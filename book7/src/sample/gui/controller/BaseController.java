@@ -66,6 +66,8 @@ public abstract class BaseController {
 
         Stage newStage = new Stage();
 
+        destController.stage = newStage;
+
         newStage.setResizable(false);
         newStage.setTitle(titre);
         newStage.setScene(new Scene(root, width, height));

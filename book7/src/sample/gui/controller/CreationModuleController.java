@@ -17,6 +17,7 @@ public class CreationModuleController extends BaseController {
     public static Double MODULE_WIDTH = 300.0;
     public static Double MODULE_HEIGHT = 100.0;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
+    private ArborescenceController arborescenceController;
 
     @FXML private VBox mainVBox;
     @FXML private HBox nomHBox;
@@ -29,8 +30,10 @@ public class CreationModuleController extends BaseController {
     @FXML private Button creer_button;
     @FXML private Text message_erreur;
 
-    public CreationModuleController(Stage stage){
+    public CreationModuleController(Stage stage, ArborescenceController arborescenceController){
         super(stage);
+
+        this.arborescenceController = arborescenceController;
     }
 
     @FXML
@@ -39,11 +42,18 @@ public class CreationModuleController extends BaseController {
             semestre_choicebox.getItems().add("Semestre "+Integer.toString(i));
         }
 
-        creer_button.setOnAction((event) -> creerModule());
-        semestre_choicebox.setOnAction((event) -> {semestre_choicebox.getStyleClass().remove("error"); message_erreur.setText("");});
+        creer_button.setOnAction((event) -> {
+            if(creerModule()) {
+                arborescenceController.updateView();
+                getStage().close();
+            }
+        });
+        semestre_choicebox.setOnAction((event) -> {
+            semestre_choicebox.getStyleClass().remove("error");
+            message_erreur.setText("");});
     }
 
-    void creerModule(){
+    private boolean creerModule(){
         String nom_module = nom_textfield.getText();
         int semestre = semestre_choicebox.getSelectionModel().getSelectedIndex()+1;
         if(nom_module.length()==0)
@@ -54,12 +64,16 @@ public class CreationModuleController extends BaseController {
 
 
         if(nom_module.length()>0 && semestre > 0){
-            if(moduleExiste(nom_module, semestre))
+            if(moduleExiste(nom_module, semestre)) {
                 message_erreur.setText("Un module du même nom et semestre existe, veuillez en choisir un autre");
-        }
+                return false;
+            } else {
+                ModuleWriter mw = new ModuleWriter();
+                return mw.ecrire(new Module(nom_module, semestre));
+            }
 
-        ModuleWriter mw = new ModuleWriter();
-        mw.ecrire(new Module(nom_module, semestre));
+        }
+        return false;
     }
 
     boolean moduleExiste(String nom, int semestre){
