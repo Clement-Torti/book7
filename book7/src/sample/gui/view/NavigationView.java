@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 import sample.gui.controller.ModuleController;
 import sample.model.Enums.Section;
 
@@ -14,6 +16,7 @@ import java.io.IOException;
 
 public class NavigationView extends HBox {
     // Attributs
+    private Stage moduleStage;
     private ModuleController moduleController;
 
     public NavigationView() {
@@ -21,13 +24,18 @@ public class NavigationView extends HBox {
         this.setSpacing(100);
         HBox hboxGauche = new HBox();
         hboxGauche.setId("navigation_gauche");
+        HBox hboxMilieu = new HBox();
+        hboxMilieu.setId("navigation_milieu");
         HBox hboxDroite = new HBox();
         hboxDroite.setId("navigation_droite");
 
+        // Navigation gauche
         Button boutonGauche = new Button();
         boutonGauche.getStyleClass().add("bouton_navigation");
         Button boutonDroite = new Button();
         boutonDroite.getStyleClass().add("bouton_navigation");
+
+        // Navigation Milieu
         Button boutonCours = new Button();
         boutonCours.setOnAction((event) -> {
             moduleController.changerSection(Section.COURS);
@@ -40,6 +48,10 @@ public class NavigationView extends HBox {
         boutonTP.setOnAction((event) -> {
             moduleController.changerSection(Section.TP);
         });
+
+        // Navigation Droite
+        Button boutonFermer = new Button();
+
 
         ColorAdjust couleurBlanche = new ColorAdjust();
         couleurBlanche.setBrightness(1);
@@ -65,6 +77,7 @@ public class NavigationView extends HBox {
             moduleController.nextPage();
         });
 
+        // Boutons cahiers
         boutonCours.setText("Cours");
         boutonCours.getStyleClass().add("bouton_cahier");
         boutonTD.setText("TD");
@@ -72,26 +85,39 @@ public class NavigationView extends HBox {
         boutonTP.setText("TP");
         boutonTP.getStyleClass().add("bouton_cahier");
 
+        // Boutons de fermeture
+        ImageView iconFermer = new ImageView("/icon-close.png");
+        iconFermer.setPreserveRatio(true);
+        iconFermer.setFitWidth(20);
+        iconFermer.setEffect(couleurBlanche);
+        boutonFermer.getStyleClass().add("bouton_fermer");
+        boutonFermer.setGraphic(iconFermer);
+        boutonFermer.setOnAction((event) ->{
+           moduleStage.close();
+        });
 
-        hboxDroite.setHgrow(boutonCours, Priority.ALWAYS);
-        hboxDroite.setHgrow(boutonTD, Priority.ALWAYS);
-        hboxDroite.setHgrow(boutonTP, Priority.ALWAYS);
+        hboxMilieu.setHgrow(boutonCours, Priority.ALWAYS);
+        hboxMilieu.setHgrow(boutonTD, Priority.ALWAYS);
+        hboxMilieu.setHgrow(boutonTP, Priority.ALWAYS);
         hboxGauche.setHgrow(boutonDroite, Priority.ALWAYS);
         hboxGauche.setHgrow(boutonGauche, Priority.ALWAYS);
-
+        hboxDroite.setHgrow(boutonFermer, Priority.ALWAYS);
 
         hboxGauche.getChildren().add(boutonGauche);
         hboxGauche.getChildren().add(boutonDroite);
-        hboxDroite.getChildren().add(boutonCours);
-        hboxDroite.getChildren().add(boutonTD);
-        hboxDroite.getChildren().add(boutonTP);
+        hboxMilieu.getChildren().add(boutonCours);
+        hboxMilieu.getChildren().add(boutonTD);
+        hboxMilieu.getChildren().add(boutonTP);
+        hboxDroite.getChildren().add(boutonFermer);
 
         getChildren().add(hboxGauche);
+        getChildren().add(hboxMilieu);
         getChildren().add(hboxDroite);
 
     }
 
-    public void setModuleController(ModuleController module) {
+    public void setModuleController(ModuleController module, Stage stage) {
         moduleController = module;
+        moduleStage = stage;
     }
 }
