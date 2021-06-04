@@ -1,0 +1,11 @@
+Philippe Lopes
+04/06/21
+
+Travail effectué en collaboration avec Alexandre :
+- Developpement du visuel de la ToolBox
+	- Palette de couleur
+	- Style de texte (police d'écriture, taille, gras, italique)
+	=> Visuel terminé mais fonctionnalitées non implémenté
+
+- Aide au développement de la fenêtre de la création de module
+- Aide pour les merges des différentes branches
