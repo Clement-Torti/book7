@@ -30,6 +30,7 @@ import sample.model.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.Locale;
 
 // ------------------------
@@ -130,15 +131,35 @@ public class PageView extends BorderPane {
         Button addImage = new Button();
         addImage.setText("Ajout image");
         addImage.setOnAction((event) -> {
+            String pwd = System.getProperty("user.dir");
+            File chemindossier = new File(pwd + "/ressources/image_sauvegarde");
+            if(! chemindossier.isDirectory()){
+                chemindossier.mkdir();
+            }
+
             File f = fileOpener.getFile();
 
             if(f != null) {
-                ImageBook7 imageBook7 = new ImageBook7(f.getAbsoluteFile().toURI());
-                page.appendContenu(imageBook7);
-                updateView();
+
+                try {
+                    String[] splitChemin = f.toString().split("/");
+                    String nomImage = splitChemin[splitChemin.length-1];
+                    String dest = chemindossier + "/" + nomImage;
+                    System.out.println(f.toString());
+                    System.out.println(nomImage);
+                    System.out.println(dest);
+                    File cheminDest = new File(dest);
+                    if(! cheminDest.exists()) {
+                        Files.copy(f.toPath(), cheminDest.toPath());
+                    }
+                    ImageBook7 imageBook7 = new ImageBook7(cheminDest.getAbsoluteFile().toURI());
+                    page.appendContenu(imageBook7);
+                    updateView();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-
-
         });
         footerBox.getChildren().add(addImage);
 
