@@ -1,0 +1,2 @@
+J'ai travaillée avec Clément en pair programming sur les user-stories "ajout de texte" "sauvegarde automatique" "section de cahier "changement de page" et "ajout d'image"
+
