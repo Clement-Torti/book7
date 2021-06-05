@@ -66,6 +66,7 @@ public class ModuleController extends BaseController {
             return;
         }
         currentSection = nouvelleSection;
+        currentCahier.setPage(0);
         updateView();
     }
 

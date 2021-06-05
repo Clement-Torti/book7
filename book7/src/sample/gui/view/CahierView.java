@@ -49,6 +49,7 @@ public class CahierView extends HBox {
         cahier = _cahier;
         nomModule = _nomModule;
         toolbox = _toolbox;
+
         setPage(pageIndex); // Afficher la 1ere page par défaut
     }
 
@@ -60,7 +61,7 @@ public class CahierView extends HBox {
         setPage(pageIndex - 2);
     }
 
-    private void setPage(Integer _pageIndex) {
+    public void setPage(Integer _pageIndex) {
         if(_pageIndex < 0) {
             return;
         } else if (_pageIndex >= cahier.getPages().size()) {

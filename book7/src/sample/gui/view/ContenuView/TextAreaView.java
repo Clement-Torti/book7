@@ -34,6 +34,9 @@ public class TextAreaView extends ContenuView {
     @Override
     public Node afficher() {
         textArea.setText(((TextZone) contenu).getTexte());
+
+        textArea.setStyle("-fx-hbar-policy : never;" +
+                "-fx-vbar-policy : never;");
         textHolder.setText(textArea.getText());
 
         return resizableTextArea();

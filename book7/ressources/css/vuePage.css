@@ -15,10 +15,14 @@
     -fx-pref-width: 1;
     -fx-opacity: 0;
 }
-
+.text-area .scroll-pane {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
 .text-area {
     -fx-background-color: rgba(0, 0, 0, 0);
     -fx-background-insets: 0;
+    -fx-overflow-y : hidden;
     /*-fx-background-color: blue;*/
 
 }
@@ -44,6 +48,7 @@
 .text-area .scroll-bar:horizontal {
     -fx-pref-height: 1;
     -fx-opacity: 0;
+    -fx-overflow : hidden;
 }
 #scrollPane > .viewport {
     -fx-background-color: white;
