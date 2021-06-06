@@ -8,9 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.gui.controller.ArborescenceController;
-import sample.model.Contenu.TextZone;
-import sample.model.Module;
-import sample.model.Persistence.ModuleWriter;
 
 import java.net.URL;
 

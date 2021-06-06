@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<?import javafx.scene.text.Text?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="/vueCreationModule.css"
+      id="mainVBox"
+      fx:id="mainVBox">
+    <HBox id="nomHBox" fx:id="nomHBox">
+        <Label id="nom_label" fx:id="nom_label">Nom du module :</Label>
+        <TextField id="nom_textfield" fx:id="nom_textfield"></TextField>
+    </HBox>
+    <HBox fx:id="semestreHBox" id="semestreHBox">
+        <Label fx:id="semestre_label" id="semestre_label">Semestre du cours :</Label>
+        <ChoiceBox id="semestre_choicebox" fx:id="semestre_choicebox" value=""></ChoiceBox>
+    </HBox>
+    <HBox id="creerHBox" fx:id="creerHBox">
+        <Button fx:id="creer_button" id="creer_button">Créer le module</Button>
+        <Text fx:id="message_erreur" id="message_erreur"></Text>
+    </HBox>
+</VBox>

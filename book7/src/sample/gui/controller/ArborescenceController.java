@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import sample.Main;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
@@ -41,6 +42,7 @@ public class ArborescenceController extends BaseController {
     @FXML private VBox contentVbox;
     @FXML private Menu menuFichier;
     @FXML private MenuItem menuFichierQuitter;
+    @FXML private MenuItem menuFichierNouveau;
 
     // Attributs
     private HashMap<Integer, List<Module>> modules;
@@ -70,93 +72,18 @@ public class ArborescenceController extends BaseController {
                 System.exit(0);
             }
         });
+        menuFichierNouveau.setOnAction((event) -> {
+            CreationModuleController contr = new CreationModuleController(getStage(), this);
 
-        // Lire les modules
-        modules = lireModules();
-
-        // Affichage dynamique des modules
-        // Parcourir l'ensemble des dossiers "semestre"
-        for (Integer key: modules.keySet()) {
-            // Creation de la TitledPane
-            TitledPane semestreTitledPane = new TitledPane();
-            semestreTitledPane.getStyleClass().add("titled-pane");
-            semestreTitledPane.setText("Semestre " + key);
-            semestreTitledPane.setExpanded(false);
-
-            // Les modules sont ajoutés dans une VBox
-            VBox modulesVBox = new VBox();
-            modulesVBox.setSpacing(10);
-            modulesVBox.getStyleClass().add("vbox");
-
-            // Parcourir les modules d'un semestre
-            for(Module m: modules.get(key)) {
-                HBox moduleHBox = new HBox();
-                moduleHBox.setSpacing(30);
-                moduleHBox.getStyleClass().add("hbox");
-
-                // Bouton pour ouvrir le module
-                Button moduleButton = new Button();
-                moduleButton.getStyleClass().add("bouton");
-                moduleButton.setText(m.getNom());
-
-                // Bouton pour supprimer le module
-                Button supprimerButton = new Button();
-                supprimerButton.getStyleClass().add("boutonSupprimer");
-
-                // Filtre Blanc pour icône
-                ColorAdjust couleurBlanche = new ColorAdjust();
-                couleurBlanche.setBrightness(1);
-
-                // Ajout icône pour bouton supprimer
-                ImageView iconSupprimer = new ImageView("/icon-trash-2.png");
-                iconSupprimer.setPreserveRatio(true);
-                iconSupprimer.setFitWidth(20);
-                iconSupprimer.setEffect(couleurBlanche);
-                supprimerButton.setGraphic(iconSupprimer);
-
-                // Au clique, ouvrir la fenêtre du cahier
-                moduleButton.setOnAction((event) -> {
-                    ModuleController moduleController = new ModuleController(getStage(), m);
-                    try {
-                        openStage(MODULE_FXML, moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom());
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
-                });
-
-                // Au clique, ouvrir une fenêtre de confirmation
-                supprimerButton.setOnAction((event) -> {
-                    // Creer une pop-up Alert
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Supprimer module");
-                    alert.setHeaderText("Voulez-vous supprimer le module : " + m.getNom() + " ?");
-                    alert.setContentText("T'es sûr frérot ?");
-
-                    // Bouton pour supprimer le module
-                    Optional<ButtonType> result = alert.showAndWait();
-
-                    // Actions des boutons
-                    if (result.get() == ButtonType.OK) {
-                        Utils.supprimerModule(m);
-                        modulesVBox.getChildren().remove(moduleHBox);
-                    } else {
-                        System.out.println("Suppression annulée.");
-                    }
-                });
-
-                // Ajout des boutons dans la HBox
-                moduleHBox.getChildren().add(moduleButton);
-                moduleHBox.getChildren().add(supprimerButton);
-                // Ajout de la HBox dans la VBox du semestre
-                modulesVBox.getChildren().add(moduleHBox);
+            try {
+                openStage("gui/view/vueCreationModule.fxml", contr, 400.0, 140.0, "Creation module", false);
+            } catch (IOException e) {
+                System.out.println(e);
             }
+        });
 
-            // Ajout de la VBox dans le TitledPane
-            semestreTitledPane.setContent(modulesVBox);
+       updateView();
 
-            // Ajouter les elements aux enfants
-            contentVbox.getChildren().add(semestreTitledPane);
-        }
     }
 
     public static HashMap<Integer, List<Module>> lireModules() {
@@ -222,6 +149,98 @@ public class ArborescenceController extends BaseController {
 
     public static Module extraireModule(ModuleReader mr, String chemin){ //On va propager les exceptions vers getModuleMap ou consors
         return mr.lire(chemin);
+    }
+
+    public void updateView() {
+        // Vider les anciennes données
+        contentVbox.getChildren().clear();
+
+        // Lire les modules
+        modules = lireModules();
+
+        // Affichage dynamique des modules
+        // Parcourir l'ensemble des dossiers "semestre"
+        for (Integer key : modules.keySet()) {
+            // Creation de la TitledPane
+            TitledPane semestreTitledPane = new TitledPane();
+            semestreTitledPane.getStyleClass().add("titled-pane");
+            semestreTitledPane.setText("Semestre " + key);
+            semestreTitledPane.setExpanded(false);
+
+            // Les modules sont ajoutés dans une VBox
+            VBox modulesVBox = new VBox();
+            modulesVBox.setSpacing(10);
+            modulesVBox.getStyleClass().add("vbox");
+
+            // Parcourir les modules d'un semestre
+            for (Module m : modules.get(key)) {
+                HBox moduleHBox = new HBox();
+                moduleHBox.setSpacing(30);
+                moduleHBox.getStyleClass().add("hbox");
+
+                // Bouton pour ouvrir le module
+                Button moduleButton = new Button();
+                moduleButton.getStyleClass().add("bouton");
+                moduleButton.setText(m.getNom());
+
+                // Bouton pour supprimer le module
+                Button supprimerButton = new Button();
+                supprimerButton.getStyleClass().add("boutonSupprimer");
+
+                // Filtre Blanc pour icône
+                ColorAdjust couleurBlanche = new ColorAdjust();
+                couleurBlanche.setBrightness(1);
+
+                // Ajout icône pour bouton supprimer
+                ImageView iconSupprimer = new ImageView("/icon-trash-2.png");
+                iconSupprimer.setPreserveRatio(true);
+                iconSupprimer.setFitWidth(20);
+                iconSupprimer.setEffect(couleurBlanche);
+                supprimerButton.setGraphic(iconSupprimer);
+
+                // Au clique, ouvrir la fenêtre du cahier
+                moduleButton.setOnAction((event) -> {
+                    ModuleController moduleController = new ModuleController(getStage(), m);
+                    try {
+                        openStage(MODULE_FXML, moduleController, MODULE_WIDTH, MODULE_HEIGHT, m.getNom(), true);
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                });
+
+                // Au clique, ouvrir une fenêtre de confirmation
+                supprimerButton.setOnAction((event) -> {
+                    // Creer une pop-up Alert
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Supprimer module");
+                    alert.setHeaderText("Voulez-vous supprimer le module : " + m.getNom() + " ?");
+                    alert.setContentText("T'es sûr frérot ?");
+
+                    // Bouton pour supprimer le module
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    // Actions des boutons
+                    if (result.get() == ButtonType.OK) {
+                        Utils.supprimerModule(m);
+                        modulesVBox.getChildren().remove(moduleHBox);
+                    } else {
+                        System.out.println("Suppression annulée.");
+                    }
+                });
+
+                // Ajout des boutons dans la HBox
+                moduleHBox.getChildren().add(moduleButton);
+                moduleHBox.getChildren().add(supprimerButton);
+                // Ajout de la HBox dans la VBox du semestre
+                modulesVBox.getChildren().add(moduleHBox);
+            }
+
+            // Ajout de la VBox dans le TitledPane
+            semestreTitledPane.setContent(modulesVBox);
+
+            // Ajouter les elements aux enfants
+            contentVbox.getChildren().add(semestreTitledPane);
+        }
     }
 
 }

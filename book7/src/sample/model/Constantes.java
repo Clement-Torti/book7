@@ -6,4 +6,5 @@ public class Constantes {
     public final static String SAVE_ROOT_FOLDER_NAME="ressources/sauvegarde_module";
     public final static int SEMESTRE_PAR_DEFAUT_MIN=5;
     public final static int SEMESTRE_PAR_DEFAUT_MAX=10;
+    public final static int SEMESTRE_MAX=20;
 }

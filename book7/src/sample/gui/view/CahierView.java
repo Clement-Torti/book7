@@ -60,7 +60,7 @@ public class CahierView extends HBox {
         setPage(pageIndex - 2);
     }
 
-    private void setPage(Integer _pageIndex) {
+    public void setPage(Integer _pageIndex) {
         if(_pageIndex < 0) {
             return;
         } else if (_pageIndex >= cahier.getPages().size()) {

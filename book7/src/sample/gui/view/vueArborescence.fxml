@@ -23,12 +23,16 @@
       </MenuBar>
       <!-- Contenue de la fenÃªtre scrollable -->
       <ScrollPane id="contentScrollPane">
-            <!-- Element pour afficher le contenu verticalement -->
-            <VBox id="contentVbox" fx:id="contentVbox">
+            <VBox alignment="CENTER" id="rootVBox">
                   <!-- Logo de l'ENSEEIHT -->
                   <ImageView>
                         <Image url="/logo_enseeiht.png" requestedWidth="450" preserveRatio="true" />
                   </ImageView>
+                  <!-- Element pour afficher le contenu verticalement -->
+                  <VBox id="contentVbox" fx:id="contentVbox">
+
+                  </VBox>
             </VBox>
+
       </ScrollPane>
 </VBox>
