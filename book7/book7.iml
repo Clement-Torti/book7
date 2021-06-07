@@ -26,5 +26,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="flowless-0.6.3" level="project" />
+    <orderEntry type="library" name="org.fxmisc.richtext:richtextfx:0.10.6" level="project" />
   </component>
 </module>

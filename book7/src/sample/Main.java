@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.gui.controller.ArborescenceController;
+import sample.gui.controller.TestController;
 
 import java.net.URL;
 
@@ -18,10 +19,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL url = getClass().getResource(ARBORESCENCE_FXML);
+//        URL url = getClass().getResource(ARBORESCENCE_FXML);
+        URL url = getClass().getResource("gui/view/vueTest.fxml");
 
         FXMLLoader loader = new FXMLLoader(url);
-        loader.setController(new ArborescenceController(primaryStage));
+//        loader.setController(new ArborescenceController(primaryStage));
+        loader.setController(new TestController(primaryStage));
         Parent root = loader.load();
 
         primaryStage.setTitle("Book 7");
