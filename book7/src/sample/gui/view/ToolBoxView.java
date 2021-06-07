@@ -2,6 +2,7 @@ package sample.gui.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.effect.MotionBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -9,9 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import sample.model.Enums.Motif;
 import sample.model.Toolbox;
 import sample.model.Enums.FontStyle;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ToolBoxView extends VBox {
@@ -29,6 +32,19 @@ public class ToolBoxView extends VBox {
 
     // Methodes
     private void updateView() {
+
+
+        //Motifs
+        ComboBox<String> motifButton = new ComboBox<>();
+        motifButton.getItems().add(String.valueOf(Motif.GRANDS_CARREAUX));
+        motifButton.getItems().add(String.valueOf(Motif.PETITS_CARREAUX));
+        motifButton.getItems().add(String.valueOf(Motif.POINTS));
+        motifButton.getItems().add(String.valueOf(Motif.RIEN));
+        motifButton.getSelectionModel().select(0);
+        motifButton.getStyleClass().add("liste_deroulante");
+
+        getChildren().add(motifButton);
+
         // Palette de couleur
         Text couleurTexte = new Text();
         couleurTexte.setFont(new Font(16));
@@ -80,6 +96,39 @@ public class ToolBoxView extends VBox {
         // BOUTONS de style
         FlowPane boutonPanel = new FlowPane();
         boutonPanel.getStyleClass().add("liste_boutons_style");
+
+        //Bouton alignement Gauche
+        Button gaucheButton = new Button();
+        ImageView iconGauche = new ImageView("/icon-align-left.png");
+        iconGauche.setPreserveRatio(true);
+        iconGauche.setFitHeight(20);
+        gaucheButton.setGraphic(iconGauche);
+        gaucheButton.getStyleClass().add("bouton_style");
+        gaucheButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(gaucheButton);
+
+        //Bouton alignement Centre
+        Button centreButton = new Button();
+        ImageView iconCentre = new ImageView("/icon-align-center.png");
+        iconCentre.setPreserveRatio(true);
+        iconCentre.setFitHeight(20);
+        centreButton.setGraphic(iconCentre);
+        centreButton.getStyleClass().add("bouton_style");
+        centreButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(centreButton);
+
+        //Bouton alignement Droit
+        Button droitButton = new Button();
+        ImageView iconDroit = new ImageView("/icon-align-right.png");
+        iconDroit.setPreserveRatio(true);
+        iconDroit.setFitHeight(20);
+        droitButton.setGraphic(iconDroit);
+        droitButton.getStyleClass().add("bouton_style");
+        droitButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(droitButton);
 
         // gras (bouton)
         Button grasButton = new Button();
