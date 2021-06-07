@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="mainVbox"
+      stylesheets="/vueArborescence.css" id="mainVbox"
+>
+      <!-- Barre de menu -->
+      <MenuBar id="mainMenuBar" fx:id="mainMenuBar">
+            <Menu id="menuFichier" fx:id="menuFichier" text="Fichier">
+                  <MenuItem id="menuFichierNouveau" fx:id="menuFichierNouveau" text="Nouveau module" />
+                  <MenuItem id="menuFichierImporter" fx:id="menuFichierImporter" text="Importer module" />
+                  <MenuItem id="menuFichierExporter" fx:id="menuFichierExporter" text="Exporter module" />
+                  <SeparatorMenuItem />
+                  <MenuItem id="menuFichierQuitter" fx:id="menuFichierQuitter" text="Quitter" />
+            </Menu>
+      </MenuBar>
+      <!-- Contenue de la fenÃªtre scrollable -->
+      <ScrollPane id="contentScrollPane">
+            <VBox alignment="CENTER" id="rootVBox">
+                  <!-- Logo de l'ENSEEIHT -->
+                  <ImageView>
+                        <Image url="/logo_enseeiht.png" requestedWidth="450" preserveRatio="true" />
+                  </ImageView>
+                  <!-- Element pour afficher le contenu verticalement -->
+                  <VBox id="contentVbox" fx:id="contentVbox">
+
+                  </VBox>
+            </VBox>
+
+      </ScrollPane>
+</VBox>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import sample.gui.view.PageView?>
+<?import sample.gui.view.CahierView?>
+<?import sample.gui.view.NavigationView?>
+<?import javafx.geometry.Insets?>
+<?import sample.gui.view.ToolBoxView?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="/vueModule.css" id="main"
+            fx:id="root">
+
+    <left>
+        <ToolBoxView id="toolBoxView" fx:id="toolBoxView">
+            <BorderPane.margin>
+                <Insets left="10" bottom="10" top="10"/>
+            </BorderPane.margin>
+        </ToolBoxView>
+    </left>
+
+    <center>
+    </center>
+
+    <bottom>
+        <NavigationView id="navigationView" fx:id="navigationView">
+            <BorderPane.margin>
+                <Insets left="10" right="10" bottom="10"/>
+            </BorderPane.margin>
+        </NavigationView>
+    </bottom>
+</BorderPane>

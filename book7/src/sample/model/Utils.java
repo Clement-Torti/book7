@@ -52,10 +52,5 @@ public class Utils {
 
           return PdfTextExtractor.getTextFromPage(reader, i); //Extracting the content from a particular page.
 
-
-
-
-
-
     }
 }

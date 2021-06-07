@@ -1,0 +1,18 @@
+@import url(/colors.css);
+
+VBox{
+    -fx-fill-width:true;
+}
+
+HBox{
+    -fx-fill-height:true;
+    -fx-padding:10;
+}
+
+Label{
+    -fx-padding:5;
+}
+
+.error{
+    -fx-background-color:red;
+}

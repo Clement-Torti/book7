@@ -1,0 +1,79 @@
+@import url(/colors.css);
+
+/* Affichage général */
+#mainVbox {
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+    -fx-background-color: -blue-1;
+}
+
+#contentScrollPane {
+    -fx-background-color: -blue-1;
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+    -fx-padding: 0;
+}
+
+#rootVBox {
+    -fx-background-color: -blue-1;
+}
+
+#contentVbox{
+    -fx-padding: 20 40 0 40;
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+}
+
+/* Affichage des éléments semetres/modules */
+.titled-pane{
+    -fx-padding: 20 0 20 0;
+}
+
+.titled-pane .vbox .bouton {
+    height:100%;
+    -fx-padding: 10 20 10 20;
+    -fx-border-style: none;
+    -fx-background-color: -blue-2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, -blue-1, 10, 0.0, 0, 1);
+}
+
+.titled-pane .vbox .bouton:hover{
+    -fx-background-color: -grey-2;
+}
+
+.titled-pane .vbox .bouton:pressed{
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+/* Bouton supprimer */
+.hbox {
+    -fx-alignment: center;
+}
+
+.boutonSupprimer {
+    -fx-padding: 5;
+    -fx-border-style: none;
+    -fx-background-color: #c30000;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.boutonSupprimer:hover {
+    -fx-background-color: #e50000;
+}
+.boutonSupprimer:pressed {
+    -fx-effect: dropshadow(three-pass-box, -grey-1, 10, 0.0, 0, 1);
+}
+
+/* Barre de menu */
+#mainMenuBar{
+    -fx-padding: 5 20 5 20;
+}
+
+.menu {
+    -fx-background-radius: 20px;
+    -fx-padding: 3 6 3 6;
+}
+.menu:hover{
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 15, 0.0, 0, 1);
+}
