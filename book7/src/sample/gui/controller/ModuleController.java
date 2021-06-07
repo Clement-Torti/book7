@@ -99,4 +99,8 @@ public class ModuleController extends BaseController {
         ModuleWriter mw = new ModuleWriter();
         mw.ecrire(module);
     }
+
+    public void fermerFenetre() {
+        getStage().close();
+    }
 }

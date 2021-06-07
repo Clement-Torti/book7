@@ -18,17 +18,19 @@
     -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
 
-#navigation_gauche, #navigation_droite {
+#navigation_gauche, #navigation_milieu, #navigation_droite{
     -fx-background-color: -grey-1;
 }
 
-#navigation_gauche{
+#navigation_gauche, #navigation_droite{
     -fx-spacing: 20;
     -fx-padding: 10;
+    -fx-alignment: center;
 }
-#navigation_droite{
+#navigation_milieu{
     -fx-spacing: 30;
     -fx-padding: 15;
+    -fx-alignment: center;
 }
 
 .bouton_navigation{
@@ -47,12 +49,26 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
 
+.bouton_fermer{
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: #e50000;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
 .bouton_navigation:hover, .bouton_cahier:hover{
     -fx-background-color: -blue-1-light;
 }
 
 .bouton_navigation:pressed, .bouton_cahier:pressed{
     -fx-background-color: -blue-2;
+}
+
+.bouton_fermer:hover {
+    -fx-background-color: #ff0000;
+}
+.bouton_fermer:pressed {
+    -fx-background-color: #c30000;
 }
 
 /*
