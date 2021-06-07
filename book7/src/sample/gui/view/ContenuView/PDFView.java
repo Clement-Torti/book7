@@ -3,6 +3,7 @@ package sample.gui.view.ContenuView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import sample.model.Contenu.Contenu;
+import sample.model.Contenu.PDF;
 import sample.model.Observateur.IObservateur;
 
 // rôle: ContenuView indiquant à la vue comment afficher un PDF
@@ -17,7 +18,8 @@ public class PDFView extends ContenuView {
     @Override
     public Node afficher() {
         Label label = new Label();
-        label.setText("je suis un pdf");
+        label.setText(((PDF)contenu).getMetadonne().toString());
+
 
         return label;
     }

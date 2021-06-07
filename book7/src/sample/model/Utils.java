@@ -1,6 +1,11 @@
 package sample.model;
 
 import java.io.*;
+import java.util.ArrayList;
+
+import com.itextpdf.text.List;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
 public class Utils {
     public static void supprimerModule(Module module) {
@@ -41,5 +46,16 @@ public class Utils {
             in.close();
             out.close();
         }
+    }
+
+    public static String pdfExtraction(PdfReader reader, int i) throws IOException {
+
+          return PdfTextExtractor.getTextFromPage(reader, i); //Extracting the content from a particular page.
+
+
+
+
+
+
     }
 }

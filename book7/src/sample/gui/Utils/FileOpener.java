@@ -35,4 +35,16 @@ public class FileOpener {
         return f;
     }
 
+    public File getFilePDF() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter PdfFilter
+                = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
+        fileChooser.getExtensionFilters().add(PdfFilter);
+        fileChooser.setTitle("Open Resource File");
+        File f = fileChooser.showOpenDialog(stage);
+
+        return f;
+
+    }
+
 }

@@ -26,5 +26,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="com.itextpdf:itextpdf:5.5.13.2" level="project" />
   </component>
 </module>

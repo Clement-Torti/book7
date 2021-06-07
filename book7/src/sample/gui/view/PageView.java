@@ -1,5 +1,6 @@
 package sample.gui.view;
 
+import com.itextpdf.text.pdf.PdfReader;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +20,7 @@ import sample.gui.view.ContenuView.ImageContenuView;
 import sample.model.Contenu.Contenu;
 
 import sample.model.Contenu.ImageBook7;
+import sample.model.Contenu.PDF;
 import sample.model.Contenu.TextZone;
 import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
@@ -29,6 +31,8 @@ import sample.model.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 // ------------------------
@@ -140,7 +144,42 @@ public class PageView extends BorderPane {
 
 
         });
+
+        Button addPDf = new Button("ajout PDF");
+        addPDf.setOnAction((event) -> {
+        File file = fileOpener.getFilePDF();
+
+
+        List<String> Metadonne = new ArrayList<>();
+        if(file != null){
+
+            PdfReader reader = null;
+            try {
+                reader = new PdfReader(file.toString());
+
+                int n = reader.getNumberOfPages();
+                for (int i = 1; i < n; i++) {
+
+                    Metadonne.add(Utils.pdfExtraction(reader, i));
+                }
+                reader.close();
+
+            }
+         catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            PDF pdf = new PDF(file.getAbsoluteFile().toURI(), Metadonne);
+
+            System.out.println(pdf.getMetadonne().toString());
+            page.appendContenu(pdf);
+          //updateView();
+
+        }
+        });
+
         footerBox.getChildren().add(addImage);
+        footerBox.getChildren().add(addPDf);
 
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
