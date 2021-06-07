@@ -1,5 +1,6 @@
 .text-red {
-    -fx-stroke: red;
+    /*-fx-stroke: red;*/
+    -fx-font-family: "Fira Sans Condensed ExtraBold";
 }
 
 .bold{

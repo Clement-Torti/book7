@@ -4,6 +4,7 @@ module book7 {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.fxmisc.richtext;
+    requires javafx.web;
 
     opens sample;
     opens sample.gui.controller;
