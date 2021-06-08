@@ -95,7 +95,6 @@ public class TextAreaView extends ContenuView{
         int stop = textArea.getSelection().getEnd();
 
         // Est-ce le contenuView concerné ?
-
         if(start != stop) {
             sauvegarder();
         }
@@ -108,12 +107,16 @@ public class TextAreaView extends ContenuView{
                 Color c = toolBox.getColor();
                 value = "#" + c.toString().substring(2, 8);
 
-                setStyle(textArea.getText().length(), textArea.getText().length(), "-fx-stroke", value);
-
                 // Si du texte est selectionné
                 if(start != stop) {
                     setStyle(start, stop, "-fx-stroke", value);
                 }
+
+
+                if(textArea.getText().length() > 0) {
+                    setStyle(textArea.getText().length(), textArea.getText().length(), "-fx-stroke", value);
+                }
+
                 break;
             case GRAS:
                 // Connaitre la valeur du gras

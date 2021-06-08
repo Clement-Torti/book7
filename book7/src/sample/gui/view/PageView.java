@@ -3,6 +3,7 @@ package sample.gui.view;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -17,6 +18,7 @@ import sample.gui.controller.ModuleController;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
+import sample.model.Constantes;
 import sample.model.Contenu.Contenu;
 
 import sample.model.Contenu.ImageBook7;
@@ -40,7 +42,7 @@ import java.util.Locale;
 public class PageView extends BorderPane implements IObservateur {
     // Outlets
     private ScrollPane scrollPane;
-    private HBox headerBox = new HBox();
+    private BorderPane headerPane = new BorderPane();
     private VBox contenuBox = new VBox();
     private HBox footerBox = new HBox();
     private FileOpener fileOpener;
@@ -61,8 +63,9 @@ public class PageView extends BorderPane implements IObservateur {
         setId("mainVue");
 
         // Elements
-        setTop(headerBox);
-        setMargin(headerBox, new Insets(10));
+        setTop(headerPane);
+        setMargin(headerPane, new Insets(5, 20, 10, 20));
+
 
 
         // Architecture du centre de la page
@@ -80,12 +83,11 @@ public class PageView extends BorderPane implements IObservateur {
         scrollPane.setId("scrollPane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        //setCenter(scrollPane);
         setCenter(scrollPaneVBox);
         scrollPaneVBox.getChildren().add(scrollPane);
 
         scrollPane.setContent(contenuBox);
-        setMargin(vBox, new Insets(0, 15, 0, 15));
+        setMargin(scrollPaneVBox, new Insets(0, 15, 0, 15));
 
         setBottom(footerBox);
         setMargin(footerBox, new Insets(5, 20, 10, 20));
@@ -112,16 +114,26 @@ public class PageView extends BorderPane implements IObservateur {
 
     private void updateView() {
         // Vider les anciens elements de vue
-        headerBox.getChildren().clear();
+        headerPane.getChildren().clear();
         contenuBox.getChildren().clear();
         footerBox.getChildren().clear();
 
         // Header
-        headerBox.setAlignment(Pos.CENTER);
-
         Label nomCahierLabel = new Label();
+        nomCahierLabel.setId("nomCahierLabel");
         nomCahierLabel.setText(nomModule.toUpperCase(Locale.ROOT) + "-" + section);
-        headerBox.getChildren().add(nomCahierLabel);
+        headerPane.setCenter(nomCahierLabel);
+
+        Label inpLabel = new Label();
+        inpLabel.setText(Constantes.INP_HEADER);
+        inpLabel.setId("inpLabel");
+        headerPane.setRight(inpLabel);
+
+        Label ghostLabel = new Label();
+        ghostLabel.setText(Constantes.GOHST_INP_HEADER);
+        headerPane.setLeft(ghostLabel);
+
+
 
         // Contenu
         contenuBox.setId("contenuBox");
@@ -141,7 +153,8 @@ public class PageView extends BorderPane implements IObservateur {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
                 ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
-                contenuBox.getChildren().add(cv.afficher());
+                Node node = cv.afficher();
+                contenuBox.getChildren().add(node);
                 toolbox.attach(cv);
                 page.appendContenu(tz);
             }
