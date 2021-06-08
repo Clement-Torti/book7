@@ -1,8 +1,9 @@
 @import "colors.css";
 
+/*
 #mainVue {
-    -fx-background-color: white;
-    -fx-background-radius: 20;
+
+
     -fx-border-style: solid;
     -fx-border-radius: 15;
     -fx-border-width: 2;
@@ -10,6 +11,19 @@
 
     -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
+*/
+
+#mainVue {
+
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-style: solid;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: rgb(150, 150, 150);
+}
+
+
 
 .text-area .scroll-bar:vertical {
     -fx-pref-width: 1;
@@ -46,16 +60,16 @@
     -fx-opacity: 0;
 }
 
-/*
+
 .textAreaView {
-    -fx-background-color: red;
+    -fx-background-color: transparent;
     -fx-resize: none;
 }
-*/
+
 
 
 #scrollPane > .viewport {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 
@@ -65,12 +79,13 @@
    -fx-background-color:transparent;
 }
 
-/*
-#contenuBox {
-    -fx-background-color: green;
-    -fx-border-style: solid;
+
+
+
+#vBoxTest {
+    -fx-background-image: url("grand_carreaux.png");
 }
-*/
+
 
 .imageContenuView {
     -fx-effect: dropshadow(three-pass-box, black, 5, 0.0, 0, 1);

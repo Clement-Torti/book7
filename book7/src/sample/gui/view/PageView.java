@@ -64,14 +64,28 @@ public class PageView extends BorderPane implements IObservateur {
         setTop(headerBox);
         setMargin(headerBox, new Insets(10));
 
+
+        // Architecture du centre de la page
+        // Vbox (motif de fond)
+        //  > ScrollPane (contenu scrollable)
+        //      > VBox (contenus)
+        //          > HBox
+        //              > ContenuView | delete Btn
+        VBox scrollPaneVBox = new VBox();
+        scrollPaneVBox.setId("scrollPaneVBox");
+
         scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
+
         scrollPane.setId("scrollPane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        setCenter(scrollPane);
+        //setCenter(scrollPane);
+        setCenter(scrollPaneVBox);
+        scrollPaneVBox.getChildren().add(scrollPane);
+
         scrollPane.setContent(contenuBox);
-        setMargin(scrollPane, new Insets(0, 20, 0, 20));
+        setMargin(vBox, new Insets(0, 15, 0, 15));
 
         setBottom(footerBox);
         setMargin(footerBox, new Insets(5, 20, 10, 20));
