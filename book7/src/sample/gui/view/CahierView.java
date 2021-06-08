@@ -33,8 +33,8 @@ public class CahierView extends HBox {
         leftPage = new PageView(fileOpener);
         rightPage = new PageView(fileOpener);
 
-        setMargin(leftPage, new Insets(10));
-        setMargin(rightPage, new Insets(10));
+        setMargin(leftPage, new Insets(0, 10, 10, 10));
+        setMargin(rightPage, new Insets(0, 0, 10, 0));
 
         HBox.setHgrow(leftPage, Priority.ALWAYS);
         HBox.setHgrow(rightPage, Priority.ALWAYS);
