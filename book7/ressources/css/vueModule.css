@@ -19,13 +19,14 @@
 }
 
 
-#navigation_gauche, #navigation_droite{
-    -fx-spacing: 20;
+#navigation_gauche, #navigation_droite {
+    -fx-spacing: 10;
     -fx-padding: 0 20;
     -fx-alignment: center;
 }
+
 #navigation_milieu{
-    -fx-spacing: 30;
+    -fx-spacing: 10;
     -fx-padding: 10;
     -fx-alignment: center;
 }
