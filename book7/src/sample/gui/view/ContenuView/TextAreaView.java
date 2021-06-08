@@ -3,25 +3,20 @@ package sample.gui.view.ContenuView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.model.StyleSpan;
-import sample.gui.controller.ModuleController;
+import org.fxmisc.richtext.model.StyleSpans;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.TextZone;
-import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 import sample.model.Toolbox;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // rôle: ContenuView indiquant à la vue comment afficher un TextArea
 // Dernière modification: Clément Torti
@@ -70,12 +65,6 @@ public class TextAreaView extends ContenuView{
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-                // Ajouter une operation
-
-                // ajoutOperation(contenu, LocalDateTime.now());
-                // MAJ du modele
-                ((TextZone)contenu).setTexte(textArea.getText());
-                ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
 
                 if (oldHeight != newValue.getHeight()) {
                     oldHeight = newValue.getHeight();
@@ -86,6 +75,9 @@ public class TextAreaView extends ContenuView{
 
         // Event quand le contenu du cahier change
         textArea.textProperty().addListener((event) -> {
+            ((TextZone)contenu).setTexte(textArea.getText());
+            ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
+
             sauvegarder();
         });
 
@@ -108,29 +100,71 @@ public class TextAreaView extends ContenuView{
             sauvegarder();
         }
 
+        String key = "";
+        String value = "";
         switch (update) {
             case COULEUR:
                 // Connaitre la couleur selectionnee
                 Color c = toolBox.getColor();
-                String css = "-fx-stroke: #" + c.toString().substring(2, 8) + ";";
+                value = "#" + c.toString().substring(2, 8);
 
-                textArea.setStyle(textArea.getText().length(), textArea.getText().length(), css);
+                setStyle(textArea.getText().length(), textArea.getText().length(), "-fx-stroke", value);
 
                 // Si du texte est selectionné
                 if(start != stop) {
-                    textArea.setStyle(start, stop, css);
+                    setStyle(start, stop, "-fx-stroke", value);
+                }
+                break;
+            case GRAS:
+                // Connaitre la valeur du gras
+                value = "normal";
+
+                if(toolBox.getGras()) {
+                    value = "bold";
+                }
+
+                if(start != stop) {
+                    setStyle(start, stop, "-fx-font-weight", value);
+                }
+                break;
+            case ITALIC:
+                value = "normal";
+
+                if(toolBox.getItalique()) {
+                    value = "italic";
+                }
+
+                if(start != stop) {
+                    setStyle(start, stop, "-fx-font-style", value);
                 }
 
                 break;
-            case GRAS:
-                break;
-            case ITALIC:
-                break;
             case SOULIGNER:
+                value = "none";
+
+                if(toolBox.getSoulignement()) {
+                    value = "underline";
+                }
+
+                if(start != stop) {
+                    System.out.println(value);
+                    setStyle(start, stop, "-fx-text-decoration", value);
+                }
+
                 break;
             case POLICE:
+                value = toolBox.getPoliceTexte();
+
+                if(start != stop) {
+                    setStyle(start, stop, "-fx-font-family", value);
+                }
                 break;
             case TAILLE_POLICE:
+                value = toolBox.getTaillePolice().toString() + "px";
+
+                if(start != stop) {
+                    setStyle(start, stop, "-fx-font-size", value);
+                }
                 break;
             case MOTIF:
                 break;
@@ -138,6 +172,45 @@ public class TextAreaView extends ContenuView{
                 break;
             default:
                 System.out.println("Unknown update");
+        }
+    }
+
+
+    private void setStyle(int start, int stop, String key, String value) {
+        StyleSpans styleSpans = textArea.getStyleSpans(start, stop);
+
+        int nbSpan = styleSpans.getSpanCount();
+
+        int currentBegin = start;
+        int currentEnd = start;
+
+
+        for(int i=0; i<nbSpan; i++) {
+            StyleSpan styleSpan = styleSpans.getStyleSpan(i);
+            currentEnd += styleSpan.getLength();
+
+            List<String> styles = Arrays.asList(((String) styleSpan.getStyle()).split(";"));
+            List<String> newStyles = new ArrayList<>();
+
+            // Conservation des anciennes propriété css
+            for(String style: styles) {
+                if(!style.contains(key) && style.replaceAll("\\s+","") != "") {
+                    newStyles.add(style + ";");
+                }
+            }
+            // Ajout de la nouvelle
+            newStyles.add(key + ": " + value + ";");
+
+
+            StringBuilder sb = new StringBuilder();
+            for (String s : newStyles)
+            {
+                sb.append(s);
+            }
+
+            textArea.setStyle(currentBegin, currentEnd, sb.toString());
+
+            currentBegin = currentEnd;
         }
     }
 }

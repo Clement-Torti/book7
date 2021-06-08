@@ -1,16 +1,15 @@
 package sample.gui.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sample.model.Toolbox;
-import sample.model.Enums.FontStyle;
 
 import java.util.List;
 
@@ -36,6 +35,7 @@ public class ToolBoxView extends VBox {
         getChildren().add(couleurTexte);
 
         FlowPane paletteCouleur = new FlowPane();
+        paletteCouleur.setAlignment(Pos.CENTER);
         paletteCouleur.setId("palette_couleur");
         // Couleurs
         Color[] listeCouleurs = {
@@ -63,15 +63,24 @@ public class ToolBoxView extends VBox {
         for(String font : fontFamilies) {
             policeButton.getItems().add(font);
         }
+        policeButton.setOnAction((event) -> {
+            String selectedFont = policeButton.getSelectionModel().getSelectedItem();
+            toolbox.setPoliceTexte(selectedFont);
+        });
+
         policeButton.getSelectionModel().select(0);
         policeButton.getStyleClass().add("liste_deroulante");
         getChildren().add(policeButton);
 
         // taillePolice (Liste déroulante)
         ComboBox<Integer> taillePolice = new ComboBox<>();
-        for (int i = 4; i <= 25; i++) {
+        for (int i = 8; i <= 25; i++) {
             taillePolice.getItems().add(i);
         }
+        taillePolice.setOnAction((event) -> {
+            Integer selectedSize = taillePolice.getSelectionModel().getSelectedItem();
+            toolbox.setTaillePolice(selectedSize);
+        });
         taillePolice.getSelectionModel().select(8);
         taillePolice.getStyleClass().add("liste_deroulante");
         getChildren().add(taillePolice);
@@ -88,7 +97,7 @@ public class ToolBoxView extends VBox {
         grasButton.setGraphic(iconGras);
         grasButton.getStyleClass().add("bouton_style");
         grasButton.setOnAction((event) ->{
-            toolbox.setGras(Boolean.TRUE);
+            toolbox.flipGras();
         });
         boutonPanel.getChildren().add(grasButton);
 
@@ -100,7 +109,7 @@ public class ToolBoxView extends VBox {
         italiqueButton.setGraphic(iconItalique);
         italiqueButton.getStyleClass().add("bouton_style");
         italiqueButton.setOnAction((event) ->{
-            ////XXX////
+            toolbox.flipItalique();
         });
         boutonPanel.getChildren().add(italiqueButton);
 
@@ -112,7 +121,7 @@ public class ToolBoxView extends VBox {
         soulignementButton.setGraphic(iconSoulignement);
         soulignementButton.getStyleClass().add("bouton_style");
         soulignementButton.setOnAction((event) ->{
-
+            toolbox.flipSoulignement();
         });
         boutonPanel.getChildren().add(soulignementButton);
 

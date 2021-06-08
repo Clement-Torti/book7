@@ -1,7 +1,6 @@
 package sample.model;
 
 import javafx.scene.paint.Color;
-import sample.model.Enums.FontStyle;
 import sample.model.Observateur.Observable;
 
 public class Toolbox extends Observable {
@@ -17,16 +16,16 @@ public class Toolbox extends Observable {
     }
 
     Color color;
-    FontStyle policeTexte;
     Integer taillePolice;
     Boolean gras;
     Boolean italique;
     Boolean surlignement;
     Boolean soulignement;
+    String policeTexte;
 
     public Toolbox() {
         this.color = Color.BLACK;
-        this.policeTexte = FontStyle.TimesNewRoman;
+        this.policeTexte = "Arial";
         this.taillePolice = 12;
         this.gras = false;
         this.italique = false;
@@ -34,7 +33,7 @@ public class Toolbox extends Observable {
         this.soulignement = false;
     }
 
-    public Toolbox(Color color, FontStyle policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
+    public Toolbox(Color color, String policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
         this.color = color;
         this.policeTexte = policeTexte;
         this.taillePolice = taillePolice;
@@ -53,11 +52,11 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.COULEUR);
     }
 
-    public FontStyle getPoliceTexte() {
+    public String getPoliceTexte() {
         return policeTexte;
     }
 
-    public void setPoliceTexte(FontStyle policeTexte) {
+    public void setPoliceTexte(String policeTexte) {
         this.policeTexte = policeTexte;
         notifier(ToolboxUpdate.POLICE);
     }
@@ -75,8 +74,8 @@ public class Toolbox extends Observable {
         return gras;
     }
 
-    public void setGras(Boolean gras) {
-        this.gras = gras;
+    public void flipGras() {
+        this.gras = !gras;
         notifier(ToolboxUpdate.GRAS);
     }
 
@@ -84,8 +83,8 @@ public class Toolbox extends Observable {
         return italique;
     }
 
-    public void setItalique(Boolean italique) {
-        this.italique = italique;
+    public void flipItalique() {
+        this.italique = !italique;
         notifier(ToolboxUpdate.ITALIC);
     }
 
@@ -101,8 +100,8 @@ public class Toolbox extends Observable {
         return soulignement;
     }
 
-    public void setSoulignement(Boolean soulignement) {
-        this.soulignement = soulignement;
+    public void flipSoulignement() {
+        this.soulignement = !soulignement;
         notifier(ToolboxUpdate.SOULIGNER);
     }
 
