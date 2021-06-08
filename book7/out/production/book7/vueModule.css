@@ -62,11 +62,21 @@
     -fx-background-color: -blue-2;
 }
 
-.bouton_fermer:hover {
-    -fx-background-color: #ff0000;
+.bouton_fermer{
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: #ff3030;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
-.bouton_fermer:pressed {
-    -fx-background-color: #c30000;
+
+.bouton_fermer:hover{
+    -fx-background-color: #dd3030;
+}
+
+.bouton_fermer:pressed{
+    -fx-background-color: #bb3030;
 }
 
 /*
