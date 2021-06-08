@@ -3,6 +3,7 @@ package sample.gui.view;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,9 +14,11 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.gui.Utils.FileOpener;
+import sample.gui.controller.ModuleController;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
+import sample.model.Constantes;
 import sample.model.Contenu.Contenu;
 
 import sample.model.Contenu.ImageBook7;
@@ -36,10 +39,10 @@ import java.util.Locale;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class PageView extends BorderPane {
+public class PageView extends BorderPane implements IObservateur {
     // Outlets
     private ScrollPane scrollPane;
-    private HBox headerBox = new HBox();
+    private BorderPane headerPane = new BorderPane();
     private VBox contenuBox = new VBox();
     private HBox footerBox = new HBox();
     private FileOpener fileOpener;
@@ -60,19 +63,31 @@ public class PageView extends BorderPane {
         setId("mainVue");
 
         // Elements
-        setTop(headerBox);
-        setMargin(headerBox, new Insets(10));
+        setTop(headerPane);
+        setMargin(headerPane, new Insets(5, 20, 10, 20));
+
+
+
+        // Architecture du centre de la page
+        // Vbox (motif de fond)
+        //  > ScrollPane (contenu scrollable)
+        //      > VBox (contenus)
+        //          > HBox
+        //              > ContenuView | delete Btn
+        VBox scrollPaneVBox = new VBox();
+        scrollPaneVBox.setId("scrollPaneVBox");
 
         scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
+
         scrollPane.setId("scrollPane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        setCenter(scrollPane);
+        setCenter(scrollPaneVBox);
+        scrollPaneVBox.getChildren().add(scrollPane);
+
         scrollPane.setContent(contenuBox);
-        contenuBox.setId("contenuBox");
-        contenuBox.setAlignment(Pos.CENTER);
-        setMargin(scrollPane, new Insets(0, 20, 0, 20));
+        setMargin(scrollPaneVBox, new Insets(0, 15, 0, 15));
 
         setBottom(footerBox);
         setMargin(footerBox, new Insets(5, 20, 10, 20));
@@ -81,7 +96,15 @@ public class PageView extends BorderPane {
 
     // Methodes
     public void setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
+        // Se desabonner de l'ancienne page
+        if(page != null) {
+            page.dettach(this);
+        }
+
+        // S'abonner a la nouvelle page
         page = _page;
+        page.attach(this);
+
         index = _index;
         nomModule = _nomModule;
         section = _section;
@@ -91,35 +114,55 @@ public class PageView extends BorderPane {
 
     private void updateView() {
         // Vider les anciens elements de vue
-        headerBox.getChildren().clear();
+        headerPane.getChildren().clear();
         contenuBox.getChildren().clear();
         footerBox.getChildren().clear();
 
         // Header
-        headerBox.setAlignment(Pos.CENTER);
-
         Label nomCahierLabel = new Label();
+        nomCahierLabel.setId("nomCahierLabel");
         nomCahierLabel.setText(nomModule.toUpperCase(Locale.ROOT) + "-" + section);
-        headerBox.getChildren().add(nomCahierLabel);
+        headerPane.setCenter(nomCahierLabel);
+
+        Label inpLabel = new Label();
+        inpLabel.setText(Constantes.INP_HEADER);
+        inpLabel.setId("inpLabel");
+        headerPane.setRight(inpLabel);
+
+        Label ghostLabel = new Label();
+        ghostLabel.setText(Constantes.GOHST_INP_HEADER);
+        headerPane.setLeft(ghostLabel);
+
+
 
         // Contenu
+        contenuBox.setId("contenuBox");
+        contenuBox.setAlignment(Pos.CENTER);
+
         for(Contenu c: page.getContenus()) {
             ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
+            toolbox.attach(cv);
             contenuBox.getChildren().add(cv.afficher());
         }
 
+
         try {
             int contentSize = page.getContenus().size();
+
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
                 ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
-                contenuBox.getChildren().add(cv.afficher());
+                Node node = cv.afficher();
+                contenuBox.getChildren().add(node);
+                toolbox.attach(cv);
                 page.appendContenu(tz);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
 
 
         // Footer
@@ -145,5 +188,11 @@ public class PageView extends BorderPane {
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
+        // A l'ajout d'un contenu, sauvegarder
+        ModuleController.forcerSauvegarde();
     }
 }

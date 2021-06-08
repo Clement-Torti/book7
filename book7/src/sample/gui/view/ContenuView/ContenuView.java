@@ -10,19 +10,18 @@ import sample.model.Observateur.Observable;
 // rôle: Classe abstraite indiquant à la vue comment afficher un contenu du modèle
 // Dernière modification: Clément Torti
 //
-public abstract class ContenuView {
+public abstract class ContenuView implements IObservateur {
     // Attribut
     protected Contenu contenu;
 
     // Constructeur
     public ContenuView(Contenu contenu) {
         this.contenu = contenu;
-        this.sauvegarder();
     }
 
     public abstract Node afficher();
 
-    public void sauvegarder() {
-        ModuleController.sauvegarderModule();
+    public boolean sauvegarder() {
+        return ModuleController.sauvegarderModule();
     }
 }

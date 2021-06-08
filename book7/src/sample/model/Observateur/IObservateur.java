@@ -4,5 +4,5 @@ package sample.model.Observateur;
 // creation: Anna/ Clément
 // dernière modification:
 public interface IObservateur {
-    void update(Observable obs);
+    void update(Observable obs, Object o);
 }

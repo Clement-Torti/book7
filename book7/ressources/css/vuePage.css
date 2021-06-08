@@ -6,10 +6,11 @@
     -fx-border-style: solid;
     -fx-border-radius: 15;
     -fx-border-width: 2;
-    -fx-border-color: rgb(200, 200, 200);
-
+    -fx-border-color: rgb(150, 150, 150);
     -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
+
+
 
 .text-area .scroll-bar:vertical {
     -fx-pref-width: 1;
@@ -45,8 +46,17 @@
     -fx-pref-height: 1;
     -fx-opacity: 0;
 }
+
+
+.textAreaView {
+    -fx-background-color: transparent;
+    -fx-resize: none;
+}
+
+
+
 #scrollPane > .viewport {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 
@@ -56,13 +66,24 @@
    -fx-background-color:transparent;
 }
 
-/*
-#contenuBox {
-    -fx-background-color: green;
-    -fx-border-style: solid;
+
+
+
+#scrollPaneVBox {
+    -fx-background-image: url("grand_carreaux.png");
 }
-*/
+
 
 .imageContenuView {
     -fx-effect: dropshadow(three-pass-box, black, 5, 0.0, 0, 1);
+}
+
+#nomCahierLabel {
+    -fx-font-style: italic;
+    -fx-font-size: 10px;
+}
+
+#inpLabel {
+    -fx-font-style: italic;
+    -fx-font-size: 10px;
 }
