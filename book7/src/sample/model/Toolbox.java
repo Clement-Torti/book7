@@ -2,8 +2,20 @@ package sample.model;
 
 import javafx.scene.paint.Color;
 import sample.model.Enums.FontStyle;
+import sample.model.Observateur.Observable;
 
-public class Toolbox {
+public class Toolbox extends Observable {
+    public enum ToolboxUpdate {
+        COULEUR,
+        GRAS,
+        ITALIC,
+        SOULIGNER,
+        POLICE,
+        TAILLE_POLICE,
+        MOTIF,
+        ALIGNEMENT
+    }
+
     Color color;
     FontStyle policeTexte;
     Integer taillePolice;
@@ -38,6 +50,7 @@ public class Toolbox {
 
     public void setColor(Color color) {
         this.color = color;
+        notifier(ToolboxUpdate.COULEUR);
     }
 
     public FontStyle getPoliceTexte() {
@@ -46,6 +59,7 @@ public class Toolbox {
 
     public void setPoliceTexte(FontStyle policeTexte) {
         this.policeTexte = policeTexte;
+        notifier(ToolboxUpdate.POLICE);
     }
 
     public Integer getTaillePolice() {
@@ -54,6 +68,7 @@ public class Toolbox {
 
     public void setTaillePolice(Integer taillePolice) {
         this.taillePolice = taillePolice;
+        notifier(ToolboxUpdate.TAILLE_POLICE);
     }
 
     public Boolean getGras() {
@@ -62,6 +77,7 @@ public class Toolbox {
 
     public void setGras(Boolean gras) {
         this.gras = gras;
+        notifier(ToolboxUpdate.GRAS);
     }
 
     public Boolean getItalique() {
@@ -70,6 +86,7 @@ public class Toolbox {
 
     public void setItalique(Boolean italique) {
         this.italique = italique;
+        notifier(ToolboxUpdate.ITALIC);
     }
 
     public Boolean getSurlignement() {
@@ -86,6 +103,7 @@ public class Toolbox {
 
     public void setSoulignement(Boolean soulignement) {
         this.soulignement = soulignement;
+        notifier(ToolboxUpdate.SOULIGNER);
     }
 
     @Override

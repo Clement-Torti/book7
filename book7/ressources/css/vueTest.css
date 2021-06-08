@@ -10,3 +10,7 @@
 .italic {
     -fx-font-style: italic;
 }
+
+.codeStyle {
+    -fx-background-color: rgb(0, 0, 120);
+}

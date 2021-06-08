@@ -51,7 +51,6 @@ public class ToolBoxView extends VBox {
             couleurBouton.setStyle("-fx-background-color: #" + couleur.toString().substring(2, 8) + ";");
             couleurBouton.setOnAction((event) -> {
                 toolbox.setColor(couleur);
-                System.out.println(toolbox.getColor());
             });
             paletteCouleur.getChildren().add(couleurBouton);
         }

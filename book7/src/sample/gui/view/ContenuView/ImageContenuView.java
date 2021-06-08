@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.ImageBook7;
 import sample.model.Observateur.IObservateur;
+import sample.model.Observateur.Observable;
 
 import java.net.URI;
 
@@ -27,5 +28,9 @@ public class ImageContenuView extends ContenuView {
         iv.setFitWidth(300);
 
         return iv;
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
     }
 }

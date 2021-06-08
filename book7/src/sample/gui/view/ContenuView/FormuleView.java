@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import sample.model.Contenu.Contenu;
 import sample.model.Observateur.IObservateur;
+import sample.model.Observateur.Observable;
 
 // rôle: ContenuView indiquant à la vue comment afficher une formule
 // Dernière modification: Clément Torti
@@ -20,5 +21,9 @@ public class FormuleView extends ContenuView {
         label.setText("je suis une formule");
 
         return label;
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
     }
 }

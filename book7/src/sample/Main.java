@@ -19,12 +19,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        URL url = getClass().getResource(ARBORESCENCE_FXML);
-        URL url = getClass().getResource("gui/view/vueTest.fxml");
+        URL url = getClass().getResource(ARBORESCENCE_FXML);
+        //URL url = getClass().getResource("gui/view/vueTest.fxml");
 
         FXMLLoader loader = new FXMLLoader(url);
-//        loader.setController(new ArborescenceController(primaryStage));
-        loader.setController(new TestController(primaryStage));
+        loader.setController(new ArborescenceController(primaryStage));
+        //loader.setController(new TestController(primaryStage));
         Parent root = loader.load();
 
         primaryStage.setTitle("Book 7");

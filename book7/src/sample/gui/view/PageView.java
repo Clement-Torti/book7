@@ -105,21 +105,27 @@ public class PageView extends BorderPane {
         // Contenu
         for(Contenu c: page.getContenus()) {
             ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
+            toolbox.attach(cv);
             contenuBox.getChildren().add(cv.afficher());
         }
 
+
         try {
             int contentSize = page.getContenus().size();
+            System.out.println(contentSize);
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
                 ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
                 contenuBox.getChildren().add(cv.afficher());
+                toolbox.attach(cv);
                 page.appendContenu(tz);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+
+
 
 
         // Footer

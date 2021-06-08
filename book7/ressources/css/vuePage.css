@@ -45,6 +45,15 @@
     -fx-pref-height: 1;
     -fx-opacity: 0;
 }
+
+/*
+.textAreaView {
+    -fx-background-color: red;
+    -fx-resize: none;
+}
+*/
+
+
 #scrollPane > .viewport {
     -fx-background-color: white;
 }

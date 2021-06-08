@@ -4,7 +4,11 @@ import javafx.css.StyleClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.StyledTextArea;
@@ -19,7 +23,7 @@ public class TestView extends VBox {
     String styleBold = "-fx-font-weight: bold;";
     String styleItalic = "-fx-font-style: italic;";
     String styleFontFamily = "-fx-font-family: 'Fira Sans Condensed ExtraBold';";
-    String styleColorRed = "-fx-stroke: red;";
+    String styleColorRed = "-fx-text-decoration: line-through;";
 
     public TestView(){
 //        TextArea mainText = new TextArea();
@@ -67,6 +71,7 @@ public class TestView extends VBox {
                 currentBegin = currentEnd;
             }
 
+            System.out.println(mainText.getStyleSpans(0, mainText.getLength()));
 
 //            StyleSpans<Collection<String>> var = mainText.getStyleSpans(debut, fin);
 //            for (StyleSpan<Collection<String>> v1 : var){
@@ -103,8 +108,12 @@ public class TestView extends VBox {
         getChildren().add(textRed);
         getChildren().add(italic);
         getChildren().add(bold);
+
+
+
         }
 
 
 
 }
+
