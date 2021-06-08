@@ -18,21 +18,17 @@
             fx:id="root">
 
     <left>
-        <ToolBoxView id="toolBoxView" fx:id="toolBoxView">
-            <BorderPane.margin>
-                <Insets left="10" bottom="10" top="10"/>
-            </BorderPane.margin>
-        </ToolBoxView>
+        <VBox alignment="CENTER">
+            <ToolBoxView id="toolBoxView" fx:id="toolBoxView"/>
+        </VBox>
     </left>
 
     <center>
     </center>
 
     <bottom>
-        <NavigationView id="navigationView" fx:id="navigationView">
-            <BorderPane.margin>
-                <Insets left="10" right="10" bottom="10"/>
-            </BorderPane.margin>
-        </NavigationView>
+        <HBox alignment="CENTER">
+            <NavigationView id="navigationView" fx:id="navigationView"/>
+        </HBox>
     </bottom>
 </BorderPane>

@@ -18,18 +18,15 @@
     -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
 
-#navigation_gauche, #navigation_milieu, #navigation_droite{
-    -fx-background-color: -grey-1;
-}
 
 #navigation_gauche, #navigation_droite{
     -fx-spacing: 20;
-    -fx-padding: 10;
+    -fx-padding: 0 20;
     -fx-alignment: center;
 }
 #navigation_milieu{
     -fx-spacing: 30;
-    -fx-padding: 15;
+    -fx-padding: 10;
     -fx-alignment: center;
 }
 
@@ -77,6 +74,7 @@
 #toolBoxView{
     -fx-max-width: 170;
     -fx-spacing: 5;
+    -fx-padding: 20 0;
 }
 /* Palette de couleur */
 #palette_couleur{
