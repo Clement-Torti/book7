@@ -60,15 +60,13 @@ public class TextAreaView extends ContenuView{
                 current += s.getLength();
             }
 
-            System.out.println(textArea.getStyleSpans(0, textArea.getLength()));
-
         } else {
             textHolder.setText("");
         }
 
         textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
-
         textHolder.textProperty().bind(textArea.textProperty());
+        // Event quand la taille de la textArea doit être MAJ
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
@@ -79,13 +77,16 @@ public class TextAreaView extends ContenuView{
                 ((TextZone)contenu).setTexte(textArea.getText());
                 ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
 
-                sauvegarder();
-
                 if (oldHeight != newValue.getHeight()) {
                     oldHeight = newValue.getHeight();
-                    textArea.setMinHeight(textHolder.getLayoutBounds().getHeight() + 20);
+                    textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
                 }
             }
+        });
+
+        // Event quand le contenu du cahier change
+        textArea.textProperty().addListener((event) -> {
+            sauvegarder();
         });
 
         return textArea;
@@ -100,6 +101,12 @@ public class TextAreaView extends ContenuView{
         // La textAreaView est-elle concernée ?
         int start = textArea.getSelection().getStart();
         int stop = textArea.getSelection().getEnd();
+
+        // Est-ce le contenuView concerné ?
+
+        if(start != stop) {
+            sauvegarder();
+        }
 
         switch (update) {
             case COULEUR:

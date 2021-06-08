@@ -33,19 +33,16 @@ public class TextZone extends Contenu implements Serializable {
     }
 
     public List<StyleSpan> getStyleSpans() {
-        System.out.println("Get style pan:");
         List<StyleSpan> styleSpans = new ArrayList<>();
 
         for(Balise b: balises) {
             StyleSpan styleSpan = new StyleSpan(b.getStyle(), b.getLength());
             styleSpans.add(styleSpan);
-            System.out.println(b);
         }
 
         return styleSpans;
     }
     public void setStyleSpans(StyleSpans styleSpans) {
-        System.out.println("set stylePans");
         balises.clear();
 
         // Conversion d'un styleSpans en quelques chose de serialisable
@@ -58,7 +55,6 @@ public class TextZone extends Contenu implements Serializable {
             String style = (String) styleSpan.getStyle();
 
             Balise b = new Balise(length, style);
-            System.out.println(b);
             balises.add(balises.size(), b);
         }
     }

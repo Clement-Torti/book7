@@ -17,12 +17,11 @@ public abstract class ContenuView implements IObservateur {
     // Constructeur
     public ContenuView(Contenu contenu) {
         this.contenu = contenu;
-        this.sauvegarder();
     }
 
     public abstract Node afficher();
 
-    public void sauvegarder() {
-        ModuleController.sauvegarderModule();
+    public boolean sauvegarder() {
+        return ModuleController.sauvegarderModule();
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.gui.Utils.FileOpener;
+import sample.gui.controller.ModuleController;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
@@ -36,7 +37,7 @@ import java.util.Locale;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class PageView extends BorderPane {
+public class PageView extends BorderPane implements IObservateur {
     // Outlets
     private ScrollPane scrollPane;
     private HBox headerBox = new HBox();
@@ -70,8 +71,6 @@ public class PageView extends BorderPane {
 
         setCenter(scrollPane);
         scrollPane.setContent(contenuBox);
-        contenuBox.setId("contenuBox");
-        contenuBox.setAlignment(Pos.CENTER);
         setMargin(scrollPane, new Insets(0, 20, 0, 20));
 
         setBottom(footerBox);
@@ -81,7 +80,15 @@ public class PageView extends BorderPane {
 
     // Methodes
     public void setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
+        // Se desabonner de l'ancienne page
+        if(page != null) {
+            page.dettach(this);
+        }
+
+        // S'abonner a la nouvelle page
         page = _page;
+        page.attach(this);
+
         index = _index;
         nomModule = _nomModule;
         section = _section;
@@ -103,6 +110,9 @@ public class PageView extends BorderPane {
         headerBox.getChildren().add(nomCahierLabel);
 
         // Contenu
+        contenuBox.setId("contenuBox");
+        contenuBox.setAlignment(Pos.CENTER);
+
         for(Contenu c: page.getContenus()) {
             ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
             toolbox.attach(cv);
@@ -112,7 +122,7 @@ public class PageView extends BorderPane {
 
         try {
             int contentSize = page.getContenus().size();
-            System.out.println(contentSize);
+
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
@@ -151,5 +161,11 @@ public class PageView extends BorderPane {
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
+        // A l'ajout d'un contenu, sauvegarder
+        ModuleController.forcerSauvegarde();
     }
 }

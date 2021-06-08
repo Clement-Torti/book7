@@ -28,6 +28,7 @@ public class CahierView extends HBox {
 
     // Constructeur
     public CahierView(FileOpener fileOpener) {
+
         // Ajout des 2 pages
         leftPage = new PageView(fileOpener);
         rightPage = new PageView(fileOpener);

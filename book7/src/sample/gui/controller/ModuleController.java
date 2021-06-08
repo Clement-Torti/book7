@@ -19,7 +19,9 @@ import sample.model.Persistence.ModuleWriter;
 // Dernière Modification: Clément Torti
 //
 public class ModuleController extends BaseController {
-    // Constantes
+    // Static
+    private static int NB_OPERATION_BEFORE_SAVING = 20;
+    private static int current_nb_operation = 0;
 
     // FXML Outlets
     @FXML
@@ -95,9 +97,24 @@ public class ModuleController extends BaseController {
 
     }
 
-    public static void sauvegarderModule() {
-        ModuleWriter mw = new ModuleWriter();
-        mw.ecrire(module);
+    public static boolean sauvegarderModule() {
+        // Ne sauvegarder qu'au bout de N operation (pour les performance car exriture disque lent)
+
+        if(current_nb_operation > NB_OPERATION_BEFORE_SAVING) {
+            ModuleWriter mw = new ModuleWriter();
+            mw.ecrire(module);
+
+            current_nb_operation = 0;
+            return true;
+        }
+
+        current_nb_operation += 1;
+        return false;
+    }
+
+    public static void forcerSauvegarde() {
+            ModuleWriter mw = new ModuleWriter();
+            mw.ecrire(module);
     }
 
     public void fermerFenetre() {
