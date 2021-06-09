@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -28,7 +29,74 @@ public class ToolBoxView extends VBox {
 
     // Methodes
     private void updateView() {
-        // Palette de couleur
+        /*
+            Motifs
+         */
+        // Hbox des motifs
+        HBox hboxMotif = new HBox();
+        hboxMotif.setId("hbox_motif");
+
+        Text motifTexte = new Text();
+        motifTexte.setFont(new Font(16));
+        motifTexte.setText("Motifs");
+        getChildren().add(motifTexte);
+
+        //Bouton motif grands carreaux
+        Button motifGCButton = new Button();
+        ImageView iconGC = new ImageView("/icon-big-grid.png");
+        iconGC.setPreserveRatio(true);
+        iconGC.setFitHeight(20);
+        motifGCButton.setGraphic(iconGC);
+        motifGCButton.getStyleClass().add("bouton_style");
+        motifGCButton.getStyleClass().add("motif");
+        motifGCButton.setOnAction((event) ->{
+
+        });
+        hboxMotif.getChildren().add(motifGCButton);
+
+        //Bouton motif petits carreaux
+        Button motifPCButton = new Button();
+        ImageView iconPC = new ImageView("/icon-small-grid.png");
+        iconPC.setPreserveRatio(true);
+        iconPC.setFitHeight(20);
+        motifPCButton.setGraphic(iconPC);
+        motifPCButton.getStyleClass().add("bouton_style");
+        motifPCButton.getStyleClass().add("motif");
+        motifPCButton.setOnAction((event) ->{
+
+        });
+        hboxMotif.getChildren().add(motifPCButton);
+
+        //Bouton motif Points
+        Button motifPointsButton = new Button();
+        ImageView iconPoints = new ImageView("/icon-points-grid.png");
+        iconPoints.setPreserveRatio(true);
+        iconPoints.setFitHeight(20);
+        motifPointsButton.setGraphic(iconPoints);
+        motifPointsButton.getStyleClass().add("bouton_style");
+        motifPointsButton.getStyleClass().add("motif");
+        motifPointsButton.setOnAction((event) ->{
+        });
+        hboxMotif.getChildren().add(motifPointsButton);
+
+        //Bouton motif page blanche
+        Button motifRienButton = new Button();
+//        ImageView iconRien = new ImageView("/icon-align-right.png");
+//        iconRien.setPreserveRatio(true);
+//        iconRien.setFitHeight(20);
+//        motifRienButton.setGraphic(iconRien);
+        motifRienButton.getStyleClass().add("bouton_style");
+        motifRienButton.getStyleClass().add("motif");
+        motifRienButton.setOnAction((event) ->{
+
+        });
+        hboxMotif.getChildren().add(motifRienButton);
+
+        getChildren().add(hboxMotif);
+
+        /*
+            Palette de couleur
+        */
         Text couleurTexte = new Text();
         couleurTexte.setFont(new Font(16));
         couleurTexte.setText("Couleurs");
@@ -56,6 +124,9 @@ public class ToolBoxView extends VBox {
         }
         getChildren().add(paletteCouleur);
 
+        /*
+            Police et taille de text
+         */
         // policeTexte (Liste déroulante)
         List<String> fontFamilies = Font.getFamilies();
 
@@ -85,10 +156,51 @@ public class ToolBoxView extends VBox {
         taillePolice.getStyleClass().add("liste_deroulante");
         getChildren().add(taillePolice);
 
-        // BOUTONS de style
+        /*
+            Boutons de style
+         */
         FlowPane boutonPanel = new FlowPane();
         boutonPanel.getStyleClass().add("liste_boutons_style");
 
+        /*
+            Alignement
+         */
+        //Bouton alignement Gauche
+        Button gaucheButton = new Button();
+        ImageView iconGauche = new ImageView("/icon-align-left.png");
+        iconGauche.setPreserveRatio(true);
+        iconGauche.setFitHeight(20);
+        gaucheButton.setGraphic(iconGauche);
+        gaucheButton.getStyleClass().add("bouton_style");
+        gaucheButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(gaucheButton);
+
+        //Bouton alignement Centre
+        Button centreButton = new Button();
+        ImageView iconCentre = new ImageView("/icon-align-center.png");
+        iconCentre.setPreserveRatio(true);
+        iconCentre.setFitHeight(20);
+        centreButton.setGraphic(iconCentre);
+        centreButton.getStyleClass().add("bouton_style");
+        centreButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(centreButton);
+
+        //Bouton alignement Droit
+        Button droitButton = new Button();
+        ImageView iconDroit = new ImageView("/icon-align-right.png");
+        iconDroit.setPreserveRatio(true);
+        iconDroit.setFitHeight(20);
+        droitButton.setGraphic(iconDroit);
+        droitButton.getStyleClass().add("bouton_style");
+        droitButton.setOnAction((event) ->{
+        });
+        boutonPanel.getChildren().add(droitButton);
+
+        /*
+            Style de texte
+         */
         // gras (bouton)
         Button grasButton = new Button();
         ImageView iconGras = new ImageView("/icon-bold.png");
@@ -125,17 +237,17 @@ public class ToolBoxView extends VBox {
         });
         boutonPanel.getChildren().add(soulignementButton);
 
-        // surlignement (bouton)
-        Button surlignementButton = new Button();
-        ImageView iconSurlignement = new ImageView("/icon-highlighter.png");
-        iconSurlignement.setPreserveRatio(true);
-        iconSurlignement.setFitHeight(20);
-        surlignementButton.setGraphic(iconSurlignement);
-        surlignementButton.getStyleClass().add("bouton_style");
-        surlignementButton.setOnAction((event) ->{
+        // Code
+        Button codeButton = new Button();
+        ImageView iconCode = new ImageView("/icon-code.png");
+        iconCode.setPreserveRatio(true);
+        iconCode.setFitHeight(20);
+        codeButton.setGraphic(iconCode);
+        codeButton.getStyleClass().add("bouton_style");
+        codeButton.setOnAction((event) ->{
             ////XXX////
         });
-        boutonPanel.getChildren().add(surlignementButton);
+        boutonPanel.getChildren().add(codeButton);
 
         // Ajout de la liste à la ToolBoxView
         getChildren().add(boutonPanel);
