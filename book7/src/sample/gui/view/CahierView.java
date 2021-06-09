@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import sample.gui.Utils.FileOpener;
 import sample.gui.controller.BaseController;
 import sample.model.Cahier;
@@ -37,6 +38,11 @@ public class CahierView extends HBox {
         setMargin(leftPage, new Insets(0, 10, 10, 10));
         setMargin(rightPage, new Insets(0, 0, 10, 0));
 
+        // Etre sure qu'elles auront la meme taille
+        rightPage.prefWidthProperty().bind(leftPage.widthProperty());
+        leftPage.prefWidthProperty().bind(rightPage.widthProperty());
+
+        // Les faire s'étendre au max
         HBox.setHgrow(leftPage, Priority.ALWAYS);
         HBox.setHgrow(rightPage, Priority.ALWAYS);
 

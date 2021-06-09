@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -149,9 +150,7 @@ public class PageView extends BorderPane implements IObservateur {
         contenuBox.setAlignment(Pos.CENTER);
 
         for(Contenu c: page.getContenus()) {
-            ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
-            toolbox.attach(cv);
-            contenuBox.getChildren().add(cv.afficher());
+            contenuBox.getChildren().add(getDefaultContenuView(c, true));
         }
 
 
@@ -161,11 +160,8 @@ public class PageView extends BorderPane implements IObservateur {
             if(contentSize == 0 || !(page.getContenus().get( contentSize - 1) instanceof TextZone)) {
                 // Le dernier element est un contenu dynamique
                 TextZone tz = new TextZone();
-                ContenuView cv = FabriqueContenuView.fabriquerContenuView(tz);
-                Node node = cv.afficher();
-                contenuBox.getChildren().add(node);
-                toolbox.attach(cv);
                 page.appendContenu(tz);
+                contenuBox.getChildren().add(getDefaultContenuView(tz, true));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -204,12 +200,10 @@ public class PageView extends BorderPane implements IObservateur {
 
                         Contenu contenu = contr.getCurrentImage();
                         page.appendContenu(contenu);
-                        ContenuView cv = FabriqueContenuView.fabriquerContenuView(contenu);
-                        contenuBox.getChildren().add(cv.afficher());
+                        contenuBox.getChildren().add(getDefaultContenuView(contenu, false));
 
                         TextZone tz = new TextZone();
-                        cv = FabriqueContenuView.fabriquerContenuView(tz);
-                        contenuBox.getChildren().add(cv.afficher());
+                        contenuBox.getChildren().add(getDefaultContenuView(contenu, false));
 
                     }
                 } catch (IOException e) {
@@ -243,5 +237,40 @@ public class PageView extends BorderPane implements IObservateur {
 
         // A l'ajout d'un contenu, sauvegarder
         ModuleController.forcerSauvegarde();
+    }
+
+    private Node getDefaultContenuView(Contenu c, boolean attachToToolBox) {
+        HBox contenuHBox = new HBox();
+
+        ContenuView cv = FabriqueContenuView.fabriquerContenuView(c);
+        Node node = cv.afficher();
+
+        HBox.setHgrow(node, Priority.ALWAYS);
+
+        contenuHBox.getChildren().add(node);
+
+        if(attachToToolBox) {
+            toolbox.attach(cv);
+        }
+
+        ColorAdjust couleurBlanche = new ColorAdjust();
+        couleurBlanche.setBrightness(0);
+        Button boutonFermer = new Button();
+        boutonFermer.getStyleClass().add("bouton_supprimer");
+        ImageView iconBoutonFermer = new ImageView("/icon-close.png");
+        iconBoutonFermer.setPreserveRatio(true);
+        iconBoutonFermer.setFitWidth(10);
+        iconBoutonFermer.setEffect(couleurBlanche);
+        boutonFermer.setGraphic(iconBoutonFermer);
+
+        boutonFermer.setOnAction((event) -> {
+            page.getContenus().remove(c);
+            updateView();
+        });
+        contenuHBox.getChildren().add(boutonFermer);
+
+        HBox.setHgrow(boutonFermer, Priority.NEVER);
+
+        return contenuHBox;
     }
 }

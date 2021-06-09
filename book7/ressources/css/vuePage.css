@@ -90,3 +90,8 @@
     -fx-font-style: italic;
     -fx-font-size: 10px;
 }
+
+.bouton_supprimer {
+    -fx-border-style: none;
+    -fx-background-color: transparent;
+}
