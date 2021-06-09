@@ -41,6 +41,7 @@ import java.util.Locale;
 //
 public class PageView extends BorderPane implements IObservateur {
     // Outlets
+    private VBox scrollPaneVBox;
     private ScrollPane scrollPane;
     private BorderPane headerPane = new BorderPane();
     private VBox contenuBox = new VBox();
@@ -74,8 +75,8 @@ public class PageView extends BorderPane implements IObservateur {
         //      > VBox (contenus)
         //          > HBox
         //              > ContenuView | delete Btn
-        VBox scrollPaneVBox = new VBox();
-        scrollPaneVBox.setId("scrollPaneVBox");
+        scrollPaneVBox = new VBox();
+        scrollPaneVBox.getStyleClass().setAll("fondGrandCarreaux");
 
         scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
@@ -109,6 +110,8 @@ public class PageView extends BorderPane implements IObservateur {
         nomModule = _nomModule;
         section = _section;
         toolbox = _toolbox;
+
+        toolbox.attach(this);
         updateView();
     }
 
@@ -162,9 +165,6 @@ public class PageView extends BorderPane implements IObservateur {
             System.out.println(e);
         }
 
-
-
-
         // Footer
         footerBox.setAlignment(Pos.CENTER_RIGHT);
         footerBox.setSpacing(10);
@@ -192,6 +192,15 @@ public class PageView extends BorderPane implements IObservateur {
 
     @Override
     public void update(Observable obs, Object o) {
+        Toolbox toolBox = (Toolbox) obs;
+        Toolbox.ToolboxUpdate update = (Toolbox.ToolboxUpdate) o;
+
+        if (update == Toolbox.ToolboxUpdate.MOTIF) {
+            String value = toolBox.getMotif();
+            scrollPaneVBox.getStyleClass().setAll("fond" + value);
+        } else {
+            System.out.println();
+        }
         // A l'ajout d'un contenu, sauvegarder
         ModuleController.forcerSauvegarde();
     }

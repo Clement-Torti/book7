@@ -22,6 +22,7 @@ public class Toolbox extends Observable {
     Boolean surlignement;
     Boolean soulignement;
     String policeTexte;
+    String motif;
 
     public Toolbox() {
         this.color = Color.BLACK;
@@ -31,6 +32,7 @@ public class Toolbox extends Observable {
         this.italique = false;
         this.surlignement = false;
         this.soulignement = false;
+        this.motif = "GrandCarreaux";
     }
 
     public Toolbox(Color color, String policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
@@ -103,6 +105,15 @@ public class Toolbox extends Observable {
     public void flipSoulignement() {
         this.soulignement = !soulignement;
         notifier(ToolboxUpdate.SOULIGNER);
+    }
+
+    public String getMotif(){
+        return motif;
+    }
+
+    public void setMotif(String motif){
+        this.motif = motif;
+        notifier(ToolboxUpdate.MOTIF);
     }
 
     @Override

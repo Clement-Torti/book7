@@ -50,7 +50,7 @@ public class ToolBoxView extends VBox {
         motifGCButton.getStyleClass().add("bouton_style");
         motifGCButton.getStyleClass().add("motif");
         motifGCButton.setOnAction((event) ->{
-
+            toolbox.setMotif("GrandCarreaux");
         });
         hboxMotif.getChildren().add(motifGCButton);
 
@@ -63,7 +63,7 @@ public class ToolBoxView extends VBox {
         motifPCButton.getStyleClass().add("bouton_style");
         motifPCButton.getStyleClass().add("motif");
         motifPCButton.setOnAction((event) ->{
-
+            toolbox.setMotif("PetitCarreaux");
         });
         hboxMotif.getChildren().add(motifPCButton);
 
@@ -76,19 +76,16 @@ public class ToolBoxView extends VBox {
         motifPointsButton.getStyleClass().add("bouton_style");
         motifPointsButton.getStyleClass().add("motif");
         motifPointsButton.setOnAction((event) ->{
+            toolbox.setMotif("Points");
         });
         hboxMotif.getChildren().add(motifPointsButton);
 
         //Bouton motif page blanche
         Button motifRienButton = new Button();
-//        ImageView iconRien = new ImageView("/icon-align-right.png");
-//        iconRien.setPreserveRatio(true);
-//        iconRien.setFitHeight(20);
-//        motifRienButton.setGraphic(iconRien);
         motifRienButton.getStyleClass().add("bouton_style");
         motifRienButton.getStyleClass().add("motif");
         motifRienButton.setOnAction((event) ->{
-
+            toolbox.setMotif("Vide");
         });
         hboxMotif.getChildren().add(motifRienButton);
 

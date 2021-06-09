@@ -66,11 +66,14 @@
    -fx-background-color:transparent;
 }
 
-
-
-
-#scrollPaneVBox {
-    -fx-background-image: url("grand_carreaux.png");
+.fondGrandCarreaux {
+    -fx-background-image: url("fond-grand-carreaux.png");
+}
+.fondPetitCarreaux {
+    -fx-background-image: url("fond-petit-carreaux.png");
+}
+.fondPoints {
+    -fx-background-image: url("fond-points.png");
 }
 
 
