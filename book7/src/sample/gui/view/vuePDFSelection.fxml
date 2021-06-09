@@ -11,7 +11,7 @@
     <HBox>
         <HBox>
             <Button onAction="#newPdf" text="Nouveau pdf"/>
-            <Label text="Pdf existant:" />
+            <Label text="Pdf existants:" />
             <ChoiceBox fx:id="pdfChoiceBox" value=""/>
         </HBox>
     </HBox>
