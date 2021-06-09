@@ -10,8 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import sample.gui.Utils.FileOpener;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
@@ -42,6 +44,7 @@ public class ArborescenceController extends BaseController {
     @FXML private Menu menuFichier;
     @FXML private MenuItem menuFichierQuitter;
     @FXML private MenuItem menuFichierNouveau;
+    @FXML private MenuItem menuFichierImporter;
 
     // Attributs
     private HashMap<Integer, List<Module>> modules;
@@ -81,6 +84,16 @@ public class ArborescenceController extends BaseController {
             }
         });
 
+        menuFichierImporter.setOnAction((event) -> {
+            FileOpener fileOpener = new FileOpener(getStage());
+            try {
+                File f = fileOpener.getBook7();
+                updateView();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
        updateView();
 
     }
@@ -116,10 +129,16 @@ public class ArborescenceController extends BaseController {
 
             for (int i = 0; i < liste_r.length; i++) {
                 m_semestre = p_semestre.matcher(liste_r[i]);
+
                 //On vérifie que le dossier ai un nom valide pour le traiter
-                if(m_semestre.matches()) {
+                if(m_semestre.matches() || liste_r[i].equals("import")) {
                     //Le cas échéant on récupère le numéro du dossier (semestreN on récupère N)
-                    Integer numero=Integer.parseInt(m_semestre.group(1));
+
+                    Integer numero= -1;
+
+                    if(!liste_r[i].equals("import")) {
+                        numero = Integer.parseInt(m_semestre.group(1));
+                    }
 
                     //On crée la liste et on la rempli de modules
                     List<Module> liste = new ArrayList<Module>();
@@ -163,7 +182,11 @@ public class ArborescenceController extends BaseController {
             // Creation de la TitledPane
             TitledPane semestreTitledPane = new TitledPane();
             semestreTitledPane.getStyleClass().add("titled-pane");
-            semestreTitledPane.setText("Semestre " + key);
+            if(key == -1) {
+                semestreTitledPane.setText("Import");
+            } else {
+                semestreTitledPane.setText("Semestre " + key);
+            }
             semestreTitledPane.setExpanded(false);
 
             // Les modules sont ajoutés dans une VBox
