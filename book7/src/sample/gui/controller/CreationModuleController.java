@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class CreationModuleController extends BaseController {
     public static Double MODULE_WIDTH = 300.0;
-    public static Double MODULE_HEIGHT = 100.0;
+    public static Double MODULE_HEIGHT = 150.0;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
     private ArborescenceController arborescenceController;
 
@@ -32,7 +32,6 @@ public class CreationModuleController extends BaseController {
 
     public CreationModuleController(Stage stage, ArborescenceController arborescenceController){
         super(stage);
-
         this.arborescenceController = arborescenceController;
     }
 
@@ -41,7 +40,7 @@ public class CreationModuleController extends BaseController {
         for (int i=1; i< Constantes.SEMESTRE_MAX; i++){
             semestre_choicebox.getItems().add("Semestre "+Integer.toString(i));
         }
-
+        creer_button.getStyleClass().add("creer_bouton");
         creer_button.setOnAction((event) -> {
             if(creerModule()) {
                 arborescenceController.updateView();
@@ -50,7 +49,8 @@ public class CreationModuleController extends BaseController {
         });
         semestre_choicebox.setOnAction((event) -> {
             semestre_choicebox.getStyleClass().remove("error");
-            message_erreur.setText("");});
+            message_erreur.setText("");}
+        );
     }
 
     private boolean creerModule(){
@@ -71,7 +71,6 @@ public class CreationModuleController extends BaseController {
                 ModuleWriter mw = new ModuleWriter();
                 return mw.ecrire(new Module(nom_module, semestre));
             }
-
         }
         return false;
     }
