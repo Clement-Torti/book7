@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="rootVbox"
+      id="/vuePDFSelection.css"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
+
+    <HBox fx:id="selection_page">
+        <Label fx:id="labelChoicebox" text="Page à importer :" />
+        <ChoiceBox fx:id="pageChoicebox" value=""/>
+    </HBox>
+
+    <VBox fx:id="apercuPage">
+        <Label fx:id="labelApercu" text="Aperçu :"/>
+        <HBox fx:id="conteneurImage"/>
+    </VBox>
+
+    <HBox>
+        <Button fx:id="boutonAnnuler" text="Annuler"/>
+        <Button fx:id="boutonAjouter" text="Ajouter diapo"/>
+    </HBox>
+</VBox>

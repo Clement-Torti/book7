@@ -14,7 +14,9 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.gui.Utils.FileOpener;
+import sample.gui.controller.BaseController;
 import sample.gui.controller.ModuleController;
+import sample.gui.controller.PDFSelectionController;
 import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
@@ -22,6 +24,7 @@ import sample.model.Constantes;
 import sample.model.Contenu.Contenu;
 
 import sample.model.Contenu.ImageBook7;
+import sample.model.Contenu.PDF;
 import sample.model.Contenu.TextZone;
 import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
@@ -53,11 +56,14 @@ public class PageView extends BorderPane implements IObservateur {
     private String nomModule;
     private Section section;
     private Toolbox toolbox;
+    private BaseController baseController;
 
     // Constructeur
-    public PageView(FileOpener fileOpener) {
+    public PageView(FileOpener fileOpener, BaseController controller) {
         super();
         this.fileOpener = fileOpener;
+        this.baseController = controller;
+
         // CSS
         getStylesheets().add("vuePage.css");
         setId("mainVue");
@@ -173,17 +179,52 @@ public class PageView extends BorderPane implements IObservateur {
         Button addImage = new Button();
         addImage.setText("Ajout image");
         addImage.setOnAction((event) -> {
-            File f = fileOpener.getFile();
+            try {
+                File f = fileOpener.getImage();
 
-            if(f != null) {
-                ImageBook7 imageBook7 = new ImageBook7(f.getAbsoluteFile().toURI());
-                page.appendContenu(imageBook7);
-                updateView();
+                if(f != null) {
+                    ImageBook7 imageBook7 = new ImageBook7(Constantes.IMAGE_ROOT_FOLDER_NAME + "/" + f.getName());
+                    page.appendContenu(imageBook7);
+                    updateView();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        });
+        footerBox.getChildren().add(addImage);
+
+        Button addPDF = new Button("ajout PDF");
+        addPDF.setOnAction((event) -> {
+                try {
+
+
+                    File file = fileOpener.getPdf();
+                    PDF pdf = new PDF(Constantes.PDF_ROOT_FOLDER_NAME + "/" + file.getName());
+                    PDFSelectionController contr = new PDFSelectionController(this.baseController.getStage(), pdf);
+                    this.baseController.openStage("gui/view/vuePDFSelection.fxml", contr, 400.0, 800.0, "Selection PDF", false);
+
+                    if(contr.getImageChosen()) {
+                        System.out.println(contr.getCurrentImage().getRelativePath());
+
+                        Contenu contenu = contr.getCurrentImage();
+                        page.appendContenu(contenu);
+                        ContenuView cv = FabriqueContenuView.fabriquerContenuView(contenu);
+                        contenuBox.getChildren().add(cv.afficher());
+
+                        TextZone tz = new TextZone();
+                        cv = FabriqueContenuView.fabriquerContenuView(tz);
+                        contenuBox.getChildren().add(cv.afficher());
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
 
         });
-        footerBox.getChildren().add(addImage);
+
+        footerBox.getChildren().add(addPDF);
 
         Label pageLabel = new Label();
         pageLabel.setText("" + index);

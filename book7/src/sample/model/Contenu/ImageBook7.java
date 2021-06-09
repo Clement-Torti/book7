@@ -16,9 +16,15 @@ public class ImageBook7 extends Media implements Serializable {
     // Attributs
 
     // Constructeurs
-    public ImageBook7(URI uri) {
-        super(uri);
+    public ImageBook7(String relativePath, String alt) {
+        super(relativePath, alt);
     }
+
+    public ImageBook7(String relativePath) {
+        super(relativePath);
+    }
+
+
 
     // Methodes
 }

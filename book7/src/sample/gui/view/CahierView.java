@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import sample.gui.Utils.FileOpener;
+import sample.gui.controller.BaseController;
 import sample.model.Cahier;
 import sample.model.Toolbox;
 import sample.model.Page;
@@ -27,11 +28,11 @@ public class CahierView extends HBox {
 
 
     // Constructeur
-    public CahierView(FileOpener fileOpener) {
+    public CahierView(FileOpener fileOpener, BaseController controller) {
 
         // Ajout des 2 pages
-        leftPage = new PageView(fileOpener);
-        rightPage = new PageView(fileOpener);
+        leftPage = new PageView(fileOpener, controller);
+        rightPage = new PageView(fileOpener, controller);
 
         setMargin(leftPage, new Insets(0, 10, 10, 10));
         setMargin(rightPage, new Insets(0, 0, 10, 0));

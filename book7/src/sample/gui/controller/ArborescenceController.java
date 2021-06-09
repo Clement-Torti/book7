@@ -12,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import sample.Main;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
@@ -100,7 +99,7 @@ public class ArborescenceController extends BaseController {
             Matcher m_semestre, m_fichier;
 
             //Chemin absolu du dossier où sont les fichiers
-            String path=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME;
+            String path = Utils.getRacineProjet() + "/" + Constantes.SAVE_ROOT_FOLDER_NAME;
 
             root = new File(path);
             //On vérifie si le dossier existe, sinon on le crée

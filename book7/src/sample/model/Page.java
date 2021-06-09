@@ -1,5 +1,6 @@
 package sample.model;
 
+import sample.gui.controller.ModuleController;
 import sample.model.Contenu.Contenu;
 import sample.model.Observateur.Observable;
 
@@ -31,6 +32,7 @@ public class Page extends Observable implements Serializable {
     public void appendContenu(Contenu contenu) {
         notifier(null);
         contenus.add(contenu);
+        ModuleController.forcerSauvegarde();
     }
 
 }

@@ -53,7 +53,7 @@ public class ModuleController extends BaseController {
         toolbox = toolBoxView.getToolbox();
         // Cahier View
         fileOpener = new FileOpener(getStage());
-        currentCahier = new CahierView(fileOpener);
+        currentCahier = new CahierView(fileOpener, this);
         root.setCenter(currentCahier);
 
         updateView();

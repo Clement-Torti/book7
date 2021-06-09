@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleWriter;
+import sample.model.Utils;
 
 import java.io.File;
-import java.io.IOException;
 
 public class CreationModuleController extends BaseController {
     public static Double MODULE_WIDTH = 300.0;
@@ -77,7 +77,7 @@ public class CreationModuleController extends BaseController {
     }
 
     boolean moduleExiste(String nom, int semestre){
-        String chemin=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/"+Module.calculerChemin(nom, semestre);
+        String chemin = Utils.getRacineProjet() + "/" + Constantes.SAVE_ROOT_FOLDER_NAME + "/" + Module.calculerChemin(nom, semestre);
         File fichier=new File(chemin);
         if(fichier.exists() && fichier.isFile())
             return true;

@@ -2,6 +2,7 @@ package sample.model.Persistence;
 
 import sample.model.Constantes;
 import sample.model.Module;
+import sample.model.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +28,7 @@ public class ModuleWriter {
 
     public boolean ecrire(Module module) {
         try {
-            String root= System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/";
+            String root= Utils.getRacineProjet() +"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/";
             String chemin_semestre = root + Constantes.SEMESTRE_NAME + Integer.toString(module.getSemestre());
             String chemin = root+module.getChemin();
 

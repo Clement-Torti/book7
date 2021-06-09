@@ -5,7 +5,7 @@ import java.io.*;
 public class Utils {
     public static void supprimerModule(Module module) {
         // Chemin absolu du dossier où se trouve le module
-        String path=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME+"/";
+        String path= Utils.getRacineProjet() + "/" + Constantes.SAVE_ROOT_FOLDER_NAME + "/";
         // Sélectionner le fichier
         File file = new File(path + module.getChemin());
         // Supprimer le fichier
@@ -41,5 +41,9 @@ public class Utils {
             in.close();
             out.close();
         }
+    }
+
+    public static String getRacineProjet() {
+        return System.getProperty("user.dir");
     }
 }
