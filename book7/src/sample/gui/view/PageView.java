@@ -203,7 +203,7 @@ public class PageView extends BorderPane implements IObservateur {
                         contenuBox.getChildren().add(getDefaultContenuView(contenu, false));
 
                         TextZone tz = new TextZone();
-                        contenuBox.getChildren().add(getDefaultContenuView(contenu, false));
+                        contenuBox.getChildren().add(getDefaultContenuView(tz, false));
 
                     }
                 } catch (IOException e) {
@@ -264,7 +264,7 @@ public class PageView extends BorderPane implements IObservateur {
         boutonFermer.setGraphic(iconBoutonFermer);
 
         boutonFermer.setOnAction((event) -> {
-            page.getContenus().remove(c);
+            page.removeContenu(c);
             updateView();
         });
         contenuHBox.getChildren().add(boutonFermer);

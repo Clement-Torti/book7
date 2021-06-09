@@ -35,4 +35,10 @@ public class Page extends Observable implements Serializable {
         ModuleController.forcerSauvegarde();
     }
 
+    public void removeContenu(Contenu c) {
+        if(contenus.remove(c)) {
+            ModuleController.forcerSauvegarde();
+        }
+    }
+
 }
