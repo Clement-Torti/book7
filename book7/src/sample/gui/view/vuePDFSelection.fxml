@@ -8,6 +8,14 @@
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml">
 
+    <HBox>
+        <HBox>
+            <Button onAction="#newPdf" text="Nouveau pdf"/>
+            <Label text="Pdf existant:" />
+            <ChoiceBox fx:id="pdfChoiceBox" value=""/>
+        </HBox>
+    </HBox>
+
     <HBox fx:id="selection_page">
         <Label fx:id="labelChoicebox" text="Page à importer :" />
         <ChoiceBox fx:id="pageChoicebox" value=""/>

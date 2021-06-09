@@ -56,10 +56,14 @@ public class FileOpener {
         fileChooser.setTitle(title);
         File f = fileChooser.showOpenDialog(stage);
 
+        if (f == null) {
+            return null;
+        }
+
         File output = new File(Utils.getRacineProjet() + "/" + folder + "/" + f.getName());
         FileUtils.copyFile(f, output);
 
-        return f;
+        return output;
     }
 
 }

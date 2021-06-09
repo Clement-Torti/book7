@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.image.*;
@@ -55,6 +57,10 @@ public class PDF extends Media implements Serializable {
         return nbPages;
     }
 
+    public String getNomFichier() {
+        return nomFichier;
+    }
+
 
     // Methodes
     public ImageBook7 getImageBook7(int i) throws IOException {
@@ -78,6 +84,10 @@ public class PDF extends Media implements Serializable {
     }
 
     private String getRelativePath(int page, String extension){
-        return (Constantes.SLIDES_ROOT_FOLDER_NAME+ "/" + this.nomFichier + "_" + page + extension);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_HH_mm_ss");
+        Date date = new Date();
+        String dateStr = formatter.format(date);
+
+        return (Constantes.SLIDES_ROOT_FOLDER_NAME+ "/" + this.nomFichier + "_" + dateStr + "_" + page + extension);
     }
 }
