@@ -143,15 +143,15 @@ public class TextAreaView extends ContenuView{
 
                 break;
             case SOULIGNER:
-                value = "none";
+                value = "false";
 
                 if(toolBox.getSoulignement()) {
-                    value = "underline";
+                    value = "true";
                 }
 
                 if(start != stop) {
                     System.out.println(value);
-                    setStyle(start, stop, "-fx-text-decoration", value);
+                    setStyle(start, stop, "-fx-underline", value);
                 }
 
                 break;

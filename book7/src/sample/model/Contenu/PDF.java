@@ -38,8 +38,6 @@ public class PDF extends Media implements Serializable {
 
         this.nbPages = doc.getNumberOfPages();
 
-        System.out.println("ICI 0");
-        System.out.println(relativePath);
         Pattern pattern = Pattern.compile(".*/([^/]+)\\.pdf$");
 
         Matcher matcher = pattern.matcher(relativePath);

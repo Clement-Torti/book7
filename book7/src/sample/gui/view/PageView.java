@@ -233,15 +233,18 @@ public class PageView extends BorderPane implements IObservateur {
 
     @Override
     public void update(Observable obs, Object o) {
-        Toolbox toolBox = (Toolbox) obs;
-        Toolbox.ToolboxUpdate update = (Toolbox.ToolboxUpdate) o;
+        if(obs instanceof Toolbox) {
+            Toolbox toolBox = (Toolbox) obs;
+            Toolbox.ToolboxUpdate update = (Toolbox.ToolboxUpdate) o;
 
-        if (update == Toolbox.ToolboxUpdate.MOTIF) {
-            String value = toolBox.getMotif();
-            scrollPaneVBox.getStyleClass().setAll("fond" + value);
-        } else {
-            System.out.println();
+            if (update == Toolbox.ToolboxUpdate.MOTIF) {
+                String value = toolBox.getMotif();
+                scrollPaneVBox.getStyleClass().setAll("fond" + value);
+            } else {
+                System.out.println();
+            }
         }
+
         // A l'ajout d'un contenu, sauvegarder
         ModuleController.forcerSauvegarde();
     }
