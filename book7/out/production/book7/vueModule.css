@@ -127,3 +127,14 @@
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
+
+#hbox_motif {
+    -fx-alignment: center;
+}
+
+.motif {
+    -fx-padding: 0;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-background-repeat: repeat;
+}
