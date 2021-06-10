@@ -3,31 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="rootVbox"
-      id="/vuePDFSelection.css"
+<VBox
+      stylesheets="/vuePDFSelection.css"
       xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml">
+      xmlns:fx="http://javafx.com/fxml"
+            id="mainVue"
+        >
+    <ScrollPane id="scrollPane">
 
-    <HBox>
-        <HBox>
-            <Button onAction="#newPdf" text="Nouveau pdf"/>
-            <Label text="Pdf existants:" />
-            <ChoiceBox fx:id="pdfChoiceBox" value=""/>
-        </HBox>
-    </HBox>
+        <VBox spacing="20">
+            <HBox spacing="10">
+                <Label text="Choix du PDF:" />
+                <ComboBox fx:id="pdfChoiceBox" value=""/>
+                <Button onAction="#newPdf" text="Nouveau"/>
+            </HBox>
 
-    <HBox fx:id="selection_page">
-        <Label fx:id="labelChoicebox" text="Page à importer :" />
-        <ChoiceBox fx:id="pageChoicebox" value=""/>
-    </HBox>
+            <HBox fx:id="selection_page" spacing="10">
+                <Label fx:id="labelChoicebox" text="Page à importer :" />
+                <ComboBox fx:id="pageChoicebox" value=""/>
+            </HBox>
 
-    <VBox fx:id="apercuPage">
-        <Label fx:id="labelApercu" text="Aperçu :"/>
-        <HBox fx:id="conteneurImage"/>
-    </VBox>
+            <HBox fx:id="conteneurImage" alignment="CENTER"/>
 
-    <HBox>
-        <Button fx:id="boutonAnnuler" text="Annuler"/>
-        <Button fx:id="boutonAjouter" text="Ajouter diapo"/>
-    </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="boutonAnnuler" text="Annuler"/>
+                <Button fx:id="boutonAjouter" text="Insérer"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
 </VBox>

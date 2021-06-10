@@ -215,7 +215,7 @@ public class PageView extends BorderPane implements IObservateur {
         addPDF.setOnAction((event) -> {
                 try {
                     PDFSelectionController contr = new PDFSelectionController(this.baseController.getStage(), fileOpener);
-                    this.baseController.openStage("gui/view/vuePDFSelection.fxml", contr, 400.0, 800.0, "Selection PDF", false);
+                    this.baseController.openStage("gui/view/vuePDFSelection.fxml", contr, 500.0, 500.0, "Selection PDF", false);
 
                     if(contr.getImageChosen()) {
                         System.out.println(contr.getCurrentImage().getRelativePath());

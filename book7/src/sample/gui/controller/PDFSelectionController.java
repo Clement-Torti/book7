@@ -1,14 +1,17 @@
 package sample.gui.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import sample.gui.Utils.FileOpener;
+import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
 import sample.gui.view.ContenuView.ImageContenuView;
 import sample.model.Constantes;
@@ -23,8 +26,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class PDFSelectionController extends BaseController {
-    @FXML private ChoiceBox pdfChoiceBox;
-    @FXML private ChoiceBox pageChoicebox;
+    @FXML private ComboBox<String> pdfChoiceBox;
+    @FXML private ComboBox<Integer> pageChoicebox;
     @FXML private HBox conteneurImage;
     @FXML private Button boutonAnnuler;
     @FXML private Button boutonAjouter;
@@ -50,6 +53,7 @@ public class PDFSelectionController extends BaseController {
     // FXML Actions
     @FXML
     private void initialize() {
+        pdfChoiceBox.se
         // Choix du pdf
         for(PDF pdf: pdfs) {
             pdfChoiceBox.getItems().add(pdf.getNomFichier());
@@ -74,7 +78,9 @@ public class PDFSelectionController extends BaseController {
 
                 this.conteneurImage.getChildren().clear();
                 this.currentImage = this.pdf.getImageBook7((Integer) pageChoicebox.getValue());
-                this.conteneurImage.getChildren().add(FabriqueContenuView.fabriquerContenuView(currentImage).afficher());
+                Node node = FabriqueContenuView.fabriquerContenuView(currentImage).afficher();
+                node.getStyleClass().add("imageView");
+                this.conteneurImage.getChildren().add(node);
                 this.containImage = true;
             } catch (IOException e) {
                 e.printStackTrace();
