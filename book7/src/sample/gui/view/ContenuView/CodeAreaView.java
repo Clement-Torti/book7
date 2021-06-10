@@ -27,4 +27,8 @@ public class CodeAreaView extends TextAreaView {
     public void update(Observable obs, Object o) {
     }
 
+    @Override
+    protected double getMaxFontSize() {
+        return 10;
+    }
 }

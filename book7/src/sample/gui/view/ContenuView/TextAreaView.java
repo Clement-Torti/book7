@@ -260,7 +260,7 @@ public class TextAreaView extends ContenuView{
     }
 
 
-    private double getMaxFontSize() {
+    protected double getMaxFontSize() {
         double maxFontSize = 0;
 
         StyleSpans stylesSpans = textArea.getStyleSpans(0, textArea.getLength());
@@ -291,4 +291,5 @@ public class TextAreaView extends ContenuView{
 
         return maxFontSize;
     }
+
 }
