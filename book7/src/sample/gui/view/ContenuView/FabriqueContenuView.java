@@ -7,7 +7,9 @@ import sample.model.Contenu.*;
 //
 public class FabriqueContenuView {
     public static ContenuView fabriquerContenuView(Contenu contenu) {
-        if (contenu instanceof TextZone) {
+        if(contenu instanceof CodeZone) {
+            return new CodeAreaView(contenu);
+        } else if (contenu instanceof TextZone) {
             return new TextAreaView(contenu);
         } else if(contenu instanceof Forme) {
             return new FormeView(contenu);

@@ -81,6 +81,7 @@
     -fx-effect: dropshadow(three-pass-box, black, 5, 0.0, 0, 1);
 }
 
+
 #nomCahierLabel {
     -fx-font-style: italic;
     -fx-font-size: 10px;
@@ -94,4 +95,20 @@
 .bouton_supprimer {
     -fx-border-style: none;
     -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-margin: 0;
+}
+
+.footer_bouton_style{
+    -fx-border-color: -grey1-;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 5;
+    -fx-background-insets: 1;
+    -fx-background-radius: 12;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
+}
+
+.codeAreaView {
+    -fx-background-color: rgb(60, 60, 60);
 }

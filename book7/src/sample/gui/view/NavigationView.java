@@ -15,6 +15,7 @@ import java.io.IOException;
 public class NavigationView extends HBox {
     // Attributs
     private ModuleController moduleController;
+    private Integer buttonSize = 15;
 
     public NavigationView() {
         super();
@@ -40,7 +41,7 @@ public class NavigationView extends HBox {
         boutonGauche.getStyleClass().add("bouton_navigation");
         ImageView iconBoutonGauche = new ImageView("/icon-arrow-left.png");
         iconBoutonGauche.setPreserveRatio(true);
-        iconBoutonGauche.setFitWidth(20);
+        iconBoutonGauche.setFitWidth(buttonSize);
         iconBoutonGauche.setEffect(couleurBlanche);
         boutonGauche.setGraphic(iconBoutonGauche);
         boutonGauche.setOnAction((event) -> {
@@ -51,7 +52,7 @@ public class NavigationView extends HBox {
         boutonDroite.getStyleClass().add("bouton_navigation");
         ImageView iconBoutonDroite = new ImageView("/icon-arrow-right.png");
         iconBoutonDroite.setPreserveRatio(true);
-        iconBoutonDroite.setFitWidth(20);
+        iconBoutonDroite.setFitWidth(buttonSize);
         iconBoutonDroite.setEffect(couleurBlanche);
         boutonDroite.setGraphic(iconBoutonDroite);
         boutonDroite.setOnAction((event) -> {
@@ -91,7 +92,7 @@ public class NavigationView extends HBox {
         boutonFermer.getStyleClass().add("bouton_fermer");
         ImageView iconBoutonFermer = new ImageView("/icon-close.png");
         iconBoutonFermer.setPreserveRatio(true);
-        iconBoutonFermer.setFitWidth(20);
+        iconBoutonFermer.setFitWidth(buttonSize);
         iconBoutonFermer.setEffect(couleurBlanche);
         boutonFermer.setGraphic(iconBoutonFermer);
         boutonFermer.setOnAction((event) -> {

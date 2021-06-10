@@ -18,15 +18,10 @@ import sample.gui.Utils.FileOpener;
 import sample.gui.controller.BaseController;
 import sample.gui.controller.ModuleController;
 import sample.gui.controller.PDFSelectionController;
-import sample.gui.view.ContenuView.ContenuView;
-import sample.gui.view.ContenuView.FabriqueContenuView;
-import sample.gui.view.ContenuView.ImageContenuView;
+import sample.gui.view.ContenuView.*;
 import sample.model.Constantes;
-import sample.model.Contenu.Contenu;
+import sample.model.Contenu.*;
 
-import sample.model.Contenu.ImageBook7;
-import sample.model.Contenu.PDF;
-import sample.model.Contenu.TextZone;
 import sample.model.Enums.Section;
 import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
@@ -173,7 +168,13 @@ public class PageView extends BorderPane implements IObservateur {
 
         // Ajout d'une image
         Button addImage = new Button();
-        addImage.setText("Ajout image");
+        addImage.setPrefWidth(50);
+        addImage.setPrefHeight(20);
+        ImageView iconImage = new ImageView("/icon-image.png");
+        iconImage.setPreserveRatio(true);
+        iconImage.setFitHeight(15);
+        addImage.setGraphic(iconImage);
+        addImage.getStyleClass().add("footer_bouton_style");
         addImage.setOnAction((event) -> {
             try {
                 File f = fileOpener.getImage();
@@ -189,7 +190,15 @@ public class PageView extends BorderPane implements IObservateur {
         });
         footerBox.getChildren().add(addImage);
 
-        Button addPDF = new Button("ajout PDF");
+        // PDF Button
+        Button addPDF = new Button();
+        addPDF.setPrefWidth(50);
+        addPDF.setPrefHeight(20);
+        ImageView iconPdf = new ImageView("/icon-pdf.png");
+        iconPdf.setPreserveRatio(true);
+        iconPdf.setFitHeight(13);
+        addPDF.setGraphic(iconPdf);
+        addPDF.getStyleClass().add("footer_bouton_style");
         addPDF.setOnAction((event) -> {
                 try {
                     PDFSelectionController contr = new PDFSelectionController(this.baseController.getStage(), fileOpener);
@@ -209,12 +218,29 @@ public class PageView extends BorderPane implements IObservateur {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
-
         });
 
         footerBox.getChildren().add(addPDF);
+
+        // Code
+        Button codeButton = new Button();
+        codeButton.setPrefWidth(50);
+        codeButton.setPrefHeight(20);
+        ImageView iconCode = new ImageView("/icon-code.png");
+        iconCode.setPreserveRatio(true);
+        iconCode.setFitHeight(13);
+        codeButton.setGraphic(iconCode);
+        codeButton.getStyleClass().add("footer_bouton_style");
+        codeButton.setOnAction((event) ->{
+            CodeZone cz = new CodeZone();
+            page.getContenus().add(cz);
+            contenuBox.getChildren().add(getDefaultContenuView(cz, false));
+
+            TextZone tz = new TextZone();
+            page.getContenus().add(tz);
+            contenuBox.getChildren().add(getDefaultContenuView(tz, true));
+        });
+        footerBox.getChildren().add(codeButton);
 
         Label pageLabel = new Label();
         pageLabel.setText("" + index);

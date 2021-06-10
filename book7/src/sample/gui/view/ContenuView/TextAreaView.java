@@ -23,7 +23,7 @@ import java.util.List;
 //
 public class TextAreaView extends ContenuView{
     // Attributs
-    private InlineCssTextArea textArea = new InlineCssTextArea();
+    protected InlineCssTextArea textArea = new InlineCssTextArea();
     private Text textHolder = new Text();
     private double oldHeight = 0;
 
@@ -174,12 +174,11 @@ public class TextAreaView extends ContenuView{
             case ALIGNEMENT:
                 break;
             default:
-                System.out.println("Unknown update");
         }
     }
 
 
-    private void setStyle(int start, int stop, String key, String value) {
+    protected void setStyle(int start, int stop, String key, String value) {
         StyleSpans styleSpans = textArea.getStyleSpans(start, stop);
 
         int nbSpan = styleSpans.getSpanCount();

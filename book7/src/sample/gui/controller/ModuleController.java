@@ -118,6 +118,7 @@ public class ModuleController extends BaseController {
     }
 
     public void fermerFenetre() {
+        forcerSauvegarde();
         getStage().close();
     }
 }

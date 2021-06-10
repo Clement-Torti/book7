@@ -17,6 +17,7 @@ import java.util.List;
 public class ToolBoxView extends VBox {
     // Attributs
     private Toolbox toolbox;
+    private Integer buttonSize = 15;
     // Outlets
 
 
@@ -45,7 +46,7 @@ public class ToolBoxView extends VBox {
         Button motifGCButton = new Button();
         ImageView iconGC = new ImageView("/icon-big-grid.png");
         iconGC.setPreserveRatio(true);
-        iconGC.setFitHeight(20);
+        iconGC.setFitHeight(buttonSize);
         motifGCButton.setGraphic(iconGC);
         motifGCButton.getStyleClass().add("bouton_style");
         motifGCButton.getStyleClass().add("motif");
@@ -58,7 +59,7 @@ public class ToolBoxView extends VBox {
         Button motifPCButton = new Button();
         ImageView iconPC = new ImageView("/icon-small-grid.png");
         iconPC.setPreserveRatio(true);
-        iconPC.setFitHeight(20);
+        iconPC.setFitHeight(buttonSize);
         motifPCButton.setGraphic(iconPC);
         motifPCButton.getStyleClass().add("bouton_style");
         motifPCButton.getStyleClass().add("motif");
@@ -71,7 +72,7 @@ public class ToolBoxView extends VBox {
         Button motifPointsButton = new Button();
         ImageView iconPoints = new ImageView("/icon-points-grid.png");
         iconPoints.setPreserveRatio(true);
-        iconPoints.setFitHeight(20);
+        iconPoints.setFitHeight(buttonSize);
         motifPointsButton.setGraphic(iconPoints);
         motifPointsButton.getStyleClass().add("bouton_style");
         motifPointsButton.getStyleClass().add("motif");
@@ -166,7 +167,7 @@ public class ToolBoxView extends VBox {
         Button gaucheButton = new Button();
         ImageView iconGauche = new ImageView("/icon-align-left.png");
         iconGauche.setPreserveRatio(true);
-        iconGauche.setFitHeight(20);
+        iconGauche.setFitHeight(buttonSize);
         gaucheButton.setGraphic(iconGauche);
         gaucheButton.getStyleClass().add("bouton_style");
         gaucheButton.setOnAction((event) ->{
@@ -177,7 +178,7 @@ public class ToolBoxView extends VBox {
         Button centreButton = new Button();
         ImageView iconCentre = new ImageView("/icon-align-center.png");
         iconCentre.setPreserveRatio(true);
-        iconCentre.setFitHeight(20);
+        iconCentre.setFitHeight(buttonSize);
         centreButton.setGraphic(iconCentre);
         centreButton.getStyleClass().add("bouton_style");
         centreButton.setOnAction((event) ->{
@@ -188,7 +189,7 @@ public class ToolBoxView extends VBox {
         Button droitButton = new Button();
         ImageView iconDroit = new ImageView("/icon-align-right.png");
         iconDroit.setPreserveRatio(true);
-        iconDroit.setFitHeight(20);
+        iconDroit.setFitHeight(buttonSize);
         droitButton.setGraphic(iconDroit);
         droitButton.getStyleClass().add("bouton_style");
         droitButton.setOnAction((event) ->{
@@ -202,7 +203,7 @@ public class ToolBoxView extends VBox {
         Button grasButton = new Button();
         ImageView iconGras = new ImageView("/icon-bold.png");
         iconGras.setPreserveRatio(true);
-        iconGras.setFitHeight(20);
+        iconGras.setFitHeight(buttonSize);
         grasButton.setGraphic(iconGras);
         grasButton.getStyleClass().add("bouton_style");
         grasButton.setOnAction((event) ->{
@@ -214,7 +215,7 @@ public class ToolBoxView extends VBox {
         Button italiqueButton = new Button();
         ImageView iconItalique = new ImageView("/icon-talic.png");
         iconItalique.setPreserveRatio(true);
-        iconItalique.setFitHeight(20);
+        iconItalique.setFitHeight(buttonSize);
         italiqueButton.setGraphic(iconItalique);
         italiqueButton.getStyleClass().add("bouton_style");
         italiqueButton.setOnAction((event) ->{
@@ -226,7 +227,7 @@ public class ToolBoxView extends VBox {
         Button soulignementButton = new Button();
         ImageView iconSoulignement = new ImageView("/icon-underline.png");
         iconSoulignement.setPreserveRatio(true);
-        iconSoulignement.setFitHeight(20);
+        iconSoulignement.setFitHeight(buttonSize);
         soulignementButton.setGraphic(iconSoulignement);
         soulignementButton.getStyleClass().add("bouton_style");
         soulignementButton.setOnAction((event) ->{
@@ -234,17 +235,7 @@ public class ToolBoxView extends VBox {
         });
         boutonPanel.getChildren().add(soulignementButton);
 
-        // Code
-        Button codeButton = new Button();
-        ImageView iconCode = new ImageView("/icon-code.png");
-        iconCode.setPreserveRatio(true);
-        iconCode.setFitHeight(20);
-        codeButton.setGraphic(iconCode);
-        codeButton.getStyleClass().add("bouton_style");
-        codeButton.setOnAction((event) ->{
-            ////XXX////
-        });
-        boutonPanel.getChildren().add(codeButton);
+
 
         // Ajout de la liste à la ToolBoxView
         getChildren().add(boutonPanel);
