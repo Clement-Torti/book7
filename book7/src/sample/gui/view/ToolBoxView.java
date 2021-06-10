@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sample.model.Toolbox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToolBoxView extends VBox {
@@ -35,11 +36,12 @@ public class ToolBoxView extends VBox {
          */
         // Hbox des motifs
         HBox hboxMotif = new HBox();
+        hboxMotif.setSpacing(5);
         hboxMotif.setId("hbox_motif");
 
         Text motifTexte = new Text();
         motifTexte.setFont(new Font(16));
-        motifTexte.setText("Motifs");
+        motifTexte.setText("Fonds");
         getChildren().add(motifTexte);
 
         //Bouton motif grands carreaux
@@ -48,7 +50,7 @@ public class ToolBoxView extends VBox {
         iconGC.setPreserveRatio(true);
         iconGC.setFitHeight(buttonSize);
         motifGCButton.setGraphic(iconGC);
-        motifGCButton.getStyleClass().add("bouton_style");
+        motifGCButton.getStyleClass().add("bouton_style_motif");
         motifGCButton.getStyleClass().add("motif");
         motifGCButton.setOnAction((event) ->{
             toolbox.setMotif("GrandCarreaux");
@@ -61,7 +63,7 @@ public class ToolBoxView extends VBox {
         iconPC.setPreserveRatio(true);
         iconPC.setFitHeight(buttonSize);
         motifPCButton.setGraphic(iconPC);
-        motifPCButton.getStyleClass().add("bouton_style");
+        motifPCButton.getStyleClass().add("bouton_style_motif");
         motifPCButton.getStyleClass().add("motif");
         motifPCButton.setOnAction((event) ->{
             toolbox.setMotif("PetitCarreaux");
@@ -74,7 +76,7 @@ public class ToolBoxView extends VBox {
         iconPoints.setPreserveRatio(true);
         iconPoints.setFitHeight(buttonSize);
         motifPointsButton.setGraphic(iconPoints);
-        motifPointsButton.getStyleClass().add("bouton_style");
+        motifPointsButton.getStyleClass().add("bouton_style_motif");
         motifPointsButton.getStyleClass().add("motif");
         motifPointsButton.setOnAction((event) ->{
             toolbox.setMotif("Points");
@@ -83,7 +85,7 @@ public class ToolBoxView extends VBox {
 
         //Bouton motif page blanche
         Button motifRienButton = new Button();
-        motifRienButton.getStyleClass().add("bouton_style");
+        motifRienButton.getStyleClass().add("bouton_style_motif");
         motifRienButton.getStyleClass().add("motif");
         motifRienButton.setOnAction((event) ->{
             toolbox.setMotif("Vide");
@@ -107,15 +109,25 @@ public class ToolBoxView extends VBox {
         Color[] listeCouleurs = {
                 Color.RED, Color.BLUE, Color.GREEN,
                 Color.BLACK, Color.CADETBLUE, Color.TOMATO,
-                Color.GHOSTWHITE, Color.VIOLET, Color.TURQUOISE,
-                Color.PINK, Color.ORANGE, Color.LEMONCHIFFON
-        };
-        for (Color couleur : listeCouleurs){
-            Button couleurBouton = new Button();
-//            couleurBouton.setText();
+                Color.GHOSTWHITE, Color.VIOLET, Color.TURQUOISE};
+
+        List<Button> couleurButtons = new ArrayList<>();
+        for (Color couleur : listeCouleurs) {
+            couleurButtons.add(new Button());
+        }
+
+        for (int i=0; i<listeCouleurs.length; i++){
+            Color couleur = listeCouleurs[i];
+            Button couleurBouton = couleurButtons.get(i);
+
             couleurBouton.getStyleClass().add("bouton_couleur");
             couleurBouton.setStyle("-fx-background-color: #" + couleur.toString().substring(2, 8) + ";");
             couleurBouton.setOnAction((event) -> {
+                for(Button button: couleurButtons) {
+                    button.getStyleClass().remove("selected_button");
+                }
+
+                couleurBouton.getStyleClass().add("selected_button");
                 toolbox.setColor(couleur);
             });
             paletteCouleur.getChildren().add(couleurBouton);
@@ -125,6 +137,11 @@ public class ToolBoxView extends VBox {
         /*
             Police et taille de text
          */
+        Text texteTexte = new Text();
+        texteTexte.setFont(new Font(16));
+        texteTexte.setText("Texte");
+        getChildren().add(texteTexte);
+
         // policeTexte (Liste déroulante)
         List<String> fontFamilies = Font.getFamilies();
 
@@ -160,41 +177,6 @@ public class ToolBoxView extends VBox {
         FlowPane boutonPanel = new FlowPane();
         boutonPanel.getStyleClass().add("liste_boutons_style");
 
-        /*
-            Alignement
-         */
-        //Bouton alignement Gauche
-        Button gaucheButton = new Button();
-        ImageView iconGauche = new ImageView("/icon-align-left.png");
-        iconGauche.setPreserveRatio(true);
-        iconGauche.setFitHeight(buttonSize);
-        gaucheButton.setGraphic(iconGauche);
-        gaucheButton.getStyleClass().add("bouton_style");
-        gaucheButton.setOnAction((event) ->{
-        });
-        boutonPanel.getChildren().add(gaucheButton);
-
-        //Bouton alignement Centre
-        Button centreButton = new Button();
-        ImageView iconCentre = new ImageView("/icon-align-center.png");
-        iconCentre.setPreserveRatio(true);
-        iconCentre.setFitHeight(buttonSize);
-        centreButton.setGraphic(iconCentre);
-        centreButton.getStyleClass().add("bouton_style");
-        centreButton.setOnAction((event) ->{
-        });
-        boutonPanel.getChildren().add(centreButton);
-
-        //Bouton alignement Droit
-        Button droitButton = new Button();
-        ImageView iconDroit = new ImageView("/icon-align-right.png");
-        iconDroit.setPreserveRatio(true);
-        iconDroit.setFitHeight(buttonSize);
-        droitButton.setGraphic(iconDroit);
-        droitButton.getStyleClass().add("bouton_style");
-        droitButton.setOnAction((event) ->{
-        });
-        boutonPanel.getChildren().add(droitButton);
 
         /*
             Style de texte
@@ -208,6 +190,11 @@ public class ToolBoxView extends VBox {
         grasButton.getStyleClass().add("bouton_style");
         grasButton.setOnAction((event) ->{
             toolbox.flipGras();
+            if(toolbox.getGras()) {
+                grasButton.getStyleClass().add("selected_button");
+            } else {
+                grasButton.getStyleClass().remove("selected_button");
+            }
         });
         boutonPanel.getChildren().add(grasButton);
 
@@ -220,6 +207,11 @@ public class ToolBoxView extends VBox {
         italiqueButton.getStyleClass().add("bouton_style");
         italiqueButton.setOnAction((event) ->{
             toolbox.flipItalique();
+            if(toolbox.getItalique()) {
+                italiqueButton.getStyleClass().add("selected_button");
+            } else {
+                italiqueButton.getStyleClass().remove("selected_button");
+            }
         });
         boutonPanel.getChildren().add(italiqueButton);
 
@@ -232,6 +224,11 @@ public class ToolBoxView extends VBox {
         soulignementButton.getStyleClass().add("bouton_style");
         soulignementButton.setOnAction((event) ->{
             toolbox.flipSoulignement();
+            if(toolbox.getSoulignement()) {
+                soulignementButton.getStyleClass().add("selected_button");
+            } else {
+                soulignementButton.getStyleClass().remove("selected_button");
+            }
         });
         boutonPanel.getChildren().add(soulignementButton);
 

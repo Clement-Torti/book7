@@ -94,20 +94,24 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
 
+
+
 /* Liste déroulante */
 .liste_deroulante{
     /*-fx-max-width: 100%;*/
     -fx-min-width: 110;
-    -fx-padding: 0 10 0 10;
+    -fx-padding: 0 5 0 5;
     -fx-border-color: -blue-2;
     -fx-border-width: 1.5 ;
     -fx-border-radius: 10;
-    -fx-border-insets: 0 10 0 10;
-    -fx-background-insets: 0 10 0 10;
+    -fx-border-insets: 0 5 0 5;
+    -fx-background-insets: 0 5 0 5;
     -fx-background-radius: 10;
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
+
+
 
 .liste_boutons_style{
     -fx-padding: 10;
@@ -128,13 +132,30 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
 
+.bouton_style:hover, .bouton_style_motif:hover {
+    -fx-background-color: -grey-1;
+}
+
+.bouton_style_motif {
+    -fx-padding: 0;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-border-color: -blue-2;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 10;
+    -fx-background-insets: 1;
+    -fx-background-radius: 12;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
+}
+
 #hbox_motif {
     -fx-alignment: center;
 }
 
-.motif {
-    -fx-padding: 0;
-    -fx-pref-width: 40;
-    -fx-pref-height: 40;
-    -fx-background-repeat: repeat;
+.bouton_couleur: hover, .liste_deroulante:hover, .selected_button {
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
+
+

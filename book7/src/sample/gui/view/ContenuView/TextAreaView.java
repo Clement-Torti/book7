@@ -26,6 +26,10 @@ public class TextAreaView extends ContenuView{
     protected InlineCssTextArea textArea = new InlineCssTextArea();
     private Text textHolder = new Text();
     private double oldHeight = 0;
+    private Color selectedColor = Color.BLACK;
+    private Boolean selectedGras = false;
+    private Boolean selectedItalic = false;
+    private Boolean selectedUnderline = false;
 
     public TextAreaView(Contenu contenu) {
         super(contenu);
@@ -75,8 +79,35 @@ public class TextAreaView extends ContenuView{
 
         // Event quand le contenu du cahier change
         textArea.textProperty().addListener((event) -> {
+            if(((TextZone)contenu).getTexte().equals(textArea.getText())) {
+                return;
+            }
+
             ((TextZone)contenu).setTexte(textArea.getText());
             ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
+
+            // Mettre à jour les styles en fonction de la toolBox
+            String value = "#" + selectedColor.toString().substring(2, 8);
+            System.out.println(value);
+            setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-fill", value);
+
+            if(selectedGras) {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-font-weight", "bold");
+            } else {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-font-weight", "normal");
+            }
+
+            if(selectedItalic) {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-font-style", "italic");
+            } else {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-font-style", "normal");
+            }
+
+            if(selectedUnderline) {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-underline", "true");
+            } else {
+                setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-underline", "false");
+            }
 
             sauvegarder();
         });
@@ -104,22 +135,18 @@ public class TextAreaView extends ContenuView{
         switch (update) {
             case COULEUR:
                 // Connaitre la couleur selectionnee
-                Color c = toolBox.getColor();
-                value = "#" + c.toString().substring(2, 8);
+                selectedColor = toolBox.getColor();
+                value = "#" + selectedColor.toString().substring(2, 8);
 
                 // Si du texte est selectionné
                 if(start != stop) {
-                    setStyle(start, stop, "-fx-stroke", value);
-                }
-
-
-                if(textArea.getText().length() > 0) {
-                    setStyle(textArea.getText().length(), textArea.getText().length(), "-fx-stroke", value);
+                    setStyle(start, stop, "-fx-fill", value);
                 }
 
                 break;
             case GRAS:
                 // Connaitre la valeur du gras
+                selectedGras = toolBox.getGras();
                 value = "normal";
 
                 if(toolBox.getGras()) {
@@ -130,7 +157,9 @@ public class TextAreaView extends ContenuView{
                     setStyle(start, stop, "-fx-font-weight", value);
                 }
                 break;
+
             case ITALIC:
+                selectedItalic = toolBox.getItalique();
                 value = "normal";
 
                 if(toolBox.getItalique()) {
@@ -142,7 +171,9 @@ public class TextAreaView extends ContenuView{
                 }
 
                 break;
+
             case SOULIGNER:
+                selectedUnderline = toolBox.getSoulignement();
                 value = "false";
 
                 if(toolBox.getSoulignement()) {

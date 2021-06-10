@@ -9,6 +9,7 @@ import javafx.scene.layout.Priority;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.ImageBook7;
 import sample.model.Observateur.Observable;
+import sample.model.Toolbox;
 import sample.model.Utils;
 
 // rôle: ContenuView indiquant à la vue comment afficher une image

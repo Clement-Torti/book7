@@ -109,6 +109,10 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
 
+.footer_bouton_style: hover {
+    -fx-background-color: -grey-2;
+}
+
 .codeAreaView {
     -fx-background-color: rgb(60, 60, 60);
 }
