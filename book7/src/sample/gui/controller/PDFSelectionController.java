@@ -53,7 +53,6 @@ public class PDFSelectionController extends BaseController {
     // FXML Actions
     @FXML
     private void initialize() {
-        pdfChoiceBox.se
         // Choix du pdf
         for(PDF pdf: pdfs) {
             pdfChoiceBox.getItems().add(pdf.getNomFichier());
