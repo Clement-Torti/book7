@@ -15,6 +15,7 @@ public class CodeAreaView extends TextAreaView {
         textArea.getStyleClass().add("codeAreaView");
         setStyle(0, 0, "-fx-stroke", "white");
         setStyle(0, 0, "-fx-font-family", "FreeMono");
+        setStyle(0, 0, "-fx-font-size", "11px");
     }
 
     // Methodes

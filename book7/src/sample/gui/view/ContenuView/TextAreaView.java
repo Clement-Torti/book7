@@ -159,7 +159,7 @@ public class TextAreaView extends ContenuView{
                 value = toolBox.getPoliceTexte();
 
                 if(start != stop) {
-                    setStyle(start, stop, "-fx-font-family", value);
+                    setStyle(start, stop, "-fx-font-family", "'" + value + "'");
                 }
                 break;
             case TAILLE_POLICE:
