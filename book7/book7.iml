@@ -32,5 +32,6 @@
     <orderEntry type="library" name="org.apache.pdfbox:pdfbox:2.0.23" level="project" />
     <orderEntry type="library" name="org.apache.pdfbox:fontbox:2.0.23" level="project" />
     <orderEntry type="library" name="commons-io:commons-io:2.5" level="project" />
+    <orderEntry type="library" name="org.openjfx:javafx-swing:14" level="project" />
   </component>
 </module>

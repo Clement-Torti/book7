@@ -9,6 +9,7 @@ module book7 {
     requires org.apache.fontbox;
     requires java.desktop;
     requires commons.io;
+    requires javafx.swing;
 
     opens sample;
     opens sample.gui.controller;

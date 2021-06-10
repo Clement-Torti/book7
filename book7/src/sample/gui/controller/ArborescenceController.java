@@ -17,6 +17,7 @@ import sample.gui.Utils.FileOpener;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
+import sample.model.Persistence.ModuleWriter;
 import sample.model.Utils;
 
 import java.io.File;
@@ -220,6 +221,22 @@ public class ArborescenceController extends BaseController {
                 iconSupprimer.setEffect(couleurBlanche);
                 supprimerButton.setGraphic(iconSupprimer);
 
+                // Bouton pour Exporter le module
+                Button exporterButton = new Button();
+                exporterButton.getStyleClass().add("boutonExporter");
+
+                // Ajout icône pour bouton supprimer
+                ImageView iconExporter = new ImageView("/icon-exporter.png");
+                iconExporter.setPreserveRatio(true);
+                iconExporter.setFitWidth(20);
+                iconExporter.setEffect(couleurBlanche);
+                exporterButton.setGraphic(iconExporter);
+                exporterButton.setOnAction((event) -> {
+                    ModuleWriter mw = new ModuleWriter();
+
+                    System.out.println(mw.toPdf(m));
+                });
+
                 // Au clique, ouvrir la fenêtre du cahier
                 moduleButton.setOnAction((event) -> {
                     ModuleController moduleController = new ModuleController(getStage(), m);
@@ -252,6 +269,7 @@ public class ArborescenceController extends BaseController {
 
                 // Ajout des boutons dans la HBox
                 moduleHBox.getChildren().add(moduleButton);
+                // moduleHBox.getChildren().add(exporterButton);
                 moduleHBox.getChildren().add(supprimerButton);
                 // Ajout de la HBox dans la VBox du semestre
                 modulesVBox.getChildren().add(moduleHBox);

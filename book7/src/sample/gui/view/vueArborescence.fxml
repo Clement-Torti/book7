@@ -16,7 +16,6 @@
             <Menu id="menuFichier" fx:id="menuFichier" text="Fichier">
                   <MenuItem id="menuFichierNouveau" fx:id="menuFichierNouveau" text="Nouveau module" />
                   <MenuItem id="menuFichierImporter" fx:id="menuFichierImporter" text="Importer module" />
-                  <MenuItem id="menuFichierExporter" fx:id="menuFichierExporter" text="Exporter module" />
                   <SeparatorMenuItem />
                   <MenuItem id="menuFichierQuitter" fx:id="menuFichierQuitter" text="Quitter" />
             </Menu>

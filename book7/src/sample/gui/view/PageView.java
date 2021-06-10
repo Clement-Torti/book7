@@ -1,9 +1,11 @@
 package sample.gui.view;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +31,8 @@ import sample.model.Observateur.Observable;
 import sample.model.Page;
 import sample.model.Toolbox;
 import sample.model.Utils;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -57,7 +62,15 @@ public class PageView extends BorderPane implements IObservateur {
 
     // Constructeur
     public PageView(FileOpener fileOpener, BaseController controller) {
+        this(fileOpener, controller, 0, 0);
+    }
+
+    public PageView(FileOpener fileOpener, BaseController controller, int width, int height) {
         super();
+        if(width != 0) {
+            this.setWidth(width);
+            this.setHeight(height);
+        }
         this.fileOpener = fileOpener;
         this.baseController = controller;
 
@@ -98,7 +111,7 @@ public class PageView extends BorderPane implements IObservateur {
     }
 
     // Methodes
-    public void setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
+    public VBox setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
         // Se desabonner de l'ancienne page
         if(page != null) {
             page.dettach(this);
@@ -114,10 +127,10 @@ public class PageView extends BorderPane implements IObservateur {
         toolbox = _toolbox;
 
         toolbox.attach(this);
-        updateView();
+        return updateView();
     }
 
-    private void updateView() {
+    private VBox updateView() {
         // Vider les anciens elements de vue
         headerPane.getChildren().clear();
         contenuBox.getChildren().clear();
@@ -245,6 +258,8 @@ public class PageView extends BorderPane implements IObservateur {
         Label pageLabel = new Label();
         pageLabel.setText("" + index);
         footerBox.getChildren().add(pageLabel);
+
+        return contenuBox;
     }
 
     @Override
