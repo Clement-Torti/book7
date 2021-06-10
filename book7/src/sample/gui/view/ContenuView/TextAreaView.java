@@ -5,10 +5,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.model.StyleSpan;
 import org.fxmisc.richtext.model.StyleSpans;
+import sample.model.Contenu.CodeZone;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.TextZone;
 import sample.model.Observateur.Observable;
@@ -24,12 +26,13 @@ import java.util.List;
 public class TextAreaView extends ContenuView{
     // Attributs
     protected InlineCssTextArea textArea = new InlineCssTextArea();
-    private Text textHolder = new Text();
+    protected Text textHolder = new Text();
     private double oldHeight = 0;
     private Color selectedColor = Color.BLACK;
     private Boolean selectedGras = false;
     private Boolean selectedItalic = false;
     private Boolean selectedUnderline = false;
+    private double maxFontSize = 14;
 
     public TextAreaView(Contenu contenu) {
         super(contenu);
@@ -63,8 +66,11 @@ public class TextAreaView extends ContenuView{
             textHolder.setText("");
         }
 
+        maxFontSize = getMaxFontSize();
+        textHolder.setFont(new Font(maxFontSize));
         textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
         textHolder.textProperty().bind(textArea.textProperty());
+
         // Event quand la taille de la textArea doit être MAJ
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
@@ -86,9 +92,12 @@ public class TextAreaView extends ContenuView{
             ((TextZone)contenu).setTexte(textArea.getText());
             ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
 
+            if(this instanceof CodeAreaView) {
+                return;
+            }
+
             // Mettre à jour les styles en fonction de la toolBox
             String value = "#" + selectedColor.toString().substring(2, 8);
-            System.out.println(value);
             setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-fill", value);
 
             if(selectedGras) {
@@ -181,7 +190,6 @@ public class TextAreaView extends ContenuView{
                 }
 
                 if(start != stop) {
-                    System.out.println(value);
                     setStyle(start, stop, "-fx-underline", value);
                 }
 
@@ -194,6 +202,10 @@ public class TextAreaView extends ContenuView{
                 }
                 break;
             case TAILLE_POLICE:
+                if(maxFontSize < toolBox.getTaillePolice()) {
+                    maxFontSize = toolBox.getTaillePolice();
+                    textHolder.setFont(new Font("'" + toolBox.getPoliceTexte() + "'", maxFontSize));
+                }
                 value = toolBox.getTaillePolice().toString() + "px";
 
                 if(start != stop) {
@@ -245,5 +257,38 @@ public class TextAreaView extends ContenuView{
 
             currentBegin = currentEnd;
         }
+    }
+
+
+    private double getMaxFontSize() {
+        double maxFontSize = 0;
+
+        StyleSpans stylesSpans = textArea.getStyleSpans(0, textArea.getLength());
+
+        int nbSpans = stylesSpans.getSpanCount();
+
+        for(int i=0; i<nbSpans; i++) {
+            StyleSpan styleSpan = stylesSpans.getStyleSpan(i);
+
+            List<String> styles = Arrays.asList(((String) styleSpan.getStyle()).split(";"));
+
+            // Conservation des anciennes propriété css
+            for(String style: styles) {
+                if(style.contains("-fx-font-size:")) {
+                    String fontSize =  style.replaceAll("[^0-9]", "");
+                    Integer size = Integer.parseInt(fontSize);
+
+                    if(size > maxFontSize) {
+                        maxFontSize = size;
+                    }
+                }
+            }
+        }
+
+        if(maxFontSize == 0) {
+            maxFontSize = 14;
+        }
+
+        return maxFontSize;
     }
 }
