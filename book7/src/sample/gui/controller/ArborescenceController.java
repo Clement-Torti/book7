@@ -10,12 +10,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import sample.Main;
+import sample.gui.Utils.FileOpener;
 import sample.model.Constantes;
 import sample.model.Module;
 import sample.model.Persistence.ModuleReader;
+import sample.model.Persistence.ModuleWriter;
 import sample.model.Utils;
 
 import java.io.File;
@@ -43,6 +45,7 @@ public class ArborescenceController extends BaseController {
     @FXML private Menu menuFichier;
     @FXML private MenuItem menuFichierQuitter;
     @FXML private MenuItem menuFichierNouveau;
+    @FXML private MenuItem menuFichierImporter;
 
     // Attributs
     private HashMap<Integer, List<Module>> modules;
@@ -82,6 +85,16 @@ public class ArborescenceController extends BaseController {
             }
         });
 
+        menuFichierImporter.setOnAction((event) -> {
+            FileOpener fileOpener = new FileOpener(getStage());
+            try {
+                File f = fileOpener.getBook7();
+                updateView();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
        updateView();
 
     }
@@ -100,7 +113,7 @@ public class ArborescenceController extends BaseController {
             Matcher m_semestre, m_fichier;
 
             //Chemin absolu du dossier où sont les fichiers
-            String path=System.getProperty("user.dir")+"/"+Constantes.SAVE_ROOT_FOLDER_NAME;
+            String path = Utils.getRacineProjet() + "/" + Constantes.SAVE_ROOT_FOLDER_NAME;
 
             root = new File(path);
             //On vérifie si le dossier existe, sinon on le crée
@@ -117,10 +130,16 @@ public class ArborescenceController extends BaseController {
 
             for (int i = 0; i < liste_r.length; i++) {
                 m_semestre = p_semestre.matcher(liste_r[i]);
+
                 //On vérifie que le dossier ai un nom valide pour le traiter
-                if(m_semestre.matches()) {
+                if(m_semestre.matches() || liste_r[i].equals("import")) {
                     //Le cas échéant on récupère le numéro du dossier (semestreN on récupère N)
-                    Integer numero=Integer.parseInt(m_semestre.group(1));
+
+                    Integer numero= -1;
+
+                    if(!liste_r[i].equals("import")) {
+                        numero = Integer.parseInt(m_semestre.group(1));
+                    }
 
                     //On crée la liste et on la rempli de modules
                     List<Module> liste = new ArrayList<Module>();
@@ -164,7 +183,11 @@ public class ArborescenceController extends BaseController {
             // Creation de la TitledPane
             TitledPane semestreTitledPane = new TitledPane();
             semestreTitledPane.getStyleClass().add("titled-pane");
-            semestreTitledPane.setText("Semestre " + key);
+            if(key == -1) {
+                semestreTitledPane.setText("Import");
+            } else {
+                semestreTitledPane.setText("Semestre " + key);
+            }
             semestreTitledPane.setExpanded(false);
 
             // Les modules sont ajoutés dans une VBox
@@ -198,6 +221,22 @@ public class ArborescenceController extends BaseController {
                 iconSupprimer.setEffect(couleurBlanche);
                 supprimerButton.setGraphic(iconSupprimer);
 
+                // Bouton pour Exporter le module
+                Button exporterButton = new Button();
+                exporterButton.getStyleClass().add("boutonExporter");
+
+                // Ajout icône pour bouton supprimer
+                ImageView iconExporter = new ImageView("/icon-exporter.png");
+                iconExporter.setPreserveRatio(true);
+                iconExporter.setFitWidth(20);
+                iconExporter.setEffect(couleurBlanche);
+                exporterButton.setGraphic(iconExporter);
+                exporterButton.setOnAction((event) -> {
+                    ModuleWriter mw = new ModuleWriter();
+
+                    System.out.println(mw.toPdf(m));
+                });
+
                 // Au clique, ouvrir la fenêtre du cahier
                 moduleButton.setOnAction((event) -> {
                     ModuleController moduleController = new ModuleController(getStage(), m);
@@ -230,6 +269,7 @@ public class ArborescenceController extends BaseController {
 
                 // Ajout des boutons dans la HBox
                 moduleHBox.getChildren().add(moduleButton);
+                // moduleHBox.getChildren().add(exporterButton);
                 moduleHBox.getChildren().add(supprimerButton);
                 // Ajout de la HBox dans la VBox du semestre
                 modulesVBox.getChildren().add(moduleHBox);

@@ -5,6 +5,8 @@ import sample.model.Enums.Disposition;
 
 import java.io.Serializable;
 import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
 
 // ------------------------
 // Rôle: Classe abstraite représentant tout élément contenu dans un cahier
@@ -16,7 +18,7 @@ public abstract class Contenu implements Serializable {
     
     // Attributs
     private String id;
-    private Dictionary<String, String> metadonnees;
+    protected Map<String, String> metadonnees = new HashMap<String, String>();
     private Alignement alignement;
     private Disposition disposition;
 

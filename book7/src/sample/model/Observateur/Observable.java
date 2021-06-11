@@ -1,5 +1,7 @@
 package sample.model.Observateur;
 
+import sample.model.Toolbox;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,9 @@ public abstract class Observable {
         observateurs.remove(obs);
     }
 
-    public void notifier() {
+    public void notifier(Object o) {
         for(IObservateur obs: observateurs) {
-            obs.update(this);
+            obs.update(this, o);
         }
     }
 }

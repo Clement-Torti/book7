@@ -2,6 +2,7 @@ package sample.model.Persistence;
 
 import sample.model.Constantes;
 import sample.model.Module;
+import sample.model.Utils;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -25,7 +26,7 @@ public class ModuleReader {
     // retour: Le module extrait
     public Module lire(String chemin) {
         try {
-            String chemin_absolu = System.getProperty("user.dir")+"/"
+            String chemin_absolu = Utils.getRacineProjet()  +"/"
                     +Constantes.SAVE_ROOT_FOLDER_NAME+"/"+chemin;
             FileInputStream fis = new FileInputStream(chemin_absolu);
             ObjectInputStream ois = new ObjectInputStream(fis);

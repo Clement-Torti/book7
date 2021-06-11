@@ -1,28 +1,41 @@
 package sample.model;
 
 import javafx.scene.paint.Color;
-import sample.model.Enums.FontStyle;
+import sample.model.Observateur.Observable;
 
-public class Toolbox {
+public class Toolbox extends Observable {
+    public enum ToolboxUpdate {
+        COULEUR,
+        GRAS,
+        ITALIC,
+        SOULIGNER,
+        POLICE,
+        TAILLE_POLICE,
+        MOTIF,
+        ALIGNEMENT
+    }
+
     Color color;
-    FontStyle policeTexte;
     Integer taillePolice;
     Boolean gras;
     Boolean italique;
     Boolean surlignement;
     Boolean soulignement;
+    String policeTexte;
+    String motif;
 
     public Toolbox() {
         this.color = Color.BLACK;
-        this.policeTexte = FontStyle.TimesNewRoman;
+        this.policeTexte = "Arial";
         this.taillePolice = 12;
         this.gras = false;
         this.italique = false;
         this.surlignement = false;
         this.soulignement = false;
+        this.motif = "GrandCarreaux";
     }
 
-    public Toolbox(Color color, FontStyle policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
+    public Toolbox(Color color, String policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
         this.color = color;
         this.policeTexte = policeTexte;
         this.taillePolice = taillePolice;
@@ -38,14 +51,16 @@ public class Toolbox {
 
     public void setColor(Color color) {
         this.color = color;
+        notifier(ToolboxUpdate.COULEUR);
     }
 
-    public FontStyle getPoliceTexte() {
+    public String getPoliceTexte() {
         return policeTexte;
     }
 
-    public void setPoliceTexte(FontStyle policeTexte) {
+    public void setPoliceTexte(String policeTexte) {
         this.policeTexte = policeTexte;
+        notifier(ToolboxUpdate.POLICE);
     }
 
     public Integer getTaillePolice() {
@@ -54,22 +69,25 @@ public class Toolbox {
 
     public void setTaillePolice(Integer taillePolice) {
         this.taillePolice = taillePolice;
+        notifier(ToolboxUpdate.TAILLE_POLICE);
     }
 
     public Boolean getGras() {
         return gras;
     }
 
-    public void setGras(Boolean gras) {
-        this.gras = gras;
+    public void flipGras() {
+        this.gras = !gras;
+        notifier(ToolboxUpdate.GRAS);
     }
 
     public Boolean getItalique() {
         return italique;
     }
 
-    public void setItalique(Boolean italique) {
-        this.italique = italique;
+    public void flipItalique() {
+        this.italique = !italique;
+        notifier(ToolboxUpdate.ITALIC);
     }
 
     public Boolean getSurlignement() {
@@ -84,8 +102,18 @@ public class Toolbox {
         return soulignement;
     }
 
-    public void setSoulignement(Boolean soulignement) {
-        this.soulignement = soulignement;
+    public void flipSoulignement() {
+        this.soulignement = !soulignement;
+        notifier(ToolboxUpdate.SOULIGNER);
+    }
+
+    public String getMotif(){
+        return motif;
+    }
+
+    public void setMotif(String motif){
+        this.motif = motif;
+        notifier(ToolboxUpdate.MOTIF);
     }
 
     @Override

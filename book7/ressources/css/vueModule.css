@@ -18,17 +18,17 @@
     -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
 }
 
+
 #navigation_gauche, #navigation_droite {
-    -fx-background-color: -grey-1;
+    -fx-spacing: 10;
+    -fx-padding: 0 20;
+    -fx-alignment: center;
 }
 
-#navigation_gauche{
-    -fx-spacing: 20;
+#navigation_milieu{
+    -fx-spacing: 10;
     -fx-padding: 10;
-}
-#navigation_droite{
-    -fx-spacing: 30;
-    -fx-padding: 15;
+    -fx-alignment: center;
 }
 
 .bouton_navigation{
@@ -47,6 +47,13 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
 
+.bouton_fermer{
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: #e50000;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
 .bouton_navigation:hover, .bouton_cahier:hover{
     -fx-background-color: -blue-1-light;
 }
@@ -55,12 +62,20 @@
     -fx-background-color: -blue-2;
 }
 
+.bouton_fermer:hover {
+    -fx-background-color: #ff0000;
+}
+.bouton_fermer:pressed {
+    -fx-background-color: #c30000;
+}
+
 /*
     Barre d'outils
  */
 #toolBoxView{
     -fx-max-width: 170;
     -fx-spacing: 5;
+    -fx-padding: 20 0;
 }
 /* Palette de couleur */
 #palette_couleur{
@@ -79,20 +94,24 @@
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
 }
 
+
+
 /* Liste déroulante */
 .liste_deroulante{
     /*-fx-max-width: 100%;*/
     -fx-min-width: 110;
-    -fx-padding: 0 10 0 10;
+    -fx-padding: 0 5 0 5;
     -fx-border-color: -blue-2;
     -fx-border-width: 1.5 ;
     -fx-border-radius: 10;
-    -fx-border-insets: 0 10 0 10;
-    -fx-background-insets: 0 10 0 10;
+    -fx-border-insets: 0 5 0 5;
+    -fx-background-insets: 0 5 0 5;
     -fx-background-radius: 10;
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
+
+
 
 .liste_boutons_style{
     -fx-padding: 10;
@@ -102,8 +121,8 @@
 }
 .bouton_style{
     -fx-padding: 10;
-    -fx-fit-to-width: 30px;
-    -fx-fit-to-height: 30px;
+    -fx-fit-to-width: 20px;
+    -fx-fit-to-height: 20px;
     -fx-border-color: -blue-2;
     -fx-border-width: 1.5;
     -fx-border-radius: 10;
@@ -112,3 +131,31 @@
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
 }
+
+.bouton_style:hover, .bouton_style_motif:hover {
+    -fx-background-color: -grey-1;
+}
+
+.bouton_style_motif {
+    -fx-padding: 0;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-border-color: -blue-2;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 10;
+    -fx-background-insets: 1;
+    -fx-background-radius: 12;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 5, 0.0, 0, 1);
+}
+
+#hbox_motif {
+    -fx-alignment: center;
+}
+
+.bouton_couleur: hover, .liste_deroulante:hover, .selected_button {
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0.0, 0, 1);
+}
+
+

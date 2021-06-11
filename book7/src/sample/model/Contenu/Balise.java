@@ -3,7 +3,7 @@ package sample.model.Contenu;
 import java.io.Serializable;
 
 // ------------------------
-// Rôle: Classe représentant une balise html dans une texteArea
+// Rôle: Encapsule un StyleSpan pour le rendre serializable
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
@@ -11,11 +11,29 @@ public class Balise implements Serializable {
     private static final long serialVersionUID = 2598804699603249099L;
 
     // Attributs
-    private boolean isDouble; // Faut-il une balise ouvrate est fermante ?
-    private Integer indexDebut;
-    private Integer indexFin;
+    private int length;
+    private String style;
 
     // Constructeurs
+    public Balise(int length, String style) {
+        this.length = length;
+        this.style = style;
+    }
 
-    // Methodes
+    //
+    public String getStyle() {
+        return style;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    @Override
+    public String toString() {
+        return "Balise{" +
+                "length=" + length +
+                ", style='" + style + '\'' +
+                '}';
+    }
 }

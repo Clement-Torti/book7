@@ -1,6 +1,8 @@
 package sample.model;
 
+import sample.gui.controller.ModuleController;
 import sample.model.Contenu.Contenu;
+import sample.model.Observateur.Observable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
 // Création: Clément Torti
 // Dernière Modification: Clément Torti
 //
-public class Page implements Serializable {
+public class Page extends Observable implements Serializable {
     private static final long serialVersionUID = 9165005631809492024L;
 
     // Attributs
@@ -28,7 +30,15 @@ public class Page implements Serializable {
 
     // Methodes
     public void appendContenu(Contenu contenu) {
+        notifier(null);
         contenus.add(contenu);
+        ModuleController.forcerSauvegarde();
+    }
+
+    public void removeContenu(Contenu c) {
+        if(contenus.remove(c)) {
+            ModuleController.forcerSauvegarde();
+        }
     }
 
 }

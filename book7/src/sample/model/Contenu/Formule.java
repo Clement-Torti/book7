@@ -15,9 +15,14 @@ public class Formule extends Media implements Serializable {
     private String texte;
 
     // Constructeurs
-    public Formule(URI uri) {
-        super(uri);
+    public Formule(String relativePath, String alt) {
+        super(relativePath, alt);
     }
+
+    public Formule(String relativePath) {
+        super(relativePath);
+    }
+
 
     // Méthodes
 }

@@ -2,9 +2,11 @@
 
 VBox{
     -fx-fill-width:true;
+    -fx-padding: 0 0 10 0;
 }
 
 HBox{
+    -fx-alignment: center;
     -fx-fill-height:true;
     -fx-padding:10;
 }
@@ -13,6 +15,24 @@ Label{
     -fx-padding:5;
 }
 
+.creer_bouton {
+    -fx-padding: 10;
+    -fx-border-style: none;
+    -fx-background-color: -blue-1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.creer_bouton:hover{
+    -fx-background-color: -blue-1-light;
+}
+
+.creer_bouton:pressed{
+    -fx-background-color: -blue-2;
+}
+
 .error{
-    -fx-background-color:red;
+    -fx-effect: dropshadow(gaussian, red, 15, 0.5, 0, 1);
+    /*-fx-background-color:red;*/
 }

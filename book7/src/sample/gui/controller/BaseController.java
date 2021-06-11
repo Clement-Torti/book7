@@ -26,7 +26,7 @@ public abstract class BaseController {
         this.stage = stage;
     }
 
-    protected Stage getStage() {
+    public Stage getStage() {
         return stage;
     }
 

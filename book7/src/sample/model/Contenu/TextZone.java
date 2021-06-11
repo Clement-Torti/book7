@@ -1,6 +1,11 @@
 package sample.model.Contenu;
 
+import org.fxmisc.richtext.model.StyleSpan;
+import org.fxmisc.richtext.model.StyleSpans;
+import org.fxmisc.richtext.model.StyleSpansBuilder;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -13,8 +18,8 @@ public class TextZone extends Contenu implements Serializable {
     private static final long serialVersionUID = 1043738449910295226L;
 
     // Attributs
-    private String texte;
-    private List<Balise> balises;
+    private String texte = "";
+    private List<Balise> balises = new ArrayList<>();
 
 
     // Getters
@@ -27,19 +32,33 @@ public class TextZone extends Contenu implements Serializable {
         this.texte = texte;
     }
 
-    // -----
-    // rôle: Ajout d'une balise de style dans le texte
-    // param:
-    // - balise: balise html a rajouter
-    public void ajoutStyle(Balise balise) {
-        maj(this);
+    public List<StyleSpan> getStyleSpans() {
+        List<StyleSpan> styleSpans = new ArrayList<>();
+
+        for(Balise b: balises) {
+            StyleSpan styleSpan = new StyleSpan(b.getStyle(), b.getLength());
+            styleSpans.add(styleSpan);
+        }
+
+        return styleSpans;
+    }
+    public void setStyleSpans(StyleSpans styleSpans) {
+        balises.clear();
+
+        // Conversion d'un styleSpans en quelques chose de serialisable
+        int nbStyles = styleSpans.getSpanCount();
+
+        for(int i=0; i<nbStyles; i++) {
+            StyleSpan styleSpan = styleSpans.getStyleSpan(i);
+
+            int length = styleSpan.getLength();
+            String style = (String) styleSpan.getStyle();
+
+            Balise b = new Balise(length, style);
+            balises.add(balises.size(), b);
+        }
     }
 
-    // -----
-    // rôle: Suppression d'une balise de style dans le texte
-    // param:
-    // - balise: balise html a supprimer
-    public void supprimerStyle(Balise balise) {
-        maj(this);
-    }
+
+
 }

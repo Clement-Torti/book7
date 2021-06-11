@@ -1,0 +1,19 @@
+@import "colors.css";
+
+#mainVue {
+    -fx-background-color: -grey-1;
+}
+
+#scrollPane > .viewport {
+    -fx-background-color: transparent;
+}
+
+
+
+#scrollPane {
+   -fx-background-color:transparent;
+}
+
+.imageView {
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.0, 0, 1);
+}

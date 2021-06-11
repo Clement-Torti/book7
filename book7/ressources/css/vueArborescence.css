@@ -51,11 +51,15 @@
     -fx-alignment: center;
 }
 
-.boutonSupprimer {
+.boutonSupprimer, .boutonExporter {
     -fx-padding: 5;
     -fx-border-style: none;
     -fx-background-color: #c30000;
     -fx-effect: dropshadow(three-pass-box, -grey-2, 10, 0.0, 0, 1);
+}
+
+.boutonExporter {
+    -fx-background-color: -blue-1;
 }
 
 .boutonSupprimer:hover {

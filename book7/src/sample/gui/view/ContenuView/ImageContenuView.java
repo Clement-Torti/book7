@@ -1,13 +1,16 @@
 package sample.gui.view.ContenuView;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.ImageBook7;
-import sample.model.Observateur.IObservateur;
-
-import java.net.URI;
+import sample.model.Observateur.Observable;
+import sample.model.Toolbox;
+import sample.model.Utils;
 
 // rôle: ContenuView indiquant à la vue comment afficher une image
 // Dernière modification: Clément Torti
@@ -20,12 +23,21 @@ public class ImageContenuView extends ContenuView {
 
     @Override
     public Node afficher() {
-        ImageView iv = new ImageView(((ImageBook7)contenu).getUri().toString());
+        Pane pane = new Pane();
+        HBox.setMargin(pane, new Insets(5));
+
+
+        ImageView iv = new ImageView("file://"+ Utils.getRacineProjet() + "/" + ((ImageBook7)contenu).getRelativePath());
         iv.getStyleClass().add("imageContenuView");
 
         iv.setPreserveRatio(true);
-        iv.setFitWidth(300);
+        iv.setFitWidth(350);
 
-        return iv;
+        pane.getChildren().add(iv);
+        return pane;
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
     }
 }
