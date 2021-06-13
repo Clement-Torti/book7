@@ -29,11 +29,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-// ------------------------
-// Rôle: Classe permettant d'enregistrer un module sur le disque
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+/**
+ * Classe permettant d'enregistrer un module sur le disque
+ */
 public class ModuleWriter {
     // Attributs
 

@@ -11,35 +11,34 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.image.*;
 
-// ------------------------
-// Rôle: Un media représentant une PDF
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+/**
+ * Un media représentant une PDF
+ */
 public class PDF extends Media implements Serializable {
     private static final long serialVersionUID = -2049344260833714945L;
+
 
     // Attributs
     private int nbPages = 0;
     private String nomFichier;
     transient PDDocument doc;
 
+
     // Constructeurs
     public PDF(String relativePath, String alt) throws IOException {
         super(relativePath, alt);
-
+        // Construction du objet pdf
         this.doc = PDDocument.load(new File(Utils.getRacineProjet() + "/" + relativePath));
 
         this.nbPages = doc.getNumberOfPages();
 
+        // Recupération du nom du pdf à partir du chemin
         Pattern pattern = Pattern.compile(".*/([^/]+)\\.pdf$");
 
         Matcher matcher = pattern.matcher(relativePath);
@@ -52,6 +51,7 @@ public class PDF extends Media implements Serializable {
         this(relativePath, "");
     }
 
+
     // Getters
     public int getNbPages() {
         return nbPages;
@@ -63,6 +63,13 @@ public class PDF extends Media implements Serializable {
 
 
     // Methodes
+
+    /**
+     * Converti une page du pdf en un image qu'il retourne
+     * @param i index de la page à convertir en image
+     * @return Image de la page
+     * @throws IOException
+     */
     public ImageBook7 getImageBook7(int i) throws IOException {
         i--;
         // Recupere la page souhaitée
@@ -83,6 +90,13 @@ public class PDF extends Media implements Serializable {
         return new ImageBook7(relativePath, pageText);
     }
 
+
+    /**
+     * Connaitre le chemin relatif de l'image créer à partir d'une page
+     * @param page
+     * @param extension
+     * @return
+     */
     private String getRelativePath(int page, String extension){
         SimpleDateFormat formatter = new SimpleDateFormat("dd_HH_mm_ss");
         Date date = new Date();

@@ -1,6 +1,5 @@
 package sample.gui.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -13,15 +12,22 @@ import sample.model.Module;
 import sample.model.Toolbox;
 import sample.model.Persistence.ModuleWriter;
 
-// ------------------------
-// Rôle: Classe controlant un module enseeiht, pour l'afficher et l'éditer
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+
+/**
+ * Controller mettant en relation les cahiers, la navigation et la toolbox
+ */
 public class ModuleController extends BaseController {
-    // Static
+    // Constantes
     private static int NB_OPERATION_BEFORE_SAVING = 20;
     private static int current_nb_operation = 0;
+
+
+    // Attributs
+    private Section currentSection = Section.COURS;
+    private static Module module;
+    private FileOpener fileOpener;
+    private Toolbox toolbox;
+
 
     // FXML Outlets
     @FXML
@@ -32,17 +38,13 @@ public class ModuleController extends BaseController {
     @FXML
     private ToolBoxView toolBoxView;
 
-    // Attributs
-    private Section currentSection = Section.COURS;
-    private static Module module;
-    private FileOpener fileOpener;
-    private Toolbox toolbox;
 
     // Constructeurs
     public ModuleController(Stage stage, Module module) {
         super(stage);
         this.module = module;
     }
+
 
     // FXML Actions
     @FXML
@@ -59,10 +61,11 @@ public class ModuleController extends BaseController {
         updateView();
     }
 
-    // Methodes
-    // role: changer la section afficher
-    // params:
-    // - nouvelleSection: nouvelle section à afficher
+
+    /**
+     * Changement de cahier à afficher
+     * @param nouvelleSection type de cahier à afficher
+     */
     public void changerSection(Section nouvelleSection) {
         if (nouvelleSection == currentSection) {
             return;
@@ -72,16 +75,28 @@ public class ModuleController extends BaseController {
         updateView();
     }
 
+
+    /**
+     * Passer à la page suivante
+     */
     public void nextPage() {
         currentCahier.nextPage();
         updateView();
     }
 
+
+    /**
+     * Retourner à la page précédence
+     */
     public void previousPage() {
         currentCahier.previousPage();
         updateView();
     }
 
+
+    /**
+     * Mise à jour de la vue quand le contenu à afficher change
+     */
     private void updateView() {
         switch (currentSection) {
             case COURS:
@@ -97,6 +112,11 @@ public class ModuleController extends BaseController {
 
     }
 
+
+    /**
+     * Sauvegarde du module sur le disque au bout de NB_OPERATION_BEFORE_SAVING appels
+     * @return la sauvegarde à eu lieu
+     */
     public static boolean sauvegarderModule() {
         // Ne sauvegarder qu'au bout de N operation (pour les performance car exriture disque lent)
 
@@ -112,11 +132,18 @@ public class ModuleController extends BaseController {
         return false;
     }
 
+
+    /**
+     * Sauvegarde du module sur le disque
+     */
     public static void forcerSauvegarde() {
             ModuleWriter mw = new ModuleWriter();
             mw.ecrire(module);
     }
 
+    /**
+     * Fermeture de la fenêtre
+     */
     public void fermerFenetre() {
         forcerSauvegarde();
         getStage().close();

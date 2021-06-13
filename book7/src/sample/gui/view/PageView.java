@@ -1,22 +1,15 @@
 package sample.gui.view;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import sample.gui.Utils.FileOpener;
 import sample.gui.controller.BaseController;
 import sample.gui.controller.ModuleController;
@@ -30,28 +23,15 @@ import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 import sample.model.Page;
 import sample.model.Toolbox;
-import sample.model.Utils;
 
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Locale;
 
-// ------------------------
-// Rôle: Classe controllant une page du cahier
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+/**
+ * Controller/View chargé de la gestion des contenues de la page
+ */
 public class PageView extends BorderPane implements IObservateur {
-    // Outlets
-    private VBox scrollPaneVBox;
-    private ScrollPane scrollPane;
-    private BorderPane headerPane = new BorderPane();
-    private VBox contenuBox = new VBox();
-    private HBox footerBox = new HBox();
-    private FileOpener fileOpener;
-
     // Attributs
     private Page page;
     private Integer index;
@@ -60,11 +40,28 @@ public class PageView extends BorderPane implements IObservateur {
     private Toolbox toolbox;
     private BaseController baseController;
 
-    // Constructeur
+
+    // Outlets
+    private VBox scrollPaneVBox;
+    private ScrollPane scrollPane;
+    private BorderPane headerPane = new BorderPane();
+    private VBox contenuBox = new VBox();
+    private HBox footerBox = new HBox();
+    private FileOpener fileOpener;
+
+
+    // Constructeurs
     public PageView(FileOpener fileOpener, BaseController controller) {
         this(fileOpener, controller, 0, 0);
     }
 
+    /**
+     * Constructeur d'une PageView
+     * @param fileOpener Classe permettant l'ouverture de fichier sur le disque
+     * @param controller Controller permettant l'ouverture du PDFSelectionController
+     * @param width Largeur de la fenêtre
+     * @param height Hauteur de la fenêtre
+     */
     public PageView(FileOpener fileOpener, BaseController controller, int width, int height) {
         super();
         if(width != 0) {
@@ -110,7 +107,16 @@ public class PageView extends BorderPane implements IObservateur {
 
     }
 
-    // Methodes
+
+    /**
+     * Définition de la page à afficher
+     * @param _page page à afficher
+     * @param _index index de la page dans le cahier
+     * @param _nomModule Nom du module
+     * @param _section Section du cahier contenant la page
+     * @param _toolbox Toolbox
+     * @return La VBox contenant l'ensemble graphique de la page
+     */
     public VBox setPage(Page _page, Integer _index, String _nomModule, Section _section, Toolbox _toolbox) {
         // Se desabonner de l'ancienne page
         if(page != null) {
@@ -130,6 +136,11 @@ public class PageView extends BorderPane implements IObservateur {
         return updateView();
     }
 
+
+    /**
+     * Mise à jour de la vue lorsque le contenu change
+     * @return La VBox contenant l'ensemble graphique de la page
+     */
     private VBox updateView() {
         // Vider les anciens elements de vue
         headerPane.getChildren().clear();
@@ -262,6 +273,7 @@ public class PageView extends BorderPane implements IObservateur {
         return contenuBox;
     }
 
+
     @Override
     public void update(Observable obs, Object o) {
         if(obs instanceof Toolbox) {
@@ -280,6 +292,13 @@ public class PageView extends BorderPane implements IObservateur {
         ModuleController.forcerSauvegarde();
     }
 
+
+    /**
+     * Retourne une node incluant une contenuView et un bouton de suppression
+     * @param c le contenu à afficher
+     * @param attachToToolBox Le contenuView doit-il être bindé à la toolBox
+     * @return la node à afficher
+     */
     private Node getDefaultContenuView(Contenu c, boolean attachToToolBox) {
         HBox contenuHBox = new HBox();
 

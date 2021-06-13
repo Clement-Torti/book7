@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-// ------------------------
-// Rôle: Classe représentant une page d'un cahier
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+
+
+/**
+ * Classe représentant une page d'un cahier
+ */
 public class Page extends Observable implements Serializable {
     private static final long serialVersionUID = 9165005631809492024L;
 
@@ -20,25 +20,33 @@ public class Page extends Observable implements Serializable {
     private boolean isPortrait;
     private List<Contenu> contenus = new ArrayList<>();
 
+
     // Getters
     public List<Contenu> getContenus() {
         return contenus;
     }
 
 
-    // Constructeurs
-
     // Methodes
+
+    /**
+     * Ajout d'un contenu en fin de page
+     * @param contenu contenue à rajouter
+     */
     public void appendContenu(Contenu contenu) {
         notifier(null);
         contenus.add(contenu);
         ModuleController.forcerSauvegarde();
     }
 
+
+    /**
+     * Suppression d'un contenu de la page
+     * @param c contenu à supprimer
+     */
     public void removeContenu(Contenu c) {
         if(contenus.remove(c)) {
             ModuleController.forcerSauvegarde();
         }
     }
-
 }

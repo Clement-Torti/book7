@@ -3,17 +3,19 @@ package sample.gui.view.ContenuView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import sample.model.Contenu.Contenu;
-import sample.model.Observateur.IObservateur;
 import sample.model.Observateur.Observable;
 
-// rôle: ContenuView indiquant à la vue comment afficher une formule
-// Dernière modification: Clément Torti
-//
+
+/**
+ * ContenuView indiquant à la vue comment afficher une formule
+ */
 public class FormuleView extends ContenuView {
 
+    // Constructeur
     public FormuleView(Contenu contenu) {
         super(contenu);
     }
+
 
     @Override
     public Node afficher() {

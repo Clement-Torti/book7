@@ -3,17 +3,12 @@ package sample.gui.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import sample.gui.Utils.FileOpener;
-import sample.gui.view.ContenuView.ContenuView;
 import sample.gui.view.ContenuView.FabriqueContenuView;
-import sample.gui.view.ContenuView.ImageContenuView;
 import sample.model.Constantes;
 import sample.model.Contenu.ImageBook7;
 import sample.model.Contenu.PDF;
@@ -25,13 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class PDFSelectionController extends BaseController {
-    @FXML private ComboBox<String> pdfChoiceBox;
-    @FXML private ComboBox<Integer> pageChoicebox;
-    @FXML private HBox conteneurImage;
-    @FXML private Button boutonAnnuler;
-    @FXML private Button boutonAjouter;
 
+/**
+ * Controller permettant de selectionner un PDF à insérer
+ */
+public class PDFSelectionController extends BaseController {
+    // Attributs
     private FileOpener fileOpener;
     private PDF pdf;
     private ImageBook7 currentImage;
@@ -39,16 +33,37 @@ public class PDFSelectionController extends BaseController {
     private boolean containImage = false;
     private List<PDF> pdfs = new ArrayList<>();
 
+
+    // Outlets
+    @FXML private ComboBox<String> pdfChoiceBox;
+    @FXML private ComboBox<Integer> pageChoicebox;
+    @FXML private HBox conteneurImage;
+    @FXML private Button boutonAnnuler;
+    @FXML private Button boutonAjouter;
+
+
+    // Constructeur
     public PDFSelectionController(Stage stage, FileOpener fileOpener) {
         super(stage);
         this.fileOpener = fileOpener;
         pdfs = loadPDFs();
     }
 
+
+    // Getters
     private void setPdf(PDF pdf) {
         this.pdf = pdf;
         updateView();
     }
+
+    public ImageBook7 getCurrentImage() {
+        return this.currentImage;
+    }
+
+    public boolean getImageChosen() {
+        return imageChosen;
+    }
+
 
     // FXML Actions
     @FXML
@@ -99,14 +114,10 @@ public class PDFSelectionController extends BaseController {
         });
     }
 
-    public ImageBook7 getCurrentImage() {
-        return this.currentImage;
-    }
 
-    public boolean getImageChosen() {
-        return imageChosen;
-    }
-
+    /**
+     * Import d'un pdf depuis le disque
+     */
     @FXML private void newPdf() {
         try {
             File file = fileOpener.getPdf();
@@ -126,6 +137,11 @@ public class PDFSelectionController extends BaseController {
 
     }
 
+
+    /**
+     * Chargement des pdfs sauvegardés en local
+     * @return Liste des pdfs
+     */
     private List<PDF> loadPDFs() {
         List<PDF> pdfs = new ArrayList<>();
 
@@ -159,7 +175,10 @@ public class PDFSelectionController extends BaseController {
         return pdfs;
     }
 
-    // MAJ du choix de la page quand on change de pdf
+
+    /**
+     * Mise à jour de la vue quand le contenu change
+     */
     private void updateView() {
         pdfChoiceBox.getItems().clear();
         pageChoicebox.getItems().clear();
@@ -177,5 +196,4 @@ public class PDFSelectionController extends BaseController {
         }
 
     }
-
 }

@@ -1,5 +1,8 @@
 package sample.model;
 
+/**
+ * Constantes du programme
+ */
 public class Constantes {
     public final static String EXTENSION = "b7";
     public final static String SEMESTRE_NAME="semestre";

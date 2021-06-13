@@ -1,22 +1,23 @@
 package sample.gui.view;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import sample.gui.controller.ModuleController;
 import sample.model.Enums.Section;
 
-import java.io.IOException;
 
+/**
+ * Controller chargé de la navigation dans le module
+ */
 public class NavigationView extends HBox {
     // Attributs
     private ModuleController moduleController;
     private Integer buttonSize = 15;
 
+
+    // Constructeur
     public NavigationView() {
         super();
         this.setSpacing(30);
@@ -118,6 +119,12 @@ public class NavigationView extends HBox {
 
     }
 
+
+    /**
+     * Définie le module controller intéressé par des actions de navigation
+     * (Devrait être remplacé par le patron observateur)
+     * @param module module à prévenir en cas d'action utilisateur
+     */
     public void setModuleController(ModuleController module) {
         moduleController = module;
     }

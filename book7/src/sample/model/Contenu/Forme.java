@@ -2,13 +2,13 @@ package sample.model.Contenu;
 
 import java.io.Serializable;
 
-// ------------------------
-// Rôle: Un contenu représentant une forme
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+
+/**
+ * Un contenu représentant une forme
+ */
 public class Forme extends Contenu implements Serializable {
     private static final long serialVersionUID = -1859992219930295378L;
+
 
     // Attributs
     private Integer deltaX;
@@ -18,7 +18,4 @@ public class Forme extends Contenu implements Serializable {
 
     private Contenu ancrage;
 
-    // Constructeurs
-
-    // Methodes
 }

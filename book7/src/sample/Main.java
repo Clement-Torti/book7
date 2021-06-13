@@ -9,11 +9,17 @@ import sample.gui.controller.ArborescenceController;
 
 import java.net.URL;
 
+/**
+ * Point du départ du programme
+ */
 public class Main extends Application {
+    // Constantes
     public static final int WIN_WIDTH = 550;
     public static final int WIN_HEIGHT = 400;
     private static final String ARBORESCENCE_FXML = "gui/view/vueArborescence.fxml";
 
+
+    // Methodes
     @Override
     public void start(Stage primaryStage) throws Exception {
         URL url = getClass().getResource(ARBORESCENCE_FXML);
@@ -30,17 +36,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
-//        Module m = new Module("gestion", 1);
-//
-//        TextArea tz = new TextArea();
-//        tz.setTexte("ceci est la textezone");
-//
-//        m.getCours().getPages().get(0).appendContenu(tz);
-//
-//        ModuleWriter mw = new ModuleWriter();
-//        mw.ecrire(m);
         launch(args);
     }
 }

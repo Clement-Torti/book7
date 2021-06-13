@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.gui.Utils.FileOpener;
@@ -29,15 +28,16 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// ------------------------
-// Rôle: Classe controllant la vue de selection du module à éditer
-// Dernière Modification: Clément Torti
-//
+
+/**
+ * Controller chargé de la vue de la gestion des modules
+ */
 public class ArborescenceController extends BaseController {
     // Constantes
     public static Double MODULE_WIDTH = 900.0;
     public static Double MODULE_HEIGHT = 600.0;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
+
 
     // FXML Outlets
     @FXML private VBox mainVbox;
@@ -47,8 +47,10 @@ public class ArborescenceController extends BaseController {
     @FXML private MenuItem menuFichierNouveau;
     @FXML private MenuItem menuFichierImporter;
 
+
     // Attributs
     private HashMap<Integer, List<Module>> modules;
+
 
     // Constructeurs
     public ArborescenceController(Stage stage) {
@@ -60,6 +62,7 @@ public class ArborescenceController extends BaseController {
             MODULE_WIDTH = MODULE_HEIGHT * 1.4;
         });
     }
+
 
     // Methodes
     @FXML
@@ -75,6 +78,8 @@ public class ArborescenceController extends BaseController {
                 System.exit(0);
             }
         });
+
+        // ItemMenu pour créer un nouveau module
         menuFichierNouveau.setOnAction((event) -> {
             CreationModuleController contr = new CreationModuleController(getStage(), this);
 
@@ -85,6 +90,7 @@ public class ArborescenceController extends BaseController {
             }
         });
 
+        // ItemMenu pour importer un nouveau module
         menuFichierImporter.setOnAction((event) -> {
             FileOpener fileOpener = new FileOpener(getStage());
             try {
@@ -99,6 +105,11 @@ public class ArborescenceController extends BaseController {
 
     }
 
+
+    /**
+     * Lit dans le dossier de sauvegarde de module les différents modules
+     * @return L'association semestre/modules du semestre
+     */
     public static HashMap<Integer, List<Module>> lireModules() {
         HashMap<Integer, List<Module>> out = new HashMap<Integer, List<Module>>();
         ModuleReader mr = new ModuleReader();
@@ -166,10 +177,21 @@ public class ArborescenceController extends BaseController {
         return out;
     }
 
+
+    /**
+     * Extrait un module à partir d'un chemin
+     * @param mr Classe extrayant un module à partir d'un chemin
+     * @param chemin Chemin du module à extraire
+     * @return
+     */
     public static Module extraireModule(ModuleReader mr, String chemin){ //On va propager les exceptions vers getModuleMap ou consors
         return mr.lire(chemin);
     }
 
+
+    /**
+     * Met à jour la vue quand le contenu change
+     */
     public void updateView() {
         // Vider les anciennes données
         contentVbox.getChildren().clear();

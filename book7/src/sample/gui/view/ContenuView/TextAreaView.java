@@ -10,7 +10,6 @@ import javafx.scene.text.Text;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.model.StyleSpan;
 import org.fxmisc.richtext.model.StyleSpans;
-import sample.model.Contenu.CodeZone;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.TextZone;
 import sample.model.Observateur.Observable;
@@ -20,37 +19,50 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// rôle: ContenuView indiquant à la vue comment afficher un TextArea
-// Dernière modification: Clément Torti
-//
+
+/**
+ * Implémentation de ContenuView chargée d'afficher une zone de texte éditable
+ */
 public class TextAreaView extends ContenuView{
     // Attributs
     protected InlineCssTextArea textArea = new InlineCssTextArea();
-    protected Text textHolder = new Text();
-    private double oldHeight = 0;
+    protected Text textHolder = new Text(); // Permet de déterminer la hauteur de la textArea en fonction de son contenu
+    private double oldHeight = 0; // Taille du la TextArea
+    private double maxFontSize = 14; // Taille maximal de la police dans la textArea
+    // Copie locale des valeurs de la toolbox
     private Color selectedColor = Color.BLACK;
     private Boolean selectedGras = false;
     private Boolean selectedItalic = false;
     private Boolean selectedUnderline = false;
-    private double maxFontSize = 14;
 
+
+    // Constructeur
     public TextAreaView(Contenu contenu) {
         super(contenu);
     }
+
 
     @Override
     public Node afficher() {
         return resizableTextArea();
     }
 
+
+    /**
+     * Construction du composant à afficher
+     * @return La textArea
+     */
     private InlineCssTextArea resizableTextArea(){
+        // Définition du style
         textArea.getStyleClass().add("textAreaView");
         textArea.setWrapText(true);
 
+        // Ajout du texte si le contenu n'est pas vide
         if(((TextZone) contenu).getTexte() != null) {
             textArea.appendText(((TextZone) contenu).getTexte());
         }
 
+        // Mise à jour du style du texte si le contenu n'est pas vide
         if(textArea.getText() != null && ((TextZone) contenu).getStyleSpans() != null) {
             textHolder.setText(textArea.getText());
 
@@ -61,21 +73,22 @@ public class TextAreaView extends ContenuView{
 
                 current += s.getLength();
             }
-
         } else {
             textHolder.setText("");
         }
 
+        // Taille daximum de la police
         maxFontSize = getMaxFontSize();
         textHolder.setFont(new Font(maxFontSize));
+        // Taille de la textArea à l'initialisation
         textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
+        // Bindage de l'élément graphique (textArea) avec de la donnée (textHolder)
         textHolder.textProperty().bind(textArea.textProperty());
 
         // Event quand la taille de la textArea doit être MAJ
         textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-
                 if (oldHeight != newValue.getHeight()) {
                     oldHeight = newValue.getHeight();
                     textArea.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20);
@@ -89,14 +102,16 @@ public class TextAreaView extends ContenuView{
                 return;
             }
 
+            // Mise à jour du modèle
             ((TextZone)contenu).setTexte(textArea.getText());
             ((TextZone)contenu).setStyleSpans(textArea.getStyleSpans(0, textArea.getLength()));
 
+            // Ne pas faire de MAJ du style sur une CodeAreaView
             if(this instanceof CodeAreaView) {
                 return;
             }
 
-            // Mettre à jour les styles en fonction de la toolBox
+            // Mettre à jour les styles en fonction des données de la toolBox
             String value = "#" + selectedColor.toString().substring(2, 8);
             setStyle(textArea.getText().length()-1, textArea.getText().length(), "-fx-fill", value);
 
@@ -220,7 +235,13 @@ public class TextAreaView extends ContenuView{
         }
     }
 
-
+    /**
+     * Défini du style sur une partie de la textArea
+     * @param start index du 1er caractère à styliser
+     * @param stop index du dernier caractère à styliser
+     * @param key Clef  css à modifier
+     * @param value Valeur css à attribuer
+     */
     protected void setStyle(int start, int stop, String key, String value) {
         StyleSpans styleSpans = textArea.getStyleSpans(start, stop);
 
@@ -259,7 +280,10 @@ public class TextAreaView extends ContenuView{
         }
     }
 
-
+    /**
+     * Trouve la plus grande taille de police utilisée dans la textArea
+     * @return La plus grande taille de police utilisée
+     */
     protected double getMaxFontSize() {
         double maxFontSize = 0;
 

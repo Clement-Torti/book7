@@ -2,18 +2,15 @@ package sample.model.Contenu;
 
 import org.fxmisc.richtext.model.StyleSpan;
 import org.fxmisc.richtext.model.StyleSpans;
-import org.fxmisc.richtext.model.StyleSpansBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
-// ------------------------
-// Rôle: Un contenu représentant un paragraphe de texte
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+
+/**
+ * Un contenu représentant un paragraphe de texte
+ */
 public class TextZone extends Contenu implements Serializable {
     private static final long serialVersionUID = 1043738449910295226L;
 

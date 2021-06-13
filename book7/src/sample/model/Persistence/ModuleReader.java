@@ -7,11 +7,9 @@ import sample.model.Utils;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
-// ------------------------
-// Rôle: Classe permettant de lire un module depuis le disque
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+/**
+ * Classe permettant de lire un module depuis le disque
+ */
 public class ModuleReader {
     // Attributs
 

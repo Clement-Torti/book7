@@ -13,12 +13,21 @@ import sample.model.Utils;
 
 import java.io.File;
 
+/**
+ * Controller charger de créer un module
+ */
 public class CreationModuleController extends BaseController {
+    // Constantes
     public static Double MODULE_WIDTH = 300.0;
     public static Double MODULE_HEIGHT = 150.0;
     public static final String MODULE_FXML = "gui/view/vueModule.fxml";
+
+
+    // Attributs
     private ArborescenceController arborescenceController;
 
+
+    // Outlets
     @FXML private VBox mainVBox;
     @FXML private HBox nomHBox;
     @FXML private HBox semestreHBox;
@@ -30,10 +39,13 @@ public class CreationModuleController extends BaseController {
     @FXML private Button creer_button;
     @FXML private Text message_erreur;
 
+
+    // Constructeur
     public CreationModuleController(Stage stage, ArborescenceController arborescenceController){
         super(stage);
         this.arborescenceController = arborescenceController;
     }
+
 
     @FXML
     void initialize() {
@@ -53,6 +65,11 @@ public class CreationModuleController extends BaseController {
         );
     }
 
+
+    /**
+     * Créer si possible un module à partir des information fournies
+     * @return succés de l'opération
+     */
     private boolean creerModule(){
         String nom_module = nom_textfield.getText();
         int semestre = semestre_choicebox.getSelectionModel().getSelectedIndex()+1;
@@ -75,7 +92,14 @@ public class CreationModuleController extends BaseController {
         return false;
     }
 
-    boolean moduleExiste(String nom, int semestre){
+
+    /**
+     * Vérifie l'existence d'un module avec les informations fournies
+     * @param nom nom du module
+     * @param semestre semestre du module
+     * @return existence du module
+     */
+    private boolean moduleExiste(String nom, int semestre){
         String chemin = Utils.getRacineProjet() + "/" + Constantes.SAVE_ROOT_FOLDER_NAME + "/" + Module.calculerChemin(nom, semestre);
         File fichier=new File(chemin);
         if(fichier.exists() && fichier.isFile())

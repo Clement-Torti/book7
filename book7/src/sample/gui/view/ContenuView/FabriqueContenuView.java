@@ -2,10 +2,16 @@ package sample.gui.view.ContenuView;
 
 import sample.model.Contenu.*;
 
-// rôle: Fabrique fournissant la bonne sous classe de contenuView en fonction du contenu fourni
-// Dernière modification: Clément Torti
-//
+
+/**
+ * Fourni un contenuView adapté à un contenu
+ */
 public class FabriqueContenuView {
+    /**
+     * Fourni un ContenuView adapté à un contenu
+     * @param contenu contenu
+     * @return la ContenuView adaptée
+     */
     public static ContenuView fabriquerContenuView(Contenu contenu) {
         if(contenu instanceof CodeZone) {
             return new CodeAreaView(contenu);
@@ -17,8 +23,6 @@ public class FabriqueContenuView {
             return new FormuleView(contenu);
         } else if(contenu instanceof ImageBook7) {
             return new ImageContenuView(contenu);
-        } else if(contenu instanceof  PDF) {
-            return new PDFView(contenu);
         } else {
             throw new RuntimeException("Contenu inconnu");
         }

@@ -5,21 +5,20 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import sample.model.Contenu.Contenu;
 import sample.model.Contenu.ImageBook7;
 import sample.model.Observateur.Observable;
-import sample.model.Toolbox;
 import sample.model.Utils;
 
-// rôle: ContenuView indiquant à la vue comment afficher une image
-// Dernière modification: Clément Torti
-//
+/**
+ * Implémentation de ContenuView chargée d'afficher une ImageBook7
+ */
 public class ImageContenuView extends ContenuView {
-
+    // Constructeur
     public ImageContenuView(Contenu contenu) {
         super(contenu);
     }
+
 
     @Override
     public Node afficher() {

@@ -3,7 +3,13 @@ package sample.model;
 import javafx.scene.paint.Color;
 import sample.model.Observateur.Observable;
 
+/**
+ * Classe représentant la toolbox
+ */
 public class Toolbox extends Observable {
+    /**
+     * Enum contenant les modification possible de la toolbox
+     */
     public enum ToolboxUpdate {
         COULEUR,
         GRAS,
@@ -15,15 +21,19 @@ public class Toolbox extends Observable {
         ALIGNEMENT
     }
 
-    Color color;
-    Integer taillePolice;
-    Boolean gras;
-    Boolean italique;
-    Boolean surlignement;
-    Boolean soulignement;
-    String policeTexte;
-    String motif;
 
+    // Attributs
+    private Color color;
+    private Integer taillePolice;
+    private Boolean gras;
+    private Boolean italique;
+    private Boolean surlignement;
+    private Boolean soulignement;
+    private String policeTexte;
+    private String motif;
+
+
+    // Constructeur
     public Toolbox() {
         this.color = Color.BLACK;
         this.policeTexte = "Arial";
@@ -35,16 +45,8 @@ public class Toolbox extends Observable {
         this.motif = "GrandCarreaux";
     }
 
-    public Toolbox(Color color, String policeTexte, Integer taillePolice, Boolean gras, Boolean italique, Boolean surlignement, Boolean soulignement) {
-        this.color = color;
-        this.policeTexte = policeTexte;
-        this.taillePolice = taillePolice;
-        this.gras = gras;
-        this.italique = italique;
-        this.surlignement = surlignement;
-        this.soulignement = soulignement;
-    }
 
+    // Getters/Setters
     public Color getColor() {
         return color;
     }
@@ -53,6 +55,7 @@ public class Toolbox extends Observable {
         this.color = color;
         notifier(ToolboxUpdate.COULEUR);
     }
+
 
     public String getPoliceTexte() {
         return policeTexte;
@@ -63,6 +66,7 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.POLICE);
     }
 
+
     public Integer getTaillePolice() {
         return taillePolice;
     }
@@ -71,6 +75,7 @@ public class Toolbox extends Observable {
         this.taillePolice = taillePolice;
         notifier(ToolboxUpdate.TAILLE_POLICE);
     }
+
 
     public Boolean getGras() {
         return gras;
@@ -81,6 +86,7 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.GRAS);
     }
 
+
     public Boolean getItalique() {
         return italique;
     }
@@ -90,6 +96,7 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.ITALIC);
     }
 
+
     public Boolean getSurlignement() {
         return surlignement;
     }
@@ -97,6 +104,7 @@ public class Toolbox extends Observable {
     public void setSurlignement(Boolean surlignement) {
         this.surlignement = surlignement;
     }
+
 
     public Boolean getSoulignement() {
         return soulignement;
@@ -107,6 +115,7 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.SOULIGNER);
     }
 
+
     public String getMotif(){
         return motif;
     }
@@ -116,6 +125,8 @@ public class Toolbox extends Observable {
         notifier(ToolboxUpdate.MOTIF);
     }
 
+
+    // Methodes
     @Override
     public String toString() {
         return "Toolbox{" +

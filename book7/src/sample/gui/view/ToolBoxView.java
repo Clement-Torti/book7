@@ -3,7 +3,6 @@ package sample.gui.view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.effect.MotionBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -11,17 +10,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import sample.model.Enums.Motif;
 import sample.model.Toolbox;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Controller/View chargé de la gestion du contrôle de la toolbox
+ */
 public class ToolBoxView extends VBox {
     // Attributs
     private Toolbox toolbox;
     private Integer buttonSize = 15;
-    // Outlets
 
 
     // Constructeurs
@@ -31,7 +32,17 @@ public class ToolBoxView extends VBox {
         updateView();
     }
 
-    // Methodes
+
+    // Getters
+    public Toolbox getToolbox() {
+        return toolbox;
+    }
+
+
+
+    /**
+     * Mise à jour de la vue quand le contenu change
+     */
     private void updateView() {
         /*
             Motifs
@@ -240,7 +251,4 @@ public class ToolBoxView extends VBox {
         getChildren().add(boutonPanel);
     }
 
-    public Toolbox getToolbox() {
-        return toolbox;
-    }
 }

@@ -1,15 +1,8 @@
 package sample.gui.Utils;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import sample.gui.controller.BaseController;
 import sample.model.Constantes;
 import sample.model.Utils;
 import org.apache.commons.io.FileUtils;
@@ -17,16 +10,26 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-// Role: Laisse l'utilisateur selectionner une image
+
+/**
+ * Classe chargée de la gestion d'ouverture de fichiers
+ */
 public class FileOpener {
     // Attributs
     private Stage stage;
+
 
     // Constructeur
     public FileOpener(Stage stage) {
         this.stage = stage;
     }
 
+
+    /**
+     * Ouverture d'un module
+     * @return Fichier correspondant au module
+     * @throws IOException
+     */
     public File getBook7() throws IOException {
         FileChooser.ExtensionFilter filter
                 = new FileChooser.ExtensionFilter("Image Files", "*." + Constantes.EXTENSION);
@@ -34,6 +37,12 @@ public class FileOpener {
         return getFile(filter, "Choix d'un module book7", Constantes.IMPORT_MODULE_ROOT_FOLDER_NAME);
     }
 
+
+    /**
+     * Ouverture d'un pdf
+     * @return Fichier correspondant au pdf
+     * @throws IOException
+     */
     public File getPdf() throws IOException{
         FileChooser.ExtensionFilter filter
                 = new FileChooser.ExtensionFilter("Image Files", "*.pdf");
@@ -41,6 +50,12 @@ public class FileOpener {
         return getFile(filter, "Choix d'un pdf", Constantes.PDF_ROOT_FOLDER_NAME);
     }
 
+
+    /**
+     * Ouverture d'une image
+     * @return Fichier correspondant à l'image
+     * @throws IOException
+     */
     public File getImage() throws IOException {
         FileChooser.ExtensionFilter filter
                 = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.jpeg");
@@ -48,7 +63,15 @@ public class FileOpener {
         return getFile(filter, "Choix d'un module book7", Constantes.IMAGE_ROOT_FOLDER_NAME);
     }
 
-    // Methodes
+
+    /**
+     * Ouverture d'un fichier
+     * @param filters Extensions du fichier autorisées
+     * @param title Titre de la fenêtre de choix
+     * @param folder Dossier de copy du fichier importé
+     * @return Fichier choisi
+     * @throws IOException
+     */
     private File getFile(FileChooser.ExtensionFilter filters, String title, String folder) throws IOException {
         FileChooser fileChooser = new FileChooser();
 
@@ -65,5 +88,4 @@ public class FileOpener {
 
         return output;
     }
-
 }

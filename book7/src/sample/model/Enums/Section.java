@@ -1,11 +1,9 @@
 package sample.model.Enums;
 
 
-// ------------------------
-// Rôle: Enumération indiquant le type de contenu d'un cahier
-// Création: Clément Torti
-// Dernière Modification: Clément Torti
-//
+/**
+ * Enumération indiquant le type de contenu d'un cahier
+ */
 public enum Section {
     COURS {
         public String toString() {

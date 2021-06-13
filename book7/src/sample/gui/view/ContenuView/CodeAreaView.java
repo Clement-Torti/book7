@@ -1,15 +1,14 @@
 package sample.gui.view.ContenuView;
 
-import javafx.scene.Node;
 import javafx.scene.text.Font;
-import org.fxmisc.richtext.InlineCssTextArea;
 import sample.model.Contenu.Contenu;
 import sample.model.Observateur.Observable;
 
+
+/**
+ * Un TextAreaView particulier pour l'affichage du code
+ */
 public class CodeAreaView extends TextAreaView {
-    // Attributs
-
-
     // Constructeur
     public CodeAreaView(Contenu contenu) {
         super(contenu);
@@ -21,8 +20,8 @@ public class CodeAreaView extends TextAreaView {
         setStyle(0, 0, "-fx-font-weight", "bold");
     }
 
-    // Methodes
 
+    // Methodes
     @Override
     public void update(Observable obs, Object o) {
     }
