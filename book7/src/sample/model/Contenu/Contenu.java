@@ -19,5 +19,4 @@ public abstract class Contenu implements Serializable {
     protected Map<String, String> metadonnees = new HashMap<String, String>();
     private Alignement alignement; // Non utilisé pour le moment
     private Disposition disposition; // Non utilisé pour le moment
-
 }
